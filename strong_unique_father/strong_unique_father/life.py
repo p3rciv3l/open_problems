@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from math import gcd
+
 from .patterns import Cell
 
 OFFSETS = tuple(
@@ -30,8 +32,13 @@ def verify_image(
 
 def convex_hull_cells(live: frozenset[Cell]) -> set[Cell]:
     points = sorted(live)
-    if len(points) <= 2:
+    if len(points) <= 1:
         return set(points)
+    if len(points) == 2:
+        (x1, y1), (x2, y2) = points
+        steps = gcd(abs(x2 - x1), abs(y2 - y1))
+        dx, dy = (x2 - x1) // steps, (y2 - y1) // steps
+        return {(x1 + step * dx, y1 + step * dy) for step in range(steps + 1)}
 
     def cross(o: Cell, a: Cell, b: Cell) -> int:
         return (a[0] - o[0]) * (b[1] - o[1]) - (a[1] - o[1]) * (b[0] - o[0])

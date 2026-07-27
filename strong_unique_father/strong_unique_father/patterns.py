@@ -43,7 +43,13 @@ $3bo2b2o4b2o4b2o4b2o$3b2o3b2obo2b2obo2b2obo$8bob2o2bob2o2bob2o!"""
 
 
 def parse_rle(rle: str) -> Pattern:
-    lines = [line.strip() for line in rle.splitlines() if line.strip()]
+    lines = [
+        line.strip()
+        for line in rle.splitlines()
+        if line.strip() and not line.lstrip().startswith("#")
+    ]
+    if not lines:
+        raise ValueError("RLE has no header")
     header = lines[0]
     fields = {
         part.split("=")[0].strip(): part.split("=")[1].strip()
