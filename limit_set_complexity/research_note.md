@@ -136,12 +136,60 @@ The published components satisfy only strict fragments:
 - backward circuits give universal soundness for one inverse step, but not
   temporal closure or second-preimage control.
 
-No new Life gadget is claimed here, so there is no new SAT gadget result to
-report. A useful next finite search must target a **cap transition**: a finite
-output patch that forces both a shifted/expanded boundary segment and a
-canonical interior encoding in every predecessor, while admitting at least
-one such predecessor. Another table showing that a stationary agar forces
-itself cannot address the obstruction.
+This identifies the useful finite search target: a **cap transition**, meaning
+a finite output patch that forces both a shifted/expanded boundary segment and
+a canonical interior encoding in every predecessor while admitting at least
+one such predecessor. The next section reports such a transition and states
+the remaining failure that prevents iteration.
+
+## Finite cap-transition search
+
+`cap_search.py` carries out that search for the published marching-band motif
+and finds a genuine, but non-iterable, cap transition. Write `R` for the
+`8 x 4` marching band and extend it periodically. For integer `p`, the exact
+candidate predicate is:
+
+- constrain the Life output rectangle
+  `[0,2p+7] x [0,2p+3]` to phase `(0,0)` of `R`;
+- leave every other output cell unconstrained;
+- quantify over every assignment to the complete radius-two predecessor
+  rectangle `[-2,2p+9] x [-2,2p+5]`;
+- require every two-step predecessor to equal `R` on
+  `[10,2p-11] x [-1,2p+4]`;
+- separately require that at least one two-step predecessor exists.
+
+For `p=15`, the `38 x 34` output rectangle is satisfiable and forces all 360
+cells of the `10 x 36` rectangle `[10,19] x [-1,34]` in every two-step
+predecessor. In particular, it forces the full canonical `10 x 34` interior
+strip and one new matching marching-band row beyond each horizontal output
+edge. This improves the `p=20`, `48 x 44` sufficient witness stated as Lemma
+22 in the 2022 paper for this narrower forced-strip predicate.
+
+The immediately smaller candidate `p=14` is completely excluded for this
+exact phase and predicate: the CNF is satisfiable both with the canonical
+predecessor and with predecessor cell `(10,-1)` flipped. Thus its first
+required expanded-row bit is not forced. No claim is made about other phases,
+nonrectangular targets, or a different forced region.
+
+This is not yet the expanding simulation cone of the sufficient lemma. In two
+inverse Life steps the verified transition gains one row at the top and
+bottom but loses 14 columns on each side (`38 -> 10`). It therefore cannot be
+iterated at a fixed positive width, and it does not make a closed cap or force
+the predecessor strip to contain the backward-circuit output type. A usable
+reduction needs corner/side gadgets whose combined inverse transition has
+nondecreasing transverse width and temporal type closure.
+
+The SAT encoding is direct. The first Life step uses the 512-clause truth
+table relation for each intermediate cell; the second step excludes every
+neighborhood assignment inconsistent with the fixed output bit. No
+periodicity is imposed on SAT variables. The successful instance has 3,036
+variables and 1,034,392 clauses. Each forced-cell claim is a separate UNSAT
+query obtained by assuming the opposite bit. `cap_result.json` records the
+bounded search, and `--emit-query` writes any individual claim as DIMACS with
+a SHA-256 digest for an independent solver. For the expanded-row query
+`p=15`, cell `(10,-1)`, the emitted 1,034,393-clause DIMACS has SHA-256
+`7929759778f94de721dd9334184a9b9aa072897c18a38eecd7f55731810ccca4`;
+both CaDiCaL 1.9.5 and Glucose 4.2 return UNSAT.
 
 ## Sources for this obstruction
 

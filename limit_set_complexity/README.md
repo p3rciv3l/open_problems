@@ -37,7 +37,9 @@ python -m venv .venv
 
 `run_checks.sh` first checks the encoder against all 512 local assignments,
 checks the agar directly under the Life rule, and verifies one complete
-forcing phase. It then verifies all phases and writes `result.json`.
+forcing phase. It then verifies all köynnös phases, runs the bounded
+marching-band cap search, and writes both result files. The two full SAT
+computations are intentionally much slower than the unit tests.
 
 Each target cell is encoded directly: every one of the 512 neighborhood
 assignments producing the wrong output contributes the clause excluding that
@@ -55,11 +57,22 @@ The command prints the SHA-256 digest of the emitted file. Coordinates,
 variable numbering, local rule, clause generation, and the expected agar are
 all in `forcing.py`.
 
+The cap search and one independently checkable boundary query are:
+
+```bash
+python cap_search.py --min-padding 14 --max-padding 20 --output cap_result.json
+python cap_search.py --emit-query query.cnf --padding 15 --cell 10,-1
+```
+
 ## Files
 
 - `forcing.py`: direct CNF encoder, PySAT verifier, and DIMACS exporter.
+- `cap_search.py`: two-step marching-band cap-transition search and DIMACS
+  exporter.
 - `tests/test_forcing.py`: exhaustive local-encoding and finite-witness tests.
 - `result.json`: generated results for all 18 phases.
+- `cap_result.json`: generated bounded cap search, including the verified
+  `38 x 34` transition and the excluded `36 x 32` candidate.
 - `research_note.md`: exact logical scope, a complete conditional reduction
   skeleton, and the fixed-ring finite-state obstruction.
 

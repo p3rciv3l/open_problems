@@ -1,0 +1,90 @@
+{
+  "predicate": {
+    "targets": "2p+8 by 2p+4 rectangular marching-band phase",
+    "required_predecessor": "matching g^2-fixed marching-band values on [10,2p-11] x [-1,2p+4]",
+    "satisfiable": true,
+    "universal": "each opposite queried bit is UNSAT"
+  },
+  "solver": "cadical195",
+  "range": [
+    14,
+    20
+  ],
+  "results": [
+    {
+      "padding": 14,
+      "phase": [
+        0,
+        0
+      ],
+      "output_size": [
+        36,
+        32
+      ],
+      "predecessor_size": [
+        40,
+        36
+      ],
+      "variables": 2732,
+      "baseline_sat": true,
+      "queried_cells": 272,
+      "forced_cells": 0,
+      "expanded_rows_forced": false,
+      "canonical_interior_forced": false,
+      "first_failure": [
+        10,
+        -1
+      ],
+      "success": false,
+      "clauses": 923008
+    },
+    {
+      "padding": 15,
+      "phase": [
+        0,
+        0
+      ],
+      "output_size": [
+        38,
+        34
+      ],
+      "predecessor_size": [
+        42,
+        38
+      ],
+      "variables": 3036,
+      "baseline_sat": true,
+      "queried_cells": 360,
+      "forced_cells": 360,
+      "expanded_rows_forced": true,
+      "canonical_interior_forced": true,
+      "first_failure": null,
+      "success": true,
+      "clauses": 1034392
+    }
+  ],
+  "found": {
+    "padding": 15,
+    "phase": [
+      0,
+      0
+    ],
+    "output_size": [
+      38,
+      34
+    ],
+    "predecessor_size": [
+      42,
+      38
+    ],
+    "variables": 3036,
+    "baseline_sat": true,
+    "queried_cells": 360,
+    "forced_cells": 360,
+    "expanded_rows_forced": true,
+    "canonical_interior_forced": true,
+    "first_failure": null,
+    "success": true,
+    "clauses": 1034392
+  }
+}
