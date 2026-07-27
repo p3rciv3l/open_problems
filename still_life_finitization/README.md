@@ -26,7 +26,22 @@ Reproduce the checked experiment result from the repository root:
 
 ```sh
 python -m still_life_finitization.experiments.run_experiments
+python -m still_life_finitization.experiments.run_adversarial
+python -m still_life_finitization.automata.generate_certificate
 ```
+
+`automata/block_4x4_certificate.json` is a deterministic finite-state transfer
+certificate for the separated-block theorem. Its 256 states record the four
+window-boundary phases modulo 4; its 512 `E`/`S` transitions cover extension by
+one column or row. The analyzer checks transition closure and commutation,
+every canonical phase state, the finite-component still-life condition, and
+the separation lemma. `verify_transfer_certificate` independently recomputes
+the full certificate.
+
+More generally, `ComponentAgar` proves a constructive bound for any periodic
+array of finite still-life motifs whose distinct copies have Chebyshev
+separation at least 3: complete every motif that intersects the core. The
+uniform margin is at most the motif's Chebyshev diameter.
 
 Result files retain every tested SAT/UNSAT status, variable and clause counts,
 solver statistics, and a SHA-256 digest of the deterministic clause stream.

@@ -47,7 +47,10 @@ def main() -> int:
         return 0
 
     data = json.loads(Path(args.witness).read_text())
-    if data.get("format") == "still-life-finitization-experiments-v1":
+    if data.get("format") in {
+        "still-life-finitization-experiments-v1",
+        "still-life-finitization-adversarial-v1",
+    }:
         witnesses = [case.get("witness") for case in data["cases"]]
     elif data.get("format") == "still-life-finitization-result-v1":
         witnesses = [data.get("witness")]

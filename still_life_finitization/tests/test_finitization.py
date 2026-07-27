@@ -1,4 +1,5 @@
 import copy
+import itertools
 import json
 from pathlib import Path
 import subprocess
@@ -8,6 +9,12 @@ import unittest
 
 from still_life_finitization.still_life.pattern import PeriodicPattern, Window
 from still_life_finitization.still_life.sat import build_encoding, enumerate_margins
+from still_life_finitization.still_life.transfer import (
+    RectangleTransferAutomaton,
+    analyze_component_agar,
+    block_agar,
+    verify_transfer_certificate,
+)
 from still_life_finitization.still_life.verify import verify_witness
 
 
@@ -141,6 +148,86 @@ class ReproductionCommandTests(unittest.TestCase):
             result = json.loads(output.read_text())
             self.assertEqual(result["case_count"], 1)
             self.assertEqual(result["cases"][0]["family"], "block-aligned-squares")
+
+
+class TransferTheoremTests(unittest.TestCase):
+    def test_checked_certificate_recomputes_exactly(self):
+        certificate_path = (
+            Path(__file__).resolve().parents[1]
+            / "automata"
+            / "block_4x4_certificate.json"
+        )
+        certificate = json.loads(certificate_path.read_text())
+        self.assertEqual(verify_transfer_certificate(certificate), [])
+        self.assertEqual(certificate, analyze_component_agar(block_agar()))
+        self.assertEqual(certificate["state_count"], 256)
+        self.assertEqual(certificate["uniform_margin_bound"], 1)
+
+    def test_transfer_reaches_every_rectangle_state(self):
+        automaton = RectangleTransferAutomaton(4, 4)
+        for x, y, width, height in itertools.product(
+            range(-4, 5), range(-4, 5), range(1, 10), range(1, 10)
+        ):
+            window = Window(x, y, width, height)
+            state = (x % 4, x % 4, y % 4, y % 4)
+            for _ in range(width - 1):
+                state = automaton.transition(state, "E")
+            for _ in range(height - 1):
+                state = automaton.transition(state, "S")
+            self.assertEqual(state, automaton.state(window))
+
+    def test_parametric_block_family_all_phases_and_two_periods(self):
+        for period_x, period_y in ((4, 4), (4, 7), (5, 6), (8, 4)):
+            agar = block_agar(period_x, period_y)
+            self.assertEqual(agar.validate_components(), [])
+            for x, y, width, height in itertools.product(
+                range(period_x),
+                range(period_y),
+                range(1, 2 * period_x + 1),
+                range(1, 2 * period_y + 1),
+            ):
+                self.assertEqual(agar.verify_window(Window(x, y, width, height)), [])
+
+    def test_uniform_bound_one_is_sharp(self):
+        result = enumerate_margins(block_agar().pattern(), Window(0, 0, 1, 1), 1)
+        self.assertEqual(result["minimum_margin"], 1)
+        self.assertEqual(
+            [outcome["status"] for outcome in result["outcomes"]],
+            ["UNSAT", "SAT"],
+        )
+
+    def test_tampered_transfer_certificate_is_rejected(self):
+        certificate = analyze_component_agar(block_agar())
+        certificate["uniform_margin_bound"] = 0
+        self.assertEqual(
+            verify_transfer_certificate(certificate),
+            ["certificate does not match the recomputed transfer analysis"],
+        )
+
+
+class AdversarialSearchTests(unittest.TestCase):
+    def test_checked_adversarial_bounds_and_witnesses(self):
+        result_path = (
+            Path(__file__).resolve().parents[1]
+            / "experiments"
+            / "adversarial_results.json"
+        )
+        result = json.loads(result_path.read_text())
+        self.assertEqual(result["case_count"], len(result["cases"]))
+        self.assertEqual(result["case_count"], 80)
+        for case in result["cases"]:
+            self.assertEqual(verify_witness(case["witness"]), [])
+            minimum = case["minimum_margin"]
+            self.assertEqual(
+                [outcome["status"] for outcome in case["outcomes"]],
+                ["UNSAT"] * minimum + ["SAT"],
+            )
+        stripes = [
+            case["minimum_margin"]
+            for case in result["cases"]
+            if case["family"] == "alternating-live-rows-height-1"
+        ]
+        self.assertEqual(stripes, [1, 1, 2, 2] + [3] * 28)
 
 
 if __name__ == "__main__":
