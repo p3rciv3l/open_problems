@@ -61,6 +61,8 @@ def _doubling_offsets(
 
 
 def search(max_side: int, max_time: int) -> DirectResult:
+    if max_side <= 0 or max_time <= 0:
+        raise ValueError("max_side and max_time must be positive")
     seeds = 0
     cases = 0
     witnesses = []

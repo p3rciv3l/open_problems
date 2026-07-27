@@ -9,6 +9,7 @@ from pathlib import Path
 from z3 import And, Bool, If, Not, Or, Solver, Sum, sat
 
 Cell = tuple[int, int]
+CSV_FIELDS = ("width", "height", "time", "offset_pairs", "status")
 
 
 @dataclass(frozen=True)
@@ -128,6 +129,8 @@ def exclude_scope(width: int, height: int, time: int) -> ScopeResult:
 
 def search(max_side: int, max_time: int) -> list[ScopeResult]:
     """Search all boxes up to rotation, with reflection symmetry reduction."""
+    if max_side <= 0 or max_time <= 0:
+        raise ValueError("max_side and max_time must be positive")
     return [
         exclude_scope(width, height, time)
         for width in range(1, max_side + 1)
@@ -136,10 +139,17 @@ def search(max_side: int, max_time: int) -> list[ScopeResult]:
     ]
 
 
+def _positive_int(value: str) -> int:
+    parsed = int(value)
+    if parsed <= 0:
+        raise argparse.ArgumentTypeError("must be positive")
+    return parsed
+
+
 def main() -> None:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--max-side", type=int, default=4)
-    parser.add_argument("--max-time", type=int, default=2)
+    parser.add_argument("--max-side", type=_positive_int, default=4)
+    parser.add_argument("--max-time", type=_positive_int, default=2)
     parser.add_argument("--csv", type=Path)
     args = parser.parse_args()
     results = search(args.max_side, args.max_time)
@@ -155,7 +165,7 @@ def main() -> None:
     ]
     if args.csv:
         with args.csv.open("w", newline="") as output:
-            writer = csv.DictWriter(output, fieldnames=rows[0])
+            writer = csv.DictWriter(output, fieldnames=CSV_FIELDS)
             writer.writeheader()
             writer.writerows(rows)
     for row in rows:
