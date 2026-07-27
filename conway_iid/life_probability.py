@@ -221,6 +221,8 @@ def simulate_once(time: int, p: float, rng: random.Random) -> bool:
 
 
 def monte_carlo(time: int, p: float, trials: int, seed: int) -> float:
+    if isinstance(trials, bool) or not isinstance(trials, int) or trials <= 0:
+        raise ValueError("trials must be a positive integer")
     rng = random.Random(seed)
     return sum(simulate_once(time, p, rng) for _ in range(trials)) / trials
 

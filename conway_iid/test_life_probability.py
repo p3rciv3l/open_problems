@@ -109,6 +109,18 @@ class ExactProbabilityTests(unittest.TestCase):
             standard_error = math.sqrt(exact * (1 - exact) / trials)
             self.assertLess(abs(estimate - exact), 6 * standard_error + 0.001)
 
+    def test_monte_carlo_rejects_nonpositive_trial_counts(self):
+        for trials in (0, -1):
+            with self.subTest(trials=trials):
+                with self.assertRaisesRegex(
+                    ValueError, "trials must be a positive integer"
+                ):
+                    monte_carlo(2, 0.3, trials, 1)
+
+    def test_monte_carlo_rejects_boolean_trial_count(self):
+        with self.assertRaisesRegex(ValueError, "trials must be a positive integer"):
+            monte_carlo(2, 0.3, True, 1)
+
     def test_rejects_unsupported_time(self):
         with self.assertRaisesRegex(ValueError, "limited"):
             exact_probability(3)
