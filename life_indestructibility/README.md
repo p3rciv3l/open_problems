@@ -11,17 +11,38 @@ simulation code.
   flip times are encoded as CNF and decided by the included SAT solver. A SAT
   result includes an independently replayable exterior assignment and trace;
   UNSAT is a bounded universal certificate.
+  `search_three_by_three_invariant` instead computes the greatest inductive
+  subset of exact 3-by-3 states in which the center is alive, when the
+  surrounding 16-cell boundary may be chosen adversarially at every step. Its
+  checked elimination certificates prove that this invariant class is empty
+  for either protected value. For a live center, 172 states leave safety
+  immediately and the remaining 84 can be forced into those states in one
+  more abstract step. For a dead center the corresponding counts are 56 and
+  200.
 * **Problem 7 / single-glider-proof object:** `enumerate_interacting_attacks`
   universally enumerates four directions, four phases, and every integer lane
   whose isolated glider can Moore-interact with a finite still-life target.
   Translation along a lane is normalized upstream. `check_all_single_gliders`
   then checks each finite collision separately.
+  `search_still_life_classes` exhausts all 65,535 nonempty assignments in a
+  4-by-4 box, retaining 39 translation-normalized still lifes and 13 classes up to
+  dihedral symmetry. All direction/phase/lane attacks are checked for every
+  class. Every class has a certified changed-periodic collision, excluding a
+  single-glider-proof still life in this bounded class. The best class restores
+  after 4 of 192 attacks; it is not a universal catalyst.
 
 These quantifiers are intentionally not conflated. **Survival through a
 bounded horizon does not solve the Immovable Object Problem**, whose exterior
 is arbitrary and whose time quantifier is infinite. A glider sweep restricts
 the adversary to one glider and is not evidence for arbitrary-exterior
 survival.
+
+The empty 3-by-3 invariant is a strong-adversary abstraction result, not an
+Immovable Object impossibility theorem. Refreshing the boundary independently
+each step includes sequences that may not be realizable by a globally
+consistent Life evolution. The per-state rank and boundary witness do,
+however, certify that no invariant represented only by the exact 3-by-3 state
+can establish center-alive safety under that abstraction.
 
 Likewise, reaching a simulation timeout is not evidence that a collision has
 settled. This toolkit certifies finite collision settling only when the entire
@@ -42,3 +63,8 @@ python3 -m unittest discover -s tests -v
 `examples/bounded_results.json` contains a one-tick UNSAT result and a SAT
 block counterexample trace. `examples/block_single_gliders.csv` records every
 enumerated block attack, not just selected collisions.
+`examples/boundary_invariant_3x3_exclusion.json` contains 512 ranked boundary
+witnesses covering both central-cell values.
+`examples/still_life_4x4_candidates.csv` records the complete bounded candidate
+search, and `examples/still_life_4x4_attacks.csv` contains every attack
+classification used by that record.

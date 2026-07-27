@@ -7,11 +7,21 @@ from pathlib import Path
 from life_safety import (
     check_all_single_gliders,
     check_bounded_flip,
+    enumerate_still_life_classes,
     enumerate_interacting_attacks,
+    search_three_by_three_invariant,
     step,
 )
-from life_safety.gliders import DIRECTIONS, glider
+from life_safety.candidates import canonical_pattern
+from life_safety.gliders import DIRECTIONS, glider, simulate_collision
 from life_safety.independent import dense_step
+from life_safety.invariant import (
+    PROTECTED_INDEX,
+    REGION,
+    decode_boundary,
+    decode_region,
+    verify_exclusion,
+)
 from life_safety.life import bounding_box, translate
 
 HERE = Path(__file__).parent.parent
@@ -115,6 +125,52 @@ class BoundedTests(unittest.TestCase):
             self.assertEqual(result.safe, not brute_flip)
 
 
+class BoundaryInvariantTests(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        cls.results = (
+            search_three_by_three_invariant(False),
+            search_three_by_three_invariant(True),
+        )
+
+    def test_three_by_three_invariant_class_is_empty(self):
+        expected_counts = {False: [56, 200], True: [172, 84]}
+        for result in self.results:
+            self.assertTrue(result.excluded)
+            self.assertEqual(len(result.eliminations), 256)
+            counts = [
+                sum(
+                    elimination.round == round_number
+                    for elimination in result.eliminations
+                )
+                for round_number in range(2)
+            ]
+            self.assertEqual(counts, expected_counts[result.protected_value])
+            self.assertTrue(verify_exclusion(result))
+
+    def test_elimination_witnesses_replay_with_dense_simulator(self):
+        region = set(REGION)
+        for result in self.results:
+            ranks = {
+                elimination.region_state: elimination.round
+                for elimination in result.eliminations
+            }
+            for elimination in result.eliminations:
+                initial = decode_region(elimination.region_state) | decode_boundary(
+                    elimination.boundary_state
+                )
+                successor = frozenset(dense_step(initial) & region)
+                self.assertEqual(successor, decode_region(elimination.successor))
+                successor_value = bool(
+                    elimination.successor & (1 << PROTECTED_INDEX)
+                )
+                if successor_value == result.protected_value:
+                    self.assertLess(
+                        ranks[elimination.successor],
+                        elimination.round,
+                    )
+
+
 class GliderEnumerationTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
@@ -193,6 +249,84 @@ class GliderEnumerationTests(unittest.TestCase):
         self.assertNotEqual(
             {tuple(cell) for cell in example["final"]},
             BLOCK,
+        )
+
+
+class StillLifeCandidateTests(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        cls.candidates = enumerate_still_life_classes()
+        with (HERE / "examples" / "still_life_4x4_candidates.csv").open() as source:
+            cls.candidate_rows = list(csv.DictReader(source))
+        with (HERE / "examples" / "still_life_4x4_attacks.csv").open() as source:
+            cls.attack_rows = list(csv.DictReader(source))
+
+    def test_four_by_four_enumeration_is_exhaustive_up_to_symmetry(self):
+        normalized = []
+        cells = tuple((x, y) for y in range(4) for x in range(4))
+        for mask in range(1, 1 << len(cells)):
+            pattern = frozenset(
+                cell
+                for index, cell in enumerate(cells)
+                if mask & (1 << index)
+            )
+            if min(x for x, _ in pattern) or min(y for _, y in pattern):
+                continue
+            if dense_step(pattern) == pattern:
+                normalized.append(pattern)
+        self.assertEqual(len(normalized), 39)
+        independent_classes = {canonical_pattern(pattern) for pattern in normalized}
+        self.assertEqual(len(independent_classes), 13)
+        self.assertEqual(
+            independent_classes,
+            {tuple(sorted(candidate.pattern)) for candidate in self.candidates},
+        )
+
+    def test_record_checks_every_attack_for_every_candidate(self):
+        rows_by_candidate = {
+            candidate.identifier: [] for candidate in self.candidates
+        }
+        for row in self.attack_rows:
+            rows_by_candidate[row["candidate"]].append(row)
+        self.assertEqual(len(self.attack_rows), 2344)
+        for candidate in self.candidates:
+            recorded = {
+                (row["direction"], int(row["phase"]), int(row["lane"]))
+                for row in rows_by_candidate[candidate.identifier]
+            }
+            expected = {
+                (attack.direction, attack.phase, attack.lane)
+                for attack in enumerate_interacting_attacks(candidate.pattern)
+            }
+            self.assertEqual(recorded, expected)
+
+    def test_every_candidate_has_a_certified_exclusion_witness(self):
+        self.assertEqual(len(self.candidate_rows), 13)
+        candidates = {
+            candidate.identifier: candidate for candidate in self.candidates
+        }
+        for row in self.candidate_rows:
+            self.assertEqual(row["excluded_by_certified_collision"], "True")
+            candidate = candidates[row["candidate"]]
+            key = (
+                row["witness_direction"],
+                int(row["witness_phase"]),
+                int(row["witness_lane"]),
+            )
+            attack = next(
+                attack
+                for attack in enumerate_interacting_attacks(candidate.pattern)
+                if (attack.direction, attack.phase, attack.lane) == key
+            )
+            collision = simulate_collision(candidate.pattern, attack, horizon=256)
+            self.assertEqual(collision.outcome, "changed_periodic")
+            self.assertEqual(
+                collision.settled_generation,
+                int(row["witness_settled_generation"]),
+            )
+        self.assertEqual(
+            max(int(row["restored"]) for row in self.candidate_rows),
+            4,
         )
 
 
