@@ -1,9 +1,33 @@
 # Local Life agar certificate experiments
 
-The strongest certificate here exhaustively checks all 4096 `4 x 3`
-B3/S23 input blocks and proves an average live-cell density bound of
-`12001/20000 = 0.60005` for every finite, spatially periodic Life orbit.
-It does **not** prove the conjectured `1/2` bound.
+The strongest certificate here independently reproduces the published
+`1176/2087 ≈ 0.563488` upper bound for every finite, spatially periodic
+Life orbit. It does **not** prove the conjectured `1/2` bound.
+
+## Three-generation `6 x 6` pyramid
+
+`pyramid_6x6.cert` assigns nonnegative integer weights to a `6 x 6`
+slice at time `t`, its determined central `4 x 4` slice at `t+1`, and
+the determined central `2 x 2` slice at `t+2`. The weights sum to 8348.
+Exact exhaustive row dynamic programming proves that every one of the
+`2^36` initial slices has live weight at most 4704. Therefore translating
+the weighted shape over every space-time position of a torus gives
+
+```
+8348 * live cells <= 4704 * all cells,
+```
+
+and density at most `4704/8348 = 1176/2087`. This is a finite weighted
+spacetime inequality rather than an assertion about unenumerated
+orbits.
+
+`pyramid_search.py` reproduces the weights with a ten-variable
+dihedral-symmetric LP. It starts with a sparse set of legal evolution
+columns and uses CP-SAT maximization as a separation oracle. The
+resulting certificate does not trust either floating-point LP output or
+CP-SAT: `pyramid_verify.cpp` reads the integer certificate, reapplies
+B3/S23, and computes the exact maximum by max-plus row DP using only the
+C++17 standard library.
 
 ## Two-center spacetime-strip inequality
 
@@ -69,13 +93,16 @@ claim is made that it extends to a Life orbit.
 
 ## Reproduce and verify
 
-The verifier uses only the Python standard library and exact
-`fractions.Fraction` arithmetic:
+The local-face verifiers use Python's exact `fractions.Fraction`
+arithmetic. The pyramid verifier uses exact integers and the C++17
+standard library:
 
 ```sh
 cd life_agar_certificate
 python verify.py
 python strip2_verify.py
+g++ -O3 -std=c++17 pyramid_verify.cpp -o pyramid_verify
+./pyramid_verify pyramid_6x6.cert
 python -m unittest discover -s tests -v
 ```
 
@@ -86,11 +113,13 @@ result exactly:
 python -m pip install -r requirements.txt
 python solve.py
 python strip2_solve.py
+python pyramid_search.py
 python verify.py
 python strip2_verify.py
 ```
 
-Both solve scripts enumerate their neighborhoods, apply B3/S23 directly,
-and use SciPy/HiGHS. They refuse to emit a certificate unless the
-rationalized local inequalities and rational lower witnesses pass the
-same exact checks as the dependency-free verifiers.
+The search scripts enumerate or separate legal B3/S23 evolutions and use
+SciPy/HiGHS; the pyramid search additionally uses OR-Tools CP-SAT.
+Floating-point and solver results are treated only as certificate
+discovery. The stored outputs are accepted only by the exact,
+solver-independent verifiers.

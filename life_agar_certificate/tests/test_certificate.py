@@ -1,5 +1,9 @@
 import copy
+import json
+import shutil
+import subprocess
 import sys
+import tempfile
 import unittest
 from fractions import Fraction
 from pathlib import Path
@@ -78,6 +82,57 @@ class Strip2CertificateTests(unittest.TestCase):
         certificate["density_bound"] = "3/5"
         with self.assertRaises(AssertionError):
             verify_strip2(certificate)
+
+
+@unittest.skipUnless(shutil.which("g++"), "g++ is required")
+class PyramidCertificateTests(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        cls.temporary_directory = tempfile.TemporaryDirectory()
+        cls.executable = Path(cls.temporary_directory.name) / "pyramid_verify"
+        subprocess.run(
+            [
+                "g++",
+                "-O3",
+                "-std=c++17",
+                str(DIRECTORY / "pyramid_verify.cpp"),
+                "-o",
+                str(cls.executable),
+            ],
+            check=True,
+        )
+
+    @classmethod
+    def tearDownClass(cls):
+        cls.temporary_directory.cleanup()
+
+    def run_verifier(self, certificate):
+        return subprocess.run(
+            [str(self.executable), str(certificate)],
+            check=False,
+            capture_output=True,
+            text=True,
+        )
+
+    def test_exact_pyramid_certificate(self):
+        result = self.run_verifier(DIRECTORY / "pyramid_6x6.cert")
+        self.assertEqual(result.returncode, 0, result.stderr)
+        report = json.loads(result.stdout)
+        self.assertEqual(report["initial_slices"], 1 << 36)
+        self.assertEqual(report["maximum_live_weight"], 4704)
+        self.assertEqual(report["total_weight"], 8348)
+        self.assertEqual(Fraction(report["density_bound"]), Fraction(1176, 2087))
+        self.assertLess(
+            Fraction(report["density_bound"]), Fraction(12001, 20000)
+        )
+
+    def test_tampered_pyramid_certificate_is_rejected(self):
+        source = (DIRECTORY / "pyramid_6x6.cert").read_text(encoding="utf-8")
+        with tempfile.NamedTemporaryFile(mode="w", encoding="utf-8") as stream:
+            stream.write(source.replace("maximum_live_weight 4704", "maximum_live_weight 4703"))
+            stream.flush()
+            result = self.run_verifier(stream.name)
+        self.assertNotEqual(result.returncode, 0)
 
 
 if __name__ == "__main__":
