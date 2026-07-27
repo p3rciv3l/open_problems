@@ -1,0 +1,46 @@
+{
+  "claim": "The minimum time-0 population of an exact-period-2 state on the 4x4 Life torus is 3.",
+  "files": {
+    "artifacts/cnf/period2-pop-le-0.cnf": {
+      "bytes": 564900,
+      "sha256": "ce8b55f31ca840e7d3471cc16e8ecce1437a9a0baa3717518d74b0ee73edc195"
+    },
+    "artifacts/cnf/period2-pop-le-1.cnf": {
+      "bytes": 565878,
+      "sha256": "33a68216cc59c07a3d480eeca280908bda472eec974c24a00e941b747ea4ee58"
+    },
+    "artifacts/cnf/period2-pop-le-2.cnf": {
+      "bytes": 571708,
+      "sha256": "b3bae06b01151fae77e53ff1ccc547d18bde27af658dae10723f5562f84aac06"
+    },
+    "artifacts/proofs/period2-pop-le-0.drat": {
+      "bytes": 194,
+      "sha256": "c42197520a6b635b2b2b691ac9a4189e386cf45e1748d348d3b1ed1cc444741a"
+    },
+    "artifacts/proofs/period2-pop-le-0.solver.txt": {
+      "bytes": 16,
+      "sha256": "bde6e1eede96772c07c8ce29fd18088863815bd043aa59a06f11f5838cf8a162"
+    },
+    "artifacts/proofs/period2-pop-le-1.drat": {
+      "bytes": 326,
+      "sha256": "c23e1732029c7a1a1009d48367339f3a9bf6b03fda4d5833c52fd42675323b39"
+    },
+    "artifacts/proofs/period2-pop-le-1.solver.txt": {
+      "bytes": 16,
+      "sha256": "bde6e1eede96772c07c8ce29fd18088863815bd043aa59a06f11f5838cf8a162"
+    },
+    "artifacts/proofs/period2-pop-le-2.drat": {
+      "bytes": 346209,
+      "sha256": "e32b45ea4e403e28dde79230230146a1f832a7614a36481968bee2ecfc048ec2"
+    },
+    "artifacts/proofs/period2-pop-le-2.solver.txt": {
+      "bytes": 16,
+      "sha256": "bde6e1eede96772c07c8ce29fd18088863815bd043aa59a06f11f5838cf8a162"
+    },
+    "artifacts/witness.json": {
+      "bytes": 361,
+      "sha256": "74ad944b4e02f861fd5e98fe2c7353972ac37674f2597540f50cc200817f6bb3"
+    }
+  },
+  "schema": 1
+}
