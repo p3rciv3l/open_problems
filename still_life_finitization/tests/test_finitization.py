@@ -1,9 +1,14 @@
 import copy
+import json
+from pathlib import Path
+import subprocess
+import sys
+import tempfile
 import unittest
 
-from still_life.pattern import PeriodicPattern, Window
-from still_life.sat import build_encoding, enumerate_margins
-from still_life.verify import verify_witness
+from still_life_finitization.still_life.pattern import PeriodicPattern, Window
+from still_life_finitization.still_life.sat import build_encoding, enumerate_margins
+from still_life_finitization.still_life.verify import verify_witness
 
 
 class PatternTests(unittest.TestCase):
@@ -49,6 +54,93 @@ class EnumeratorTests(unittest.TestCase):
         result = enumerate_margins(pattern, Window(0, 0, 10, 1), 2)
         self.assertEqual(result["minimum_margin"], 2)
         self.assertEqual([item["status"] for item in result["outcomes"]], ["UNSAT", "UNSAT", "SAT"])
+
+
+class VerifierValidationTests(unittest.TestCase):
+    def setUp(self):
+        self.witness = {
+            "pattern": {"name": "dead", "rows": ["."]},
+            "window": {"x": 0, "y": 0, "width": 1, "height": 1},
+            "margin": 0,
+            "live_cells": [],
+        }
+
+    def test_missing_fields_have_deterministic_errors(self):
+        expected = [
+            "missing field: pattern",
+            "missing field: window",
+            "missing field: margin",
+            "missing field: live_cells",
+        ]
+        self.assertEqual(verify_witness({}), expected)
+        self.assertEqual(verify_witness({}), expected)
+
+    def test_wrong_top_level_type_is_an_error(self):
+        self.assertEqual(verify_witness(None), ["witness must be an object"])
+
+    def test_wrong_nested_types_are_errors(self):
+        cases = [
+            ("pattern", [], ["pattern must be an object"]),
+            ("window", [], ["window must be an object"]),
+            ("margin", "0", ["margin must be a nonnegative integer"]),
+            ("live_cells", {}, ["live_cells must be an array"]),
+        ]
+        for field, value, expected in cases:
+            with self.subTest(field=field):
+                damaged = copy.deepcopy(self.witness)
+                damaged[field] = value
+                self.assertEqual(verify_witness(damaged), expected)
+
+    def test_malformed_and_nonnumeric_coordinates_are_errors(self):
+        self.witness["live_cells"] = [[1], [1, 2, 3], "1,2", [1, "x"], [True, 2]]
+        self.assertEqual(
+            verify_witness(self.witness),
+            [
+                "live_cells[0] must be a coordinate pair",
+                "live_cells[1] must be a coordinate pair",
+                "live_cells[2] must be a coordinate pair",
+                "live_cells[3] coordinates must be integers",
+                "live_cells[4] coordinates must be integers",
+            ],
+        )
+
+    def test_nonnumeric_window_values_are_errors(self):
+        self.witness["window"] = {"x": "zero", "y": None, "width": 1.5, "height": True}
+        self.assertEqual(
+            verify_witness(self.witness),
+            [
+                "window.x must be an integer",
+                "window.y must be an integer",
+                "window.width must be an integer",
+                "window.height must be an integer",
+            ],
+        )
+
+
+class ReproductionCommandTests(unittest.TestCase):
+    def test_experiment_module_invocation_from_repository_root(self):
+        repository = Path(__file__).resolve().parents[2]
+        with tempfile.TemporaryDirectory() as directory:
+            output = Path(directory, "result.json")
+            completed = subprocess.run(
+                [
+                    sys.executable,
+                    "-m",
+                    "still_life_finitization.experiments.run_experiments",
+                    "--max-cases",
+                    "1",
+                    "--output",
+                    str(output),
+                ],
+                cwd=repository,
+                capture_output=True,
+                text=True,
+                check=False,
+            )
+            self.assertEqual(completed.returncode, 0, completed.stderr)
+            result = json.loads(output.read_text())
+            self.assertEqual(result["case_count"], 1)
+            self.assertEqual(result["cases"][0]["family"], "block-aligned-squares")
 
 
 if __name__ == "__main__":

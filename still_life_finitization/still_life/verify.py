@@ -44,9 +44,85 @@ def verify_cells(
     return errors
 
 
-def verify_witness(witness: dict[str, object]) -> list[str]:
-    pattern = PeriodicPattern.from_dict(witness["pattern"])
-    window = Window.from_dict(witness["window"])
-    margin = int(witness["margin"])
-    live_cells = {tuple(map(int, cell)) for cell in witness["live_cells"]}
+def _is_integer(value: object) -> bool:
+    return isinstance(value, int) and not isinstance(value, bool)
+
+
+def verify_witness(witness: object) -> list[str]:
+    errors: list[str] = []
+    if not isinstance(witness, dict):
+        return ["witness must be an object"]
+
+    for field in ("pattern", "window", "margin", "live_cells"):
+        if field not in witness:
+            errors.append(f"missing field: {field}")
+    if errors:
+        return errors
+
+    pattern_data = witness["pattern"]
+    pattern = None
+    if not isinstance(pattern_data, dict):
+        errors.append("pattern must be an object")
+    else:
+        name = pattern_data.get("name")
+        rows = pattern_data.get("rows")
+        if not isinstance(name, str):
+            errors.append("pattern.name must be a string")
+        if not isinstance(rows, list) or not all(isinstance(row, str) for row in rows):
+            errors.append("pattern.rows must be an array of strings")
+        if isinstance(name, str) and isinstance(rows, list) and all(
+            isinstance(row, str) for row in rows
+        ):
+            try:
+                pattern = PeriodicPattern(tuple(rows), name)
+            except ValueError as error:
+                errors.append(f"invalid pattern: {error}")
+
+    window_data = witness["window"]
+    window = None
+    if not isinstance(window_data, dict):
+        errors.append("window must be an object")
+    else:
+        window_values: dict[str, int] = {}
+        for field in ("x", "y", "width", "height"):
+            value = window_data.get(field)
+            if not _is_integer(value):
+                errors.append(f"window.{field} must be an integer")
+            else:
+                window_values[field] = value
+        if len(window_values) == 4:
+            try:
+                window = Window(**window_values)
+            except ValueError as error:
+                errors.append(f"invalid window: {error}")
+
+    margin_data = witness["margin"]
+    margin = None
+    if not _is_integer(margin_data):
+        errors.append("margin must be a nonnegative integer")
+    elif margin_data < 0:
+        errors.append("margin must be a nonnegative integer")
+    else:
+        margin = margin_data
+
+    cells_data = witness["live_cells"]
+    live_cells: set[tuple[int, int]] | None = None
+    if not isinstance(cells_data, list):
+        errors.append("live_cells must be an array")
+    else:
+        parsed_cells: set[tuple[int, int]] = set()
+        for index, cell in enumerate(cells_data):
+            if not isinstance(cell, (list, tuple)) or len(cell) != 2:
+                errors.append(f"live_cells[{index}] must be a coordinate pair")
+                continue
+            if not _is_integer(cell[0]) or not _is_integer(cell[1]):
+                errors.append(f"live_cells[{index}] coordinates must be integers")
+                continue
+            parsed_cells.add((cell[0], cell[1]))
+        live_cells = parsed_cells
+
+    if errors:
+        return errors
+    assert pattern is not None and window is not None and margin is not None
+    assert live_cells is not None
     return verify_cells(pattern, window, margin, live_cells)

@@ -14,12 +14,18 @@ UNSAT proves the minimum is `m` relative to this definition.
 Install and run:
 
 ```sh
-python -m pip install -r requirements.txt
-PYTHONPATH=. python -m still_life.cli enumerate \
-  --tile patterns/block_4x4.txt --size 8 8 --max-margin 6 \
-  --output result.json
-PYTHONPATH=. python -m still_life.cli verify result.json
-python -m unittest discover -s tests -v
+python -m pip install -r still_life_finitization/requirements.txt
+python -m still_life_finitization.still_life.cli enumerate \
+  --tile still_life_finitization/patterns/block_4x4.txt \
+  --size 8 8 --max-margin 6 --output result.json
+python -m still_life_finitization.still_life.cli verify result.json
+python -m unittest discover -s still_life_finitization/tests -v
+```
+
+Reproduce the checked experiment result from the repository root:
+
+```sh
+python -m still_life_finitization.experiments.run_experiments
 ```
 
 Result files retain every tested SAT/UNSAT status, variable and clause counts,

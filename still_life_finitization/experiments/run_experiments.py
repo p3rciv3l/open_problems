@@ -1,12 +1,13 @@
 from __future__ import annotations
 
+import argparse
 import json
 import platform
 from pathlib import Path
 
 import pysat
 
-from still_life import PeriodicPattern, Window, enumerate_margins
+from ..still_life import PeriodicPattern, Window, enumerate_margins
 
 
 BLOCK = PeriodicPattern(("11..", "11..", "....", "...."), "block-4x4")
@@ -24,8 +25,24 @@ def cases():
 
 
 def main() -> None:
+    parser = argparse.ArgumentParser(description="Reproduce controlled margin experiments")
+    parser.add_argument(
+        "--output",
+        type=Path,
+        default=Path(__file__).with_name("results.json"),
+    )
+    parser.add_argument("--max-cases", type=int, help=argparse.SUPPRESS)
+    args = parser.parse_args()
+
     records = []
-    for family, pattern, window in cases():
+    selected_cases = cases()
+    if args.max_cases is not None:
+        if args.max_cases < 0:
+            parser.error("--max-cases must be nonnegative")
+        import itertools
+
+        selected_cases = itertools.islice(selected_cases, args.max_cases)
+    for family, pattern, window in selected_cases:
         print(f"{family}: {window.width}x{window.height}")
         result = enumerate_margins(pattern, window, max_margin=4)
         records.append({"family": family, **result})
@@ -38,8 +55,7 @@ def main() -> None:
         "case_count": len(records),
         "cases": records,
     }
-    destination = Path(__file__).with_name("results.json")
-    destination.write_text(json.dumps(output, indent=2, sort_keys=True) + "\n")
+    args.output.write_text(json.dumps(output, indent=2, sort_keys=True) + "\n")
 
 
 if __name__ == "__main__":
