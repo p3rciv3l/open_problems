@@ -60,7 +60,8 @@ all in `forcing.py`.
 - `forcing.py`: direct CNF encoder, PySAT verifier, and DIMACS exporter.
 - `tests/test_forcing.py`: exhaustive local-encoding and finite-witness tests.
 - `result.json`: generated results for all 18 phases.
-- `research_note.md`: exact logical scope and the missing reduction gadget.
+- `research_note.md`: exact logical scope, a complete conditional reduction
+  skeleton, and the fixed-ring finite-state obstruction.
 
 ## Sources
 
