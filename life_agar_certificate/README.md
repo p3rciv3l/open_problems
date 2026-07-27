@@ -1,9 +1,31 @@
 # Local Life agar certificate experiments
 
 The strongest certificate here proves the new bound
-`43578/78167 ≈ 0.557499` for every finite, spatially periodic Life orbit,
+`138947/250001 ≈ 0.555786` for every finite, spatially periodic Life orbit,
 improving the published `1176/2087 ≈ 0.563488` bound. It does **not**
 prove the conjectured `1/2` bound.
+
+## Exact `6 x 10` strip-pyramid bound
+
+`pyramid_6x10.cert` assigns nonnegative integer weights to a `6 x 10`
+slice at time `t`, its determined central `4 x 8` slice at `t+1`, and
+the determined central `2 x 6` slice at `t+2`. The weights sum to
+1,000,004. Exact max-plus row dynamic programming exhausts all `2^60`
+initial slices symbolically and proves maximum live weight 555,788.
+Translating the weighted shape over a space-time torus therefore gives
+
+```
+555788/1000004 = 138947/250001.
+```
+
+This is strictly below `43578/78167`. `pyramid_6x10_search.py`
+reproduces the weighting by reflection-reduced sparse LP column
+generation and rounds it to a common integer grid. The rounding and
+floating-point optimization are not trusted: `pyramid_6x10_verify.cpp`
+reads only the integer artifact, reapplies B3/S23, checks its weight
+sum, and independently computes the exact maximum using the C++17
+standard library. No claim is made that this rounded weighting is the
+exact optimum of the `6 x 10` hierarchy.
 
 ## Exact `6 x 8` strip-pyramid optimum
 
@@ -137,6 +159,8 @@ g++ -O3 -std=c++17 pyramid_verify.cpp -o pyramid_verify
 ./pyramid_verify pyramid_6x6.cert
 g++ -O3 -std=c++17 pyramid_6x8_verify.cpp -o pyramid_6x8_verify
 ./pyramid_6x8_verify pyramid_6x8.cert
+g++ -O3 -std=c++17 pyramid_6x10_verify.cpp -o pyramid_6x10_verify
+./pyramid_6x10_verify pyramid_6x10.cert
 python -m unittest discover -s tests -v
 ```
 
@@ -149,6 +173,7 @@ python solve.py
 python strip2_solve.py
 python pyramid_search.py
 python pyramid_6x8_search.py
+python pyramid_6x10_search.py
 python verify.py
 python strip2_verify.py
 ```

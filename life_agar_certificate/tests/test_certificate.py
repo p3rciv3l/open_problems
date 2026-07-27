@@ -93,6 +93,9 @@ class PyramidCertificateTests(unittest.TestCase):
         cls.strong_executable = (
             Path(cls.temporary_directory.name) / "pyramid_6x8_verify"
         )
+        cls.larger_executable = (
+            Path(cls.temporary_directory.name) / "pyramid_6x10_verify"
+        )
         subprocess.run(
             [
                 "g++",
@@ -101,6 +104,17 @@ class PyramidCertificateTests(unittest.TestCase):
                 str(DIRECTORY / "pyramid_verify.cpp"),
                 "-o",
                 str(cls.executable),
+            ],
+            check=True,
+        )
+        subprocess.run(
+            [
+                "g++",
+                "-O3",
+                "-std=c++17",
+                str(DIRECTORY / "pyramid_6x10_verify.cpp"),
+                "-o",
+                str(cls.larger_executable),
             ],
             check=True,
         )
@@ -131,6 +145,14 @@ class PyramidCertificateTests(unittest.TestCase):
     def run_strong_verifier(self, certificate):
         return subprocess.run(
             [str(self.strong_executable), str(certificate)],
+            check=False,
+            capture_output=True,
+            text=True,
+        )
+
+    def run_larger_verifier(self, certificate):
+        return subprocess.run(
+            [str(self.larger_executable), str(certificate)],
             check=False,
             capture_output=True,
             text=True,
@@ -175,6 +197,31 @@ class PyramidCertificateTests(unittest.TestCase):
             stream.write(source.replace("witness 281474976710655 12789", "witness 281474976710655 12788"))
             stream.flush()
             result = self.run_strong_verifier(stream.name)
+        self.assertNotEqual(result.returncode, 0)
+
+    def test_exact_larger_pyramid_certificate(self):
+        result = self.run_larger_verifier(DIRECTORY / "pyramid_6x10.cert")
+        self.assertEqual(result.returncode, 0, result.stderr)
+        report = json.loads(result.stdout)
+        self.assertEqual(report["initial_slices"], 1 << 60)
+        self.assertEqual(report["maximum_live_weight"], 555788)
+        self.assertEqual(report["total_weight"], 1000004)
+        self.assertEqual(Fraction(report["density_bound"]), Fraction(138947, 250001))
+        self.assertLess(
+            Fraction(report["density_bound"]), Fraction(43578, 78167)
+        )
+
+    def test_tampered_larger_pyramid_certificate_is_rejected(self):
+        source = (DIRECTORY / "pyramid_6x10.cert").read_text(encoding="utf-8")
+        with tempfile.NamedTemporaryFile(mode="w", encoding="utf-8") as stream:
+            stream.write(
+                source.replace(
+                    "maximum_live_weight 555788",
+                    "maximum_live_weight 555787",
+                )
+            )
+            stream.flush()
+            result = self.run_larger_verifier(stream.name)
         self.assertNotEqual(result.returncode, 0)
 
 
