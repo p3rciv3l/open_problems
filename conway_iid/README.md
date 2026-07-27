@@ -16,6 +16,10 @@ on infinitely many changes at every finite time and almost-sure spatial
 density at each fixed time. Those results do not assert local nonfixation or
 convergence of the densities as time tends to infinity.
 
+See [`ASYMPTOTICS.md`](ASYMPTOTICS.md) for the exact verified leading terms at
+time three, a local-fixation dichotomy, and precise blockers encountered by a
+full time-three frontier computation and the proposed asymptotic arguments.
+
 ## Finite-time theorem
 
 The state of the origin at time \(t\) is a Boolean function of only the

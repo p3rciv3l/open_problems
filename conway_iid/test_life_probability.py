@@ -18,6 +18,7 @@ from verify_protected_blinker import (
     cylinder_probability,
     verify_horizon,
 )
+from q3_low_weight import low_weight_counts
 
 
 TIME_TWO_COUNTS = [
@@ -140,6 +141,32 @@ class ProtectedBlinkerTests(unittest.TestCase):
         for horizon in range(4):
             expected = p**3 * (1 - p) ** ((2 * (horizon + 2) + 1) ** 2 - 3)
             self.assertEqual(cylinder_probability(horizon, p), expected)
+
+
+class TimeThreeLeadingTermTests(unittest.TestCase):
+    def test_low_weight_counts(self):
+        counts = low_weight_counts(5)
+        self.assertEqual(counts, [0, 0, 0, 22, 1536, 39108])
+        padded_counts = counts + [0] * (50 - len(counts))
+        self.assertEqual(bernstein_to_power(padded_counts)[3:6], [22, 524, -7242])
+
+    @unittest.skipUnless(shutil.which("cc"), "a C compiler is required")
+    def test_low_weight_counts_against_independent_c_enumeration(self):
+        source = pathlib.Path(__file__).with_name("verify_q3_low.c")
+        with tempfile.TemporaryDirectory() as directory:
+            executable = pathlib.Path(directory) / "verify_q3_low"
+            subprocess.run(
+                ["cc", "-O3", str(source), "-o", str(executable)],
+                check=True,
+            )
+            output = subprocess.run(
+                [str(executable)],
+                check=True,
+                capture_output=True,
+                text=True,
+            ).stdout
+        counts = [int(line.split()[1]) for line in output.splitlines()]
+        self.assertEqual(counts, [0, 0, 0, 22, 1536, 39108])
 
 
 if __name__ == "__main__":
