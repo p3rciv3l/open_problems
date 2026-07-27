@@ -1,0 +1,5555 @@
+{
+  "backend": "numpy",
+  "environment": {
+    "numpy": "2.5.1",
+    "python": "3.12.1"
+  },
+  "experiments": [
+    {
+      "config": {
+        "confidence": 0.95,
+        "master_seed": 20260727,
+        "p": 0.1,
+        "sample_every": 10,
+        "size": 32,
+        "steps": 200,
+        "trials": 12
+      },
+      "elapsed_seconds": 0.044544911000002685,
+      "label": "EMPIRICAL FINITE-SIZE RESULTS: finite periodic tori and finite run lengths; no asymptotic theorem is inferred.",
+      "measurements": [
+        {
+          "activity": {
+            "ci_high": null,
+            "ci_low": null,
+            "mean": null,
+            "n": 0
+          },
+          "density": {
+            "ci_high": 0.10256002923709415,
+            "ci_low": 0.09486835617957251,
+            "mean": 0.09871419270833333,
+            "n": 12
+          },
+          "generation": 0
+        },
+        {
+          "activity": {
+            "ci_high": 0.03318555918065805,
+            "ci_low": 0.017270169986008617,
+            "mean": 0.025227864583333332,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.04923653822171235,
+            "ci_low": 0.030841586778287647,
+            "mean": 0.0400390625,
+            "n": 12
+          },
+          "generation": 10
+        },
+        {
+          "activity": {
+            "ci_high": 0.055202112832835,
+            "ci_low": 0.02992158508383167,
+            "mean": 0.042561848958333336,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.06203569766415614,
+            "ci_low": 0.03789919816917719,
+            "mean": 0.049967447916666664,
+            "n": 12
+          },
+          "generation": 20
+        },
+        {
+          "activity": {
+            "ci_high": 0.046968513797726825,
+            "ci_low": 0.023181225785606503,
+            "mean": 0.035074869791666664,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.06349201599094129,
+            "ci_low": 0.035791838175725385,
+            "mean": 0.049641927083333336,
+            "n": 12
+          },
+          "generation": 30
+        },
+        {
+          "activity": {
+            "ci_high": 0.05280131579397676,
+            "ci_low": 0.018976027956023236,
+            "mean": 0.035888671875,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.06766412443981773,
+            "ci_low": 0.03389837556018227,
+            "mean": 0.05078125,
+            "n": 12
+          },
+          "generation": 40
+        },
+        {
+          "activity": {
+            "ci_high": 0.048299585835894485,
+            "ci_low": 0.019083226664105515,
+            "mean": 0.03369140625,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.0680287644467673,
+            "ci_low": 0.033208214719899376,
+            "mean": 0.050618489583333336,
+            "n": 12
+          },
+          "generation": 50
+        },
+        {
+          "activity": {
+            "ci_high": 0.04843930042450449,
+            "ci_low": 0.016990387075495512,
+            "mean": 0.03271484375,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.06837020797487817,
+            "ci_low": 0.030262604525121833,
+            "mean": 0.04931640625,
+            "n": 12
+          },
+          "generation": 60
+        },
+        {
+          "activity": {
+            "ci_high": 0.05599671079254512,
+            "ci_low": 0.021151726707454882,
+            "mean": 0.03857421875,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.068036472001829,
+            "ci_low": 0.03352602799817101,
+            "mean": 0.05078125,
+            "n": 12
+          },
+          "generation": 70
+        },
+        {
+          "activity": {
+            "ci_high": 0.04979693193487009,
+            "ci_low": 0.019539005565129913,
+            "mean": 0.03466796875,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.06690395571781152,
+            "ci_low": 0.03286817969885515,
+            "mean": 0.049886067708333336,
+            "n": 12
+          },
+          "generation": 80
+        },
+        {
+          "activity": {
+            "ci_high": 0.055197535604703585,
+            "ci_low": 0.017068089395296415,
+            "mean": 0.0361328125,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.0735704698072225,
+            "ci_low": 0.0333631239427775,
+            "mean": 0.053466796875,
+            "n": 12
+          },
+          "generation": 90
+        },
+        {
+          "activity": {
+            "ci_high": 0.05764508262068217,
+            "ci_low": 0.014295021545984495,
+            "mean": 0.035970052083333336,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.08121751084799686,
+            "ci_low": 0.031087176652003137,
+            "mean": 0.05615234375,
+            "n": 12
+          },
+          "generation": 100
+        },
+        {
+          "activity": {
+            "ci_high": 0.056708406042780615,
+            "ci_low": 0.013441333540552713,
+            "mean": 0.035074869791666664,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.079793188285862,
+            "ci_low": 0.029256290880804666,
+            "mean": 0.054524739583333336,
+            "n": 12
+          },
+          "generation": 110
+        },
+        {
+          "activity": {
+            "ci_high": 0.04826365801823894,
+            "ci_low": 0.010818373231761064,
+            "mean": 0.029541015625,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.06601269656588413,
+            "ci_low": 0.027574543017449202,
+            "mean": 0.046793619791666664,
+            "n": 12
+          },
+          "generation": 120
+        },
+        {
+          "activity": {
+            "ci_high": 0.04190580083148473,
+            "ci_low": 0.009852011668515272,
+            "mean": 0.02587890625,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.06534713505582158,
+            "ci_low": 0.02531041702751174,
+            "mean": 0.045328776041666664,
+            "n": 12
+          },
+          "generation": 130
+        },
+        {
+          "activity": {
+            "ci_high": 0.048166540832322996,
+            "ci_low": 0.010101688334343672,
+            "mean": 0.029134114583333332,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.06038140246489555,
+            "ci_low": 0.023928493368437772,
+            "mean": 0.042154947916666664,
+            "n": 12
+          },
+          "generation": 140
+        },
+        {
+          "activity": {
+            "ci_high": 0.05091458601078326,
+            "ci_low": 0.015328903572550064,
+            "mean": 0.033121744791666664,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.06354328149529836,
+            "ci_low": 0.025649426838034964,
+            "mean": 0.044596354166666664,
+            "n": 12
+          },
+          "generation": 150
+        },
+        {
+          "activity": {
+            "ci_high": 0.05325972441041327,
+            "ci_low": 0.014123088089586736,
+            "mean": 0.03369140625,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.06162033041969937,
+            "ci_low": 0.027897898746967298,
+            "mean": 0.044759114583333336,
+            "n": 12
+          },
+          "generation": 160
+        },
+        {
+          "activity": {
+            "ci_high": 0.04687643375437226,
+            "ci_low": 0.014321482912294403,
+            "mean": 0.030598958333333332,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.06545080335594217,
+            "ci_low": 0.02878747789405783,
+            "mean": 0.047119140625,
+            "n": 12
+          },
+          "generation": 170
+        },
+        {
+          "activity": {
+            "ci_high": 0.039448203470122026,
+            "ci_low": 0.013448931946544635,
+            "mean": 0.026448567708333332,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.06137929161006424,
+            "ci_low": 0.029115500056602437,
+            "mean": 0.045247395833333336,
+            "n": 12
+          },
+          "generation": 180
+        },
+        {
+          "activity": {
+            "ci_high": 0.05823405551927954,
+            "ci_low": 0.014357090314053786,
+            "mean": 0.036295572916666664,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.07480194382443292,
+            "ci_low": 0.031155087425567086,
+            "mean": 0.052978515625,
+            "n": 12
+          },
+          "generation": 190
+        },
+        {
+          "activity": {
+            "ci_high": 0.04874217081537757,
+            "ci_low": 0.011804704184622431,
+            "mean": 0.0302734375,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.066793606473998,
+            "ci_low": 0.028909518526002004,
+            "mean": 0.0478515625,
+            "n": 12
+          },
+          "generation": 200
+        }
+      ],
+      "period_detection": {
+        "detected_fraction": {
+          "ci_high": 0.874676290844923,
+          "ci_low": 0.29199037582174364,
+          "mean": 0.5833333333333334,
+          "n": 12
+        },
+        "period_detected_only": {
+          "ci_high": 2.0757575176804743,
+          "ci_low": 1.3528139108909543,
+          "mean": 1.7142857142857142,
+          "n": 7
+        },
+        "transient_detected_only": {
+          "ci_high": 111.30154678760283,
+          "ci_low": 18.98416749811144,
+          "mean": 65.14285714285714,
+          "n": 7
+        },
+        "trials": [
+          {
+            "detected": false,
+            "detected_at": null,
+            "period": null,
+            "seed": 14517110740355951974,
+            "transient": null,
+            "trial": 0
+          },
+          {
+            "detected": true,
+            "detected_at": 53,
+            "period": 2,
+            "seed": 13868697107555089308,
+            "transient": 51,
+            "trial": 1
+          },
+          {
+            "detected": false,
+            "detected_at": null,
+            "period": null,
+            "seed": 16241151923553345,
+            "transient": null,
+            "trial": 2
+          },
+          {
+            "detected": true,
+            "detected_at": 9,
+            "period": 1,
+            "seed": 5459976423245392149,
+            "transient": 8,
+            "trial": 3
+          },
+          {
+            "detected": true,
+            "detected_at": 34,
+            "period": 1,
+            "seed": 3417702129463376045,
+            "transient": 33,
+            "trial": 4
+          },
+          {
+            "detected": true,
+            "detected_at": 173,
+            "period": 2,
+            "seed": 15629204107392549352,
+            "transient": 171,
+            "trial": 5
+          },
+          {
+            "detected": false,
+            "detected_at": null,
+            "period": null,
+            "seed": 16554503354614793517,
+            "transient": null,
+            "trial": 6
+          },
+          {
+            "detected": false,
+            "detected_at": null,
+            "period": null,
+            "seed": 12443134331443206796,
+            "transient": null,
+            "trial": 7
+          },
+          {
+            "detected": true,
+            "detected_at": 137,
+            "period": 2,
+            "seed": 9827234669520997329,
+            "transient": 135,
+            "trial": 8
+          },
+          {
+            "detected": false,
+            "detected_at": null,
+            "period": null,
+            "seed": 11527847039702687078,
+            "transient": null,
+            "trial": 9
+          },
+          {
+            "detected": true,
+            "detected_at": 38,
+            "period": 2,
+            "seed": 3081976839991891881,
+            "transient": 36,
+            "trial": 10
+          },
+          {
+            "detected": true,
+            "detected_at": 24,
+            "period": 2,
+            "seed": 5228406328338992213,
+            "transient": 22,
+            "trial": 11
+          }
+        ]
+      },
+      "trial_seeds": [
+        14517110740355951974,
+        13868697107555089308,
+        16241151923553345,
+        5459976423245392149,
+        3417702129463376045,
+        15629204107392549352,
+        16554503354614793517,
+        12443134331443206796,
+        9827234669520997329,
+        11527847039702687078,
+        3081976839991891881,
+        5228406328338992213
+      ]
+    },
+    {
+      "config": {
+        "confidence": 0.95,
+        "master_seed": 20260727,
+        "p": 0.1,
+        "sample_every": 10,
+        "size": 64,
+        "steps": 200,
+        "trials": 12
+      },
+      "elapsed_seconds": 0.03629116899998053,
+      "label": "EMPIRICAL FINITE-SIZE RESULTS: finite periodic tori and finite run lengths; no asymptotic theorem is inferred.",
+      "measurements": [
+        {
+          "activity": {
+            "ci_high": null,
+            "ci_low": null,
+            "mean": null,
+            "n": 0
+          },
+          "density": {
+            "ci_high": 0.10179081900492608,
+            "ci_low": 0.09718379037007392,
+            "mean": 0.0994873046875,
+            "n": 12
+          },
+          "generation": 0
+        },
+        {
+          "activity": {
+            "ci_high": 0.0322152822867451,
+            "ci_low": 0.019420459900754902,
+            "mean": 0.02581787109375,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.04430157015397848,
+            "ci_low": 0.030975122554354848,
+            "mean": 0.037638346354166664,
+            "n": 12
+          },
+          "generation": 10
+        },
+        {
+          "activity": {
+            "ci_high": 0.03553792430780416,
+            "ci_low": 0.018376463713029173,
+            "mean": 0.026957194010416668,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.04517228682100206,
+            "ci_low": 0.028965082970664614,
+            "mean": 0.037068684895833336,
+            "n": 12
+          },
+          "generation": 20
+        },
+        {
+          "activity": {
+            "ci_high": 0.03447825001563084,
+            "ci_low": 0.017198182276035825,
+            "mean": 0.025838216145833332,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.052012569009635704,
+            "ci_low": 0.029733850261197625,
+            "mean": 0.040873209635416664,
+            "n": 12
+          },
+          "generation": 30
+        },
+        {
+          "activity": {
+            "ci_high": 0.03640677748144808,
+            "ci_low": 0.01693794908105192,
+            "mean": 0.02667236328125,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.05326003533598875,
+            "ci_low": 0.029015355289011252,
+            "mean": 0.0411376953125,
+            "n": 12
+          },
+          "generation": 40
+        },
+        {
+          "activity": {
+            "ci_high": 0.03820571100088449,
+            "ci_low": 0.01843491399911551,
+            "mean": 0.0283203125,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.05176424478185417,
+            "ci_low": 0.029860104176479156,
+            "mean": 0.040812174479166664,
+            "n": 12
+          },
+          "generation": 50
+        },
+        {
+          "activity": {
+            "ci_high": 0.04370984658820004,
+            "ci_low": 0.018790153411799956,
+            "mean": 0.03125,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.05981331190426768,
+            "ci_low": 0.030925620387398992,
+            "mean": 0.045369466145833336,
+            "n": 12
+          },
+          "generation": 60
+        },
+        {
+          "activity": {
+            "ci_high": 0.04669709682351286,
+            "ci_low": 0.018447759947320466,
+            "mean": 0.032572428385416664,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.06174481968756818,
+            "ci_low": 0.03070309697909849,
+            "mean": 0.046223958333333336,
+            "n": 12
+          },
+          "generation": 70
+        },
+        {
+          "activity": {
+            "ci_high": 0.04432515134962996,
+            "ci_low": 0.017483116879536707,
+            "mean": 0.030904134114583332,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.060304234174105575,
+            "ci_low": 0.031248500200894428,
+            "mean": 0.0457763671875,
+            "n": 12
+          },
+          "generation": 80
+        },
+        {
+          "activity": {
+            "ci_high": 0.043048322338544526,
+            "ci_low": 0.01709165161978881,
+            "mean": 0.030069986979166668,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.06139724172993122,
+            "ci_low": 0.03190516712423545,
+            "mean": 0.046651204427083336,
+            "n": 12
+          },
+          "generation": 90
+        },
+        {
+          "activity": {
+            "ci_high": 0.042027294391940105,
+            "ci_low": 0.01587472383722656,
+            "mean": 0.028951009114583332,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.059470622362832806,
+            "ci_low": 0.030861408887167194,
+            "mean": 0.045166015625,
+            "n": 12
+          },
+          "generation": 100
+        },
+        {
+          "activity": {
+            "ci_high": 0.040401242965062464,
+            "ci_low": 0.014611777868270868,
+            "mean": 0.027506510416666668,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.054759692647439635,
+            "ci_low": 0.029428132873393693,
+            "mean": 0.042093912760416664,
+            "n": 12
+          },
+          "generation": 110
+        },
+        {
+          "activity": {
+            "ci_high": 0.03935604169524959,
+            "ci_low": 0.015901119763083747,
+            "mean": 0.027628580729166668,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.06032823134033253,
+            "ci_low": 0.0320383051180008,
+            "mean": 0.046183268229166664,
+            "n": 12
+          },
+          "generation": 120
+        },
+        {
+          "activity": {
+            "ci_high": 0.04243906287114872,
+            "ci_low": 0.01700917931635128,
+            "mean": 0.02972412109375,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.06152055105598823,
+            "ci_low": 0.03271773019401177,
+            "mean": 0.047119140625,
+            "n": 12
+          },
+          "generation": 130
+        },
+        {
+          "activity": {
+            "ci_high": 0.04528017086289067,
+            "ci_low": 0.017463969762109326,
+            "mean": 0.0313720703125,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.06503085990924898,
+            "ci_low": 0.032788150507417686,
+            "mean": 0.048909505208333336,
+            "n": 12
+          },
+          "generation": 140
+        },
+        {
+          "activity": {
+            "ci_high": 0.043001654888769225,
+            "ci_low": 0.01632451698623077,
+            "mean": 0.0296630859375,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.06325403227506339,
+            "ci_low": 0.03216426199576994,
+            "mean": 0.047709147135416664,
+            "n": 12
+          },
+          "generation": 150
+        },
+        {
+          "activity": {
+            "ci_high": 0.04201104418353661,
+            "ci_low": 0.016623395920630057,
+            "mean": 0.029317220052083332,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.06030459692072638,
+            "ci_low": 0.03218400985010695,
+            "mean": 0.046244303385416664,
+            "n": 12
+          },
+          "generation": 160
+        },
+        {
+          "activity": {
+            "ci_high": 0.03991439324628926,
+            "ci_low": 0.015586908837044073,
+            "mean": 0.027750651041666668,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.05833470137075606,
+            "ci_low": 0.030613866337577268,
+            "mean": 0.044474283854166664,
+            "n": 12
+          },
+          "generation": 170
+        },
+        {
+          "activity": {
+            "ci_high": 0.039928115835224806,
+            "ci_low": 0.015776636768941855,
+            "mean": 0.027852376302083332,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.061058131986239786,
+            "ci_low": 0.031959446138760214,
+            "mean": 0.0465087890625,
+            "n": 12
+          },
+          "generation": 180
+        },
+        {
+          "activity": {
+            "ci_high": 0.044986954262712306,
+            "ci_low": 0.017390975424787694,
+            "mean": 0.03118896484375,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.06108784064942126,
+            "ci_low": 0.03176697705891207,
+            "mean": 0.046427408854166664,
+            "n": 12
+          },
+          "generation": 190
+        },
+        {
+          "activity": {
+            "ci_high": 0.04117819863719151,
+            "ci_low": 0.015055525321141829,
+            "mean": 0.028116861979166668,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.05686464999343927,
+            "ci_low": 0.0299680322982274,
+            "mean": 0.043416341145833336,
+            "n": 12
+          },
+          "generation": 200
+        }
+      ],
+      "period_detection": {
+        "detected_fraction": {
+          "ci_high": 0.6119104836900906,
+          "ci_low": 0.05475618297657597,
+          "mean": 0.3333333333333333,
+          "n": 12
+        },
+        "period_detected_only": {
+          "ci_high": 2.0,
+          "ci_low": 2.0,
+          "mean": 2.0,
+          "n": 4
+        },
+        "transient_detected_only": {
+          "ci_high": 162.67919327483034,
+          "ci_low": 42.32080672516966,
+          "mean": 102.5,
+          "n": 4
+        },
+        "trials": [
+          {
+            "detected": true,
+            "detected_at": 37,
+            "period": 2,
+            "seed": 2636766353829097544,
+            "transient": 35,
+            "trial": 0
+          },
+          {
+            "detected": true,
+            "detected_at": 85,
+            "period": 2,
+            "seed": 13776670779431204451,
+            "transient": 83,
+            "trial": 1
+          },
+          {
+            "detected": false,
+            "detected_at": null,
+            "period": null,
+            "seed": 18410142674179178943,
+            "transient": null,
+            "trial": 2
+          },
+          {
+            "detected": false,
+            "detected_at": null,
+            "period": null,
+            "seed": 4033972379755683876,
+            "transient": null,
+            "trial": 3
+          },
+          {
+            "detected": true,
+            "detected_at": 112,
+            "period": 2,
+            "seed": 8375791813808399640,
+            "transient": 110,
+            "trial": 4
+          },
+          {
+            "detected": false,
+            "detected_at": null,
+            "period": null,
+            "seed": 4880100142703502226,
+            "transient": null,
+            "trial": 5
+          },
+          {
+            "detected": false,
+            "detected_at": null,
+            "period": null,
+            "seed": 10506634417956961612,
+            "transient": null,
+            "trial": 6
+          },
+          {
+            "detected": false,
+            "detected_at": null,
+            "period": null,
+            "seed": 3436101459244490511,
+            "transient": null,
+            "trial": 7
+          },
+          {
+            "detected": false,
+            "detected_at": null,
+            "period": null,
+            "seed": 17212333743676737414,
+            "transient": null,
+            "trial": 8
+          },
+          {
+            "detected": false,
+            "detected_at": null,
+            "period": null,
+            "seed": 12729140224284967642,
+            "transient": null,
+            "trial": 9
+          },
+          {
+            "detected": false,
+            "detected_at": null,
+            "period": null,
+            "seed": 14815238983217767161,
+            "transient": null,
+            "trial": 10
+          },
+          {
+            "detected": true,
+            "detected_at": 184,
+            "period": 2,
+            "seed": 8989593599234036058,
+            "transient": 182,
+            "trial": 11
+          }
+        ]
+      },
+      "trial_seeds": [
+        2636766353829097544,
+        13776670779431204451,
+        18410142674179178943,
+        4033972379755683876,
+        8375791813808399640,
+        4880100142703502226,
+        10506634417956961612,
+        3436101459244490511,
+        17212333743676737414,
+        12729140224284967642,
+        14815238983217767161,
+        8989593599234036058
+      ]
+    },
+    {
+      "config": {
+        "confidence": 0.95,
+        "master_seed": 20260727,
+        "p": 0.1,
+        "sample_every": 10,
+        "size": 128,
+        "steps": 200,
+        "trials": 12
+      },
+      "elapsed_seconds": 0.10778593099999512,
+      "label": "EMPIRICAL FINITE-SIZE RESULTS: finite periodic tori and finite run lengths; no asymptotic theorem is inferred.",
+      "measurements": [
+        {
+          "activity": {
+            "ci_high": null,
+            "ci_low": null,
+            "mean": null,
+            "n": 0
+          },
+          "density": {
+            "ci_high": 0.10087652510025019,
+            "ci_low": 0.09757928544662481,
+            "mean": 0.0992279052734375,
+            "n": 12
+          },
+          "generation": 0
+        },
+        {
+          "activity": {
+            "ci_high": 0.025808639356286814,
+            "ci_low": 0.019286168586421522,
+            "mean": 0.022547403971354168,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.04017023483948275,
+            "ci_low": 0.033031262556350575,
+            "mean": 0.036600748697916664,
+            "n": 12
+          },
+          "generation": 10
+        },
+        {
+          "activity": {
+            "ci_high": 0.02950346916451681,
+            "ci_low": 0.022905385002149854,
+            "mean": 0.026204427083333332,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.043252299408185854,
+            "ci_low": 0.036917378326189146,
+            "mean": 0.0400848388671875,
+            "n": 12
+          },
+          "generation": 20
+        },
+        {
+          "activity": {
+            "ci_high": 0.031865871230561726,
+            "ci_low": 0.024601820826729934,
+            "mean": 0.028233846028645832,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.04700229801921673,
+            "ci_low": 0.03969814143390827,
+            "mean": 0.0433502197265625,
+            "n": 12
+          },
+          "generation": 30
+        },
+        {
+          "activity": {
+            "ci_high": 0.035382875610997115,
+            "ci_low": 0.026832293659836224,
+            "mean": 0.031107584635416668,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.049418639555063204,
+            "ci_low": 0.040903219168895125,
+            "mean": 0.045160929361979164,
+            "n": 12
+          },
+          "generation": 40
+        },
+        {
+          "activity": {
+            "ci_high": 0.035190126743058804,
+            "ci_low": 0.02622141297048286,
+            "mean": 0.030705769856770832,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.05058504157711524,
+            "ci_low": 0.04212736076663476,
+            "mean": 0.046356201171875,
+            "n": 12
+          },
+          "generation": 50
+        },
+        {
+          "activity": {
+            "ci_high": 0.03607683749936171,
+            "ci_low": 0.02833559739647162,
+            "mean": 0.032206217447916664,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.05213555075501728,
+            "ci_low": 0.04420844338560772,
+            "mean": 0.0481719970703125,
+            "n": 12
+          },
+          "generation": 60
+        },
+        {
+          "activity": {
+            "ci_high": 0.03479480170985901,
+            "ci_low": 0.027979856493265984,
+            "mean": 0.0313873291015625,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.0515113615739039,
+            "ci_low": 0.0435203767073461,
+            "mean": 0.047515869140625,
+            "n": 12
+          },
+          "generation": 70
+        },
+        {
+          "activity": {
+            "ci_high": 0.034755074780447,
+            "ci_low": 0.026330944099761333,
+            "mean": 0.030543009440104168,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.04978266586716978,
+            "ci_low": 0.04152592788283022,
+            "mean": 0.045654296875,
+            "n": 12
+          },
+          "generation": 80
+        },
+        {
+          "activity": {
+            "ci_high": 0.033272361137446756,
+            "ci_low": 0.02525018118026158,
+            "mean": 0.029261271158854168,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.04823818349262006,
+            "ci_low": 0.03984571950217161,
+            "mean": 0.044041951497395836,
+            "n": 12
+          },
+          "generation": 90
+        },
+        {
+          "activity": {
+            "ci_high": 0.03375976109304719,
+            "ci_low": 0.024895024063202816,
+            "mean": 0.029327392578125,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.04806158217432121,
+            "ci_low": 0.03948317694026212,
+            "mean": 0.043772379557291664,
+            "n": 12
+          },
+          "generation": 100
+        },
+        {
+          "activity": {
+            "ci_high": 0.03440270167519671,
+            "ci_low": 0.024984505356053288,
+            "mean": 0.029693603515625,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.05017445723769918,
+            "ci_low": 0.03999481359563415,
+            "mean": 0.045084635416666664,
+            "n": 12
+          },
+          "generation": 110
+        },
+        {
+          "activity": {
+            "ci_high": 0.03472254398655175,
+            "ci_low": 0.024878286091573252,
+            "mean": 0.0298004150390625,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.052511144076093384,
+            "ci_low": 0.041208338345781616,
+            "mean": 0.0468597412109375,
+            "n": 12
+          },
+          "generation": 120
+        },
+        {
+          "activity": {
+            "ci_high": 0.03374417896614463,
+            "ci_low": 0.025012331450522035,
+            "mean": 0.029378255208333332,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.05051740002185227,
+            "ci_low": 0.040984471722939404,
+            "mean": 0.045750935872395836,
+            "n": 12
+          },
+          "generation": 130
+        },
+        {
+          "activity": {
+            "ci_high": 0.03436724669053252,
+            "ci_low": 0.02604738547092582,
+            "mean": 0.030207316080729168,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.04917228652858226,
+            "ci_low": 0.04118008977350107,
+            "mean": 0.045176188151041664,
+            "n": 12
+          },
+          "generation": 140
+        },
+        {
+          "activity": {
+            "ci_high": 0.03472525807878303,
+            "ci_low": 0.026086102598300305,
+            "mean": 0.030405680338541668,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.05103433202975441,
+            "ci_low": 0.04169841536607892,
+            "mean": 0.046366373697916664,
+            "n": 12
+          },
+          "generation": 150
+        },
+        {
+          "activity": {
+            "ci_high": 0.034065305654284485,
+            "ci_low": 0.02429447624675718,
+            "mean": 0.029179890950520832,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.04984867192229796,
+            "ci_low": 0.040524049431868714,
+            "mean": 0.045186360677083336,
+            "n": 12
+          },
+          "generation": 160
+        },
+        {
+          "activity": {
+            "ci_high": 0.033441573878775416,
+            "ci_low": 0.02449096192851625,
+            "mean": 0.028966267903645832,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.05009795449808603,
+            "ci_low": 0.0402239042258723,
+            "mean": 0.045160929361979164,
+            "n": 12
+          },
+          "generation": 170
+        },
+        {
+          "activity": {
+            "ci_high": 0.03429903869264376,
+            "ci_low": 0.023613152062564573,
+            "mean": 0.028956095377604168,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.051604998494909717,
+            "ci_low": 0.03990704577592361,
+            "mean": 0.045756022135416664,
+            "n": 12
+          },
+          "generation": 180
+        },
+        {
+          "activity": {
+            "ci_high": 0.03537567635912441,
+            "ci_low": 0.02453032950025059,
+            "mean": 0.0299530029296875,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.05155181929385113,
+            "ci_low": 0.04037729854469054,
+            "mean": 0.045964558919270836,
+            "n": 12
+          },
+          "generation": 190
+        },
+        {
+          "activity": {
+            "ci_high": 0.03475873497660794,
+            "ci_low": 0.02487261267964206,
+            "mean": 0.029815673828125,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.05205527019751945,
+            "ci_low": 0.04102334308373055,
+            "mean": 0.046539306640625,
+            "n": 12
+          },
+          "generation": 200
+        }
+      ],
+      "period_detection": {
+        "detected_fraction": {
+          "ci_high": 0.0,
+          "ci_low": 0.0,
+          "mean": 0.0,
+          "n": 12
+        },
+        "period_detected_only": {
+          "ci_high": null,
+          "ci_low": null,
+          "mean": null,
+          "n": 0
+        },
+        "transient_detected_only": {
+          "ci_high": null,
+          "ci_low": null,
+          "mean": null,
+          "n": 0
+        },
+        "trials": [
+          {
+            "detected": false,
+            "detected_at": null,
+            "period": null,
+            "seed": 14239483989320478628,
+            "transient": null,
+            "trial": 0
+          },
+          {
+            "detected": false,
+            "detected_at": null,
+            "period": null,
+            "seed": 18151377194864445323,
+            "transient": null,
+            "trial": 1
+          },
+          {
+            "detected": false,
+            "detected_at": null,
+            "period": null,
+            "seed": 3624927167254235876,
+            "transient": null,
+            "trial": 2
+          },
+          {
+            "detected": false,
+            "detected_at": null,
+            "period": null,
+            "seed": 3519536318369586109,
+            "transient": null,
+            "trial": 3
+          },
+          {
+            "detected": false,
+            "detected_at": null,
+            "period": null,
+            "seed": 9481674467722445172,
+            "transient": null,
+            "trial": 4
+          },
+          {
+            "detected": false,
+            "detected_at": null,
+            "period": null,
+            "seed": 3538297736244979268,
+            "transient": null,
+            "trial": 5
+          },
+          {
+            "detected": false,
+            "detected_at": null,
+            "period": null,
+            "seed": 6823081821665289498,
+            "transient": null,
+            "trial": 6
+          },
+          {
+            "detected": false,
+            "detected_at": null,
+            "period": null,
+            "seed": 11678734630580442279,
+            "transient": null,
+            "trial": 7
+          },
+          {
+            "detected": false,
+            "detected_at": null,
+            "period": null,
+            "seed": 2137504094756153309,
+            "transient": null,
+            "trial": 8
+          },
+          {
+            "detected": false,
+            "detected_at": null,
+            "period": null,
+            "seed": 2039564593476059138,
+            "transient": null,
+            "trial": 9
+          },
+          {
+            "detected": false,
+            "detected_at": null,
+            "period": null,
+            "seed": 8082280359680990839,
+            "transient": null,
+            "trial": 10
+          },
+          {
+            "detected": false,
+            "detected_at": null,
+            "period": null,
+            "seed": 6705352549918643809,
+            "transient": null,
+            "trial": 11
+          }
+        ]
+      },
+      "trial_seeds": [
+        14239483989320478628,
+        18151377194864445323,
+        3624927167254235876,
+        3519536318369586109,
+        9481674467722445172,
+        3538297736244979268,
+        6823081821665289498,
+        11678734630580442279,
+        2137504094756153309,
+        2039564593476059138,
+        8082280359680990839,
+        6705352549918643809
+      ]
+    },
+    {
+      "config": {
+        "confidence": 0.95,
+        "master_seed": 20260727,
+        "p": 0.3,
+        "sample_every": 10,
+        "size": 32,
+        "steps": 200,
+        "trials": 12
+      },
+      "elapsed_seconds": 0.021722253000007186,
+      "label": "EMPIRICAL FINITE-SIZE RESULTS: finite periodic tori and finite run lengths; no asymptotic theorem is inferred.",
+      "measurements": [
+        {
+          "activity": {
+            "ci_high": null,
+            "ci_low": null,
+            "mean": null,
+            "n": 0
+          },
+          "density": {
+            "ci_high": 0.3064541258635048,
+            "ci_low": 0.2926669678864952,
+            "mean": 0.299560546875,
+            "n": 12
+          },
+          "generation": 0
+        },
+        {
+          "activity": {
+            "ci_high": 0.20957649367369197,
+            "ci_low": 0.17714225632630803,
+            "mean": 0.193359375,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.2168802933496159,
+            "ci_low": 0.1890441858170508,
+            "mean": 0.20296223958333334,
+            "n": 12
+          },
+          "generation": 10
+        },
+        {
+          "activity": {
+            "ci_high": 0.16258891505731007,
+            "ci_low": 0.12256733494268993,
+            "mean": 0.142578125,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.17413042750568142,
+            "ci_low": 0.15122764541098527,
+            "mean": 0.16267903645833334,
+            "n": 12
+          },
+          "generation": 20
+        },
+        {
+          "activity": {
+            "ci_high": 0.15483655585795772,
+            "ci_low": 0.11729886080870895,
+            "mean": 0.13606770833333334,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.170761189057677,
+            "ci_low": 0.146621623442323,
+            "mean": 0.15869140625,
+            "n": 12
+          },
+          "generation": 30
+        },
+        {
+          "activity": {
+            "ci_high": 0.13720448389766216,
+            "ci_low": 0.10888926610233784,
+            "mean": 0.123046875,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.15507289054198664,
+            "ci_low": 0.13398960945801336,
+            "mean": 0.14453125,
+            "n": 12
+          },
+          "generation": 40
+        },
+        {
+          "activity": {
+            "ci_high": 0.11311892488982833,
+            "ci_low": 0.08349565844350501,
+            "mean": 0.09830729166666667,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.14242576588863948,
+            "ci_low": 0.11668881744469384,
+            "mean": 0.12955729166666666,
+            "n": 12
+          },
+          "generation": 50
+        },
+        {
+          "activity": {
+            "ci_high": 0.12164348031865407,
+            "ci_low": 0.08196980093134593,
+            "mean": 0.101806640625,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.14093073018005692,
+            "ci_low": 0.09816432190327644,
+            "mean": 0.11954752604166667,
+            "n": 12
+          },
+          "generation": 60
+        },
+        {
+          "activity": {
+            "ci_high": 0.10527114858095107,
+            "ci_low": 0.07343978891904893,
+            "mean": 0.08935546875,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.12313083593865981,
+            "ci_low": 0.09675848697800685,
+            "mean": 0.10994466145833333,
+            "n": 12
+          },
+          "generation": 70
+        },
+        {
+          "activity": {
+            "ci_high": 0.10614772341206472,
+            "ci_low": 0.06735488075460194,
+            "mean": 0.08675130208333333,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.1268044138316864,
+            "ci_low": 0.09015522158498027,
+            "mean": 0.10847981770833333,
+            "n": 12
+          },
+          "generation": 80
+        },
+        {
+          "activity": {
+            "ci_high": 0.10043452622265321,
+            "ci_low": 0.06069828627734679,
+            "mean": 0.08056640625,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.12629459962649728,
+            "ci_low": 0.08106217120683606,
+            "mean": 0.10367838541666667,
+            "n": 12
+          },
+          "generation": 90
+        },
+        {
+          "activity": {
+            "ci_high": 0.10944136406140785,
+            "ci_low": 0.05966670885525881,
+            "mean": 0.08455403645833333,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.12426836892090762,
+            "ci_low": 0.07560142274575904,
+            "mean": 0.09993489583333333,
+            "n": 12
+          },
+          "generation": 100
+        },
+        {
+          "activity": {
+            "ci_high": 0.09796133694600007,
+            "ci_low": 0.05291756930399994,
+            "mean": 0.075439453125,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.12220533874554843,
+            "ci_low": 0.07538580708778492,
+            "mean": 0.09879557291666667,
+            "n": 12
+          },
+          "generation": 110
+        },
+        {
+          "activity": {
+            "ci_high": 0.0989579220357939,
+            "ci_low": 0.0494795779642061,
+            "mean": 0.07421875,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.11269589824050116,
+            "ci_low": 0.06308535175949884,
+            "mean": 0.087890625,
+            "n": 12
+          },
+          "generation": 120
+        },
+        {
+          "activity": {
+            "ci_high": 0.09159498853319012,
+            "ci_low": 0.038450584383476545,
+            "mean": 0.06502278645833333,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.10466713779265158,
+            "ci_low": 0.05402426845734842,
+            "mean": 0.079345703125,
+            "n": 12
+          },
+          "generation": 130
+        },
+        {
+          "activity": {
+            "ci_high": 0.0761463684802071,
+            "ci_low": 0.037948683603126226,
+            "mean": 0.057047526041666664,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.0962067628358391,
+            "ci_low": 0.05499766424749425,
+            "mean": 0.07560221354166667,
+            "n": 12
+          },
+          "generation": 140
+        },
+        {
+          "activity": {
+            "ci_high": 0.07441202734130749,
+            "ci_low": 0.03838094140869251,
+            "mean": 0.056396484375,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.09322131597279726,
+            "ci_low": 0.05293753819386939,
+            "mean": 0.07307942708333333,
+            "n": 12
+          },
+          "generation": 150
+        },
+        {
+          "activity": {
+            "ci_high": 0.07671565366331778,
+            "ci_low": 0.03754215883668222,
+            "mean": 0.05712890625,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.08886379220686871,
+            "ci_low": 0.049808082793131286,
+            "mean": 0.0693359375,
+            "n": 12
+          },
+          "generation": 160
+        },
+        {
+          "activity": {
+            "ci_high": 0.05942797239322094,
+            "ci_low": 0.023742600523445737,
+            "mean": 0.041585286458333336,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.07638169512598841,
+            "ci_low": 0.04340997154067826,
+            "mean": 0.059895833333333336,
+            "n": 12
+          },
+          "generation": 170
+        },
+        {
+          "activity": {
+            "ci_high": 0.06579974291694456,
+            "ci_low": 0.022416402916388776,
+            "mean": 0.044108072916666664,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.08932558199532788,
+            "ci_low": 0.047718688838005466,
+            "mean": 0.06852213541666667,
+            "n": 12
+          },
+          "generation": 180
+        },
+        {
+          "activity": {
+            "ci_high": 0.06827876262351656,
+            "ci_low": 0.02693608112648344,
+            "mean": 0.047607421875,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.0825421610246177,
+            "ci_low": 0.0458758077253823,
+            "mean": 0.064208984375,
+            "n": 12
+          },
+          "generation": 190
+        },
+        {
+          "activity": {
+            "ci_high": 0.05458722226552867,
+            "ci_low": 0.019143246484471327,
+            "mean": 0.036865234375,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.07395444878929955,
+            "ci_low": 0.03997784287736712,
+            "mean": 0.056966145833333336,
+            "n": 12
+          },
+          "generation": 200
+        }
+      ],
+      "period_detection": {
+        "detected_fraction": {
+          "ci_high": 0.7080096241782564,
+          "ci_low": 0.12532370915507696,
+          "mean": 0.4166666666666667,
+          "n": 12
+        },
+        "period_detected_only": {
+          "ci_high": 2.0800911676355307,
+          "ci_low": 1.1199088323644693,
+          "mean": 1.6,
+          "n": 5
+        },
+        "transient_detected_only": {
+          "ci_high": 193.03393067300348,
+          "ci_low": 127.3660693269965,
+          "mean": 160.2,
+          "n": 5
+        },
+        "trials": [
+          {
+            "detected": false,
+            "detected_at": null,
+            "period": null,
+            "seed": 16871982049930956084,
+            "transient": null,
+            "trial": 0
+          },
+          {
+            "detected": true,
+            "detected_at": 177,
+            "period": 2,
+            "seed": 11643311666821917237,
+            "transient": 175,
+            "trial": 1
+          },
+          {
+            "detected": false,
+            "detected_at": null,
+            "period": null,
+            "seed": 14785863905632322301,
+            "transient": null,
+            "trial": 2
+          },
+          {
+            "detected": true,
+            "detected_at": 171,
+            "period": 1,
+            "seed": 18412768300385746904,
+            "transient": 170,
+            "trial": 3
+          },
+          {
+            "detected": false,
+            "detected_at": null,
+            "period": null,
+            "seed": 3094286679963333218,
+            "transient": null,
+            "trial": 4
+          },
+          {
+            "detected": true,
+            "detected_at": 162,
+            "period": 2,
+            "seed": 17060146065161263591,
+            "transient": 160,
+            "trial": 5
+          },
+          {
+            "detected": false,
+            "detected_at": null,
+            "period": null,
+            "seed": 15045809426680153874,
+            "transient": null,
+            "trial": 6
+          },
+          {
+            "detected": false,
+            "detected_at": null,
+            "period": null,
+            "seed": 9700702133512076587,
+            "transient": null,
+            "trial": 7
+          },
+          {
+            "detected": false,
+            "detected_at": null,
+            "period": null,
+            "seed": 17087002351346558529,
+            "transient": null,
+            "trial": 8
+          },
+          {
+            "detected": true,
+            "detected_at": 99,
+            "period": 1,
+            "seed": 10088365275553080720,
+            "transient": 98,
+            "trial": 9
+          },
+          {
+            "detected": false,
+            "detected_at": null,
+            "period": null,
+            "seed": 4243095205573856356,
+            "transient": null,
+            "trial": 10
+          },
+          {
+            "detected": true,
+            "detected_at": 200,
+            "period": 2,
+            "seed": 6192098373440379709,
+            "transient": 198,
+            "trial": 11
+          }
+        ]
+      },
+      "trial_seeds": [
+        16871982049930956084,
+        11643311666821917237,
+        14785863905632322301,
+        18412768300385746904,
+        3094286679963333218,
+        17060146065161263591,
+        15045809426680153874,
+        9700702133512076587,
+        17087002351346558529,
+        10088365275553080720,
+        4243095205573856356,
+        6192098373440379709
+      ]
+    },
+    {
+      "config": {
+        "confidence": 0.95,
+        "master_seed": 20260727,
+        "p": 0.3,
+        "sample_every": 10,
+        "size": 64,
+        "steps": 200,
+        "trials": 12
+      },
+      "elapsed_seconds": 0.04103118300000119,
+      "label": "EMPIRICAL FINITE-SIZE RESULTS: finite periodic tori and finite run lengths; no asymptotic theorem is inferred.",
+      "measurements": [
+        {
+          "activity": {
+            "ci_high": null,
+            "ci_low": null,
+            "mean": null,
+            "n": 0
+          },
+          "density": {
+            "ci_high": 0.30840708968708436,
+            "ci_low": 0.2982009832295823,
+            "mean": 0.3033040364583333,
+            "n": 12
+          },
+          "generation": 0
+        },
+        {
+          "activity": {
+            "ci_high": 0.2208440203822303,
+            "ci_low": 0.20619862284693638,
+            "mean": 0.21352132161458334,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.2329043371331652,
+            "ci_low": 0.21480887901266812,
+            "mean": 0.22385660807291666,
+            "n": 12
+          },
+          "generation": 10
+        },
+        {
+          "activity": {
+            "ci_high": 0.16689535502653408,
+            "ci_low": 0.14487222309846592,
+            "mean": 0.1558837890625,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.18340027766605302,
+            "ci_low": 0.16559874577144698,
+            "mean": 0.17449951171875,
+            "n": 12
+          },
+          "generation": 20
+        },
+        {
+          "activity": {
+            "ci_high": 0.1421479838573279,
+            "ci_low": 0.12164596145517209,
+            "mean": 0.13189697265625,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.16391507827679858,
+            "ci_low": 0.14760835922320142,
+            "mean": 0.15576171875,
+            "n": 12
+          },
+          "generation": 30
+        },
+        {
+          "activity": {
+            "ci_high": 0.12796487984587587,
+            "ci_low": 0.11007222952912414,
+            "mean": 0.1190185546875,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.14962612673964418,
+            "ci_low": 0.12759555294785582,
+            "mean": 0.13861083984375,
+            "n": 12
+          },
+          "generation": 40
+        },
+        {
+          "activity": {
+            "ci_high": 0.11322929682843512,
+            "ci_low": 0.09494127608823154,
+            "mean": 0.10408528645833333,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.13707805124458133,
+            "ci_low": 0.11678750865125197,
+            "mean": 0.12693277994791666,
+            "n": 12
+          },
+          "generation": 50
+        },
+        {
+          "activity": {
+            "ci_high": 0.10615952076485381,
+            "ci_low": 0.08866469798514619,
+            "mean": 0.097412109375,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.12841743755485457,
+            "ci_low": 0.10848034890347877,
+            "mean": 0.11844889322916667,
+            "n": 12
+          },
+          "generation": 60
+        },
+        {
+          "activity": {
+            "ci_high": 0.10113930413608199,
+            "ci_low": 0.08282065680141801,
+            "mean": 0.09197998046875,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.12360617304145083,
+            "ci_low": 0.10328184779188251,
+            "mean": 0.11344401041666667,
+            "n": 12
+          },
+          "generation": 70
+        },
+        {
+          "activity": {
+            "ci_high": 0.098012601281519,
+            "ci_low": 0.07915211226014766,
+            "mean": 0.08858235677083333,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.11682599005551506,
+            "ci_low": 0.0978143094236516,
+            "mean": 0.10732014973958333,
+            "n": 12
+          },
+          "generation": 80
+        },
+        {
+          "activity": {
+            "ci_high": 0.09212377105939373,
+            "ci_low": 0.07364771331560627,
+            "mean": 0.0828857421875,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.11209362913473314,
+            "ci_low": 0.08993273805276686,
+            "mean": 0.10101318359375,
+            "n": 12
+          },
+          "generation": 90
+        },
+        {
+          "activity": {
+            "ci_high": 0.09024382569446802,
+            "ci_low": 0.06352407795136532,
+            "mean": 0.07688395182291667,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.11100966606028037,
+            "ci_low": 0.08397731310638629,
+            "mean": 0.09749348958333333,
+            "n": 12
+          },
+          "generation": 100
+        },
+        {
+          "activity": {
+            "ci_high": 0.08698310265245948,
+            "ci_low": 0.06422132443087386,
+            "mean": 0.07560221354166667,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.10526208020576619,
+            "ci_low": 0.07975582344006715,
+            "mean": 0.09250895182291667,
+            "n": 12
+          },
+          "generation": 110
+        },
+        {
+          "activity": {
+            "ci_high": 0.07779458861139726,
+            "ci_low": 0.05729655722193608,
+            "mean": 0.06754557291666667,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.09965862455584965,
+            "ci_low": 0.0754715837774837,
+            "mean": 0.08756510416666667,
+            "n": 12
+          },
+          "generation": 120
+        },
+        {
+          "activity": {
+            "ci_high": 0.07291055707916506,
+            "ci_low": 0.05383911740000159,
+            "mean": 0.06337483723958333,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.09426185663566919,
+            "ci_low": 0.07350344284349747,
+            "mean": 0.08388264973958333,
+            "n": 12
+          },
+          "generation": 130
+        },
+        {
+          "activity": {
+            "ci_high": 0.07724660259869275,
+            "ci_low": 0.0571121213596406,
+            "mean": 0.06717936197916667,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.09485695295581022,
+            "ci_low": 0.07274558610668978,
+            "mean": 0.08380126953125,
+            "n": 12
+          },
+          "generation": 140
+        },
+        {
+          "activity": {
+            "ci_high": 0.06607301119739141,
+            "ci_low": 0.04871377265677526,
+            "mean": 0.057393391927083336,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.08868547396709943,
+            "ci_low": 0.06626244269956723,
+            "mean": 0.07747395833333333,
+            "n": 12
+          },
+          "generation": 150
+        },
+        {
+          "activity": {
+            "ci_high": 0.06802586077205874,
+            "ci_low": 0.05241684756127458,
+            "mean": 0.060221354166666664,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.09186186834160111,
+            "ci_low": 0.07277029311673223,
+            "mean": 0.08231608072916667,
+            "n": 12
+          },
+          "generation": 160
+        },
+        {
+          "activity": {
+            "ci_high": 0.06547160611348529,
+            "ci_low": 0.04903034701151471,
+            "mean": 0.0572509765625,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.09052475584873461,
+            "ci_low": 0.06999770508876539,
+            "mean": 0.08026123046875,
+            "n": 12
+          },
+          "generation": 170
+        },
+        {
+          "activity": {
+            "ci_high": 0.06068098399561363,
+            "ci_low": 0.0441367243377197,
+            "mean": 0.052408854166666664,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.08511271266823743,
+            "ci_low": 0.06462687066509591,
+            "mean": 0.07486979166666667,
+            "n": 12
+          },
+          "generation": 180
+        },
+        {
+          "activity": {
+            "ci_high": 0.06395599107050326,
+            "ci_low": 0.04383209486699674,
+            "mean": 0.05389404296875,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.08643645050973661,
+            "ci_low": 0.06403555469859673,
+            "mean": 0.07523600260416667,
+            "n": 12
+          },
+          "generation": 190
+        },
+        {
+          "activity": {
+            "ci_high": 0.06746777180821263,
+            "ci_low": 0.04524381673345404,
+            "mean": 0.056355794270833336,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.08729852711658379,
+            "ci_low": 0.06333623850841621,
+            "mean": 0.0753173828125,
+            "n": 12
+          },
+          "generation": 200
+        }
+      ],
+      "period_detection": {
+        "detected_fraction": {
+          "ci_high": 0.0,
+          "ci_low": 0.0,
+          "mean": 0.0,
+          "n": 12
+        },
+        "period_detected_only": {
+          "ci_high": null,
+          "ci_low": null,
+          "mean": null,
+          "n": 0
+        },
+        "transient_detected_only": {
+          "ci_high": null,
+          "ci_low": null,
+          "mean": null,
+          "n": 0
+        },
+        "trials": [
+          {
+            "detected": false,
+            "detected_at": null,
+            "period": null,
+            "seed": 14686434820059161410,
+            "transient": null,
+            "trial": 0
+          },
+          {
+            "detected": false,
+            "detected_at": null,
+            "period": null,
+            "seed": 13206167498453195259,
+            "transient": null,
+            "trial": 1
+          },
+          {
+            "detected": false,
+            "detected_at": null,
+            "period": null,
+            "seed": 1190168971778388402,
+            "transient": null,
+            "trial": 2
+          },
+          {
+            "detected": false,
+            "detected_at": null,
+            "period": null,
+            "seed": 17280725877689224994,
+            "transient": null,
+            "trial": 3
+          },
+          {
+            "detected": false,
+            "detected_at": null,
+            "period": null,
+            "seed": 14373902408270307521,
+            "transient": null,
+            "trial": 4
+          },
+          {
+            "detected": false,
+            "detected_at": null,
+            "period": null,
+            "seed": 5848025302078245683,
+            "transient": null,
+            "trial": 5
+          },
+          {
+            "detected": false,
+            "detected_at": null,
+            "period": null,
+            "seed": 3229589788700395108,
+            "transient": null,
+            "trial": 6
+          },
+          {
+            "detected": false,
+            "detected_at": null,
+            "period": null,
+            "seed": 8577398059158233181,
+            "transient": null,
+            "trial": 7
+          },
+          {
+            "detected": false,
+            "detected_at": null,
+            "period": null,
+            "seed": 12759302219312688969,
+            "transient": null,
+            "trial": 8
+          },
+          {
+            "detected": false,
+            "detected_at": null,
+            "period": null,
+            "seed": 16889437862407633735,
+            "transient": null,
+            "trial": 9
+          },
+          {
+            "detected": false,
+            "detected_at": null,
+            "period": null,
+            "seed": 8911810921192026705,
+            "transient": null,
+            "trial": 10
+          },
+          {
+            "detected": false,
+            "detected_at": null,
+            "period": null,
+            "seed": 16164902673643596891,
+            "transient": null,
+            "trial": 11
+          }
+        ]
+      },
+      "trial_seeds": [
+        14686434820059161410,
+        13206167498453195259,
+        1190168971778388402,
+        17280725877689224994,
+        14373902408270307521,
+        5848025302078245683,
+        3229589788700395108,
+        8577398059158233181,
+        12759302219312688969,
+        16889437862407633735,
+        8911810921192026705,
+        16164902673643596891
+      ]
+    },
+    {
+      "config": {
+        "confidence": 0.95,
+        "master_seed": 20260727,
+        "p": 0.3,
+        "sample_every": 10,
+        "size": 128,
+        "steps": 200,
+        "trials": 12
+      },
+      "elapsed_seconds": 0.10348822799997492,
+      "label": "EMPIRICAL FINITE-SIZE RESULTS: finite periodic tori and finite run lengths; no asymptotic theorem is inferred.",
+      "measurements": [
+        {
+          "activity": {
+            "ci_high": null,
+            "ci_low": null,
+            "mean": null,
+            "n": 0
+          },
+          "density": {
+            "ci_high": 0.30220171065265644,
+            "ci_low": 0.2970211083577602,
+            "mean": 0.2996114095052083,
+            "n": 12
+          },
+          "generation": 0
+        },
+        {
+          "activity": {
+            "ci_high": 0.2129890769189312,
+            "ci_low": 0.2022534361019021,
+            "mean": 0.20762125651041666,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.22463295532867616,
+            "ci_low": 0.21565431680674052,
+            "mean": 0.22014363606770834,
+            "n": 12
+          },
+          "generation": 10
+        },
+        {
+          "activity": {
+            "ci_high": 0.15974126607935288,
+            "ci_low": 0.15046991556127212,
+            "mean": 0.1551055908203125,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.17968803330225958,
+            "ci_low": 0.16954495823419874,
+            "mean": 0.17461649576822916,
+            "n": 12
+          },
+          "generation": 20
+        },
+        {
+          "activity": {
+            "ci_high": 0.13450534523797286,
+            "ci_low": 0.12868842103806882,
+            "mean": 0.13159688313802084,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.15628364353329693,
+            "ci_low": 0.14951266180524475,
+            "mean": 0.15289815266927084,
+            "n": 12
+          },
+          "generation": 30
+        },
+        {
+          "activity": {
+            "ci_high": 0.11915942523962972,
+            "ci_low": 0.11226554220828694,
+            "mean": 0.11571248372395833,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.14047883481858367,
+            "ci_low": 0.13370125958245802,
+            "mean": 0.13709004720052084,
+            "n": 12
+          },
+          "generation": 40
+        },
+        {
+          "activity": {
+            "ci_high": 0.10907309736093257,
+            "ci_low": 0.10372597490469243,
+            "mean": 0.1063995361328125,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.13049827870571448,
+            "ci_low": 0.1243641887422022,
+            "mean": 0.12743123372395834,
+            "n": 12
+          },
+          "generation": 50
+        },
+        {
+          "activity": {
+            "ci_high": 0.09880225372239917,
+            "ci_low": 0.09172915903801748,
+            "mean": 0.09526570638020833,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.12129457967872645,
+            "ci_low": 0.11347714883689855,
+            "mean": 0.1173858642578125,
+            "n": 12
+          },
+          "generation": 60
+        },
+        {
+          "activity": {
+            "ci_high": 0.08880981179030946,
+            "ci_low": 0.08129516867844054,
+            "mean": 0.085052490234375,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.1092038468782922,
+            "ci_low": 0.10462265051754115,
+            "mean": 0.10691324869791667,
+            "n": 12
+          },
+          "generation": 70
+        },
+        {
+          "activity": {
+            "ci_high": 0.08286263666915092,
+            "ci_low": 0.07859569666418242,
+            "mean": 0.08072916666666667,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.10426964396994974,
+            "ci_low": 0.0995776053790086,
+            "mean": 0.10192362467447917,
+            "n": 12
+          },
+          "generation": 80
+        },
+        {
+          "activity": {
+            "ci_high": 0.08163332518073681,
+            "ci_low": 0.07130043132967985,
+            "mean": 0.07646687825520833,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.10259082677429206,
+            "ci_low": 0.09290477869445794,
+            "mean": 0.097747802734375,
+            "n": 12
+          },
+          "generation": 90
+        },
+        {
+          "activity": {
+            "ci_high": 0.07664625304546273,
+            "ci_low": 0.06773240906391227,
+            "mean": 0.0721893310546875,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.09804369721917813,
+            "ci_low": 0.08990389392665521,
+            "mean": 0.09397379557291667,
+            "n": 12
+          },
+          "generation": 100
+        },
+        {
+          "activity": {
+            "ci_high": 0.07559817056610463,
+            "ci_low": 0.06680702149118703,
+            "mean": 0.07120259602864583,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.09540810705397376,
+            "ci_low": 0.08722942549810958,
+            "mean": 0.09131876627604167,
+            "n": 12
+          },
+          "generation": 110
+        },
+        {
+          "activity": {
+            "ci_high": 0.07511017231256922,
+            "ci_low": 0.06415170919784743,
+            "mean": 0.06963094075520833,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.09648103647366962,
+            "ci_low": 0.08493579295341372,
+            "mean": 0.09070841471354167,
+            "n": 12
+          },
+          "generation": 120
+        },
+        {
+          "activity": {
+            "ci_high": 0.07111321998726877,
+            "ci_low": 0.061485656965856235,
+            "mean": 0.0662994384765625,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.09012105373972017,
+            "ci_low": 0.08099100680715483,
+            "mean": 0.0855560302734375,
+            "n": 12
+          },
+          "generation": 130
+        },
+        {
+          "activity": {
+            "ci_high": 0.06656309755076947,
+            "ci_low": 0.05960674294402219,
+            "mean": 0.06308492024739583,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.08754759430729173,
+            "ci_low": 0.07929200530208327,
+            "mean": 0.0834197998046875,
+            "n": 12
+          },
+          "generation": 140
+        },
+        {
+          "activity": {
+            "ci_high": 0.06397205989426834,
+            "ci_low": 0.05473114648593999,
+            "mean": 0.059351603190104164,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.08543369130925214,
+            "ci_low": 0.07569912119074786,
+            "mean": 0.08056640625,
+            "n": 12
+          },
+          "generation": 150
+        },
+        {
+          "activity": {
+            "ci_high": 0.061204042124058805,
+            "ci_low": 0.050856504750941195,
+            "mean": 0.0560302734375,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.08245295655947124,
+            "ci_low": 0.0726272029457371,
+            "mean": 0.07754007975260417,
+            "n": 12
+          },
+          "generation": 160
+        },
+        {
+          "activity": {
+            "ci_high": 0.06038917053477606,
+            "ci_low": 0.05018618753814061,
+            "mean": 0.055287679036458336,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.08110123194450493,
+            "ci_low": 0.07080509943570341,
+            "mean": 0.07595316569010417,
+            "n": 12
+          },
+          "generation": 170
+        },
+        {
+          "activity": {
+            "ci_high": 0.06226311556182831,
+            "ci_low": 0.050631578448588364,
+            "mean": 0.056447347005208336,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.08221385529843486,
+            "ci_low": 0.0695297156651068,
+            "mean": 0.07587178548177083,
+            "n": 12
+          },
+          "generation": 180
+        },
+        {
+          "activity": {
+            "ci_high": 0.05791251502645953,
+            "ci_low": 0.044911378202707145,
+            "mean": 0.051411946614583336,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.07978099505946193,
+            "ci_low": 0.06458749452387141,
+            "mean": 0.07218424479166667,
+            "n": 12
+          },
+          "generation": 190
+        },
+        {
+          "activity": {
+            "ci_high": 0.05791999665141903,
+            "ci_low": 0.04593132170795597,
+            "mean": 0.0519256591796875,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.07804571756981112,
+            "ci_low": 0.06515293151873054,
+            "mean": 0.07159932454427083,
+            "n": 12
+          },
+          "generation": 200
+        }
+      ],
+      "period_detection": {
+        "detected_fraction": {
+          "ci_high": 0.0,
+          "ci_low": 0.0,
+          "mean": 0.0,
+          "n": 12
+        },
+        "period_detected_only": {
+          "ci_high": null,
+          "ci_low": null,
+          "mean": null,
+          "n": 0
+        },
+        "transient_detected_only": {
+          "ci_high": null,
+          "ci_low": null,
+          "mean": null,
+          "n": 0
+        },
+        "trials": [
+          {
+            "detected": false,
+            "detected_at": null,
+            "period": null,
+            "seed": 11101646993166286548,
+            "transient": null,
+            "trial": 0
+          },
+          {
+            "detected": false,
+            "detected_at": null,
+            "period": null,
+            "seed": 6816250495541910959,
+            "transient": null,
+            "trial": 1
+          },
+          {
+            "detected": false,
+            "detected_at": null,
+            "period": null,
+            "seed": 5770036986990018337,
+            "transient": null,
+            "trial": 2
+          },
+          {
+            "detected": false,
+            "detected_at": null,
+            "period": null,
+            "seed": 16155287087530375624,
+            "transient": null,
+            "trial": 3
+          },
+          {
+            "detected": false,
+            "detected_at": null,
+            "period": null,
+            "seed": 6857642436244012550,
+            "transient": null,
+            "trial": 4
+          },
+          {
+            "detected": false,
+            "detected_at": null,
+            "period": null,
+            "seed": 10020760536557180921,
+            "transient": null,
+            "trial": 5
+          },
+          {
+            "detected": false,
+            "detected_at": null,
+            "period": null,
+            "seed": 12011346354631365910,
+            "transient": null,
+            "trial": 6
+          },
+          {
+            "detected": false,
+            "detected_at": null,
+            "period": null,
+            "seed": 8697218130833953071,
+            "transient": null,
+            "trial": 7
+          },
+          {
+            "detected": false,
+            "detected_at": null,
+            "period": null,
+            "seed": 1079270692714382134,
+            "transient": null,
+            "trial": 8
+          },
+          {
+            "detected": false,
+            "detected_at": null,
+            "period": null,
+            "seed": 7102991130174087822,
+            "transient": null,
+            "trial": 9
+          },
+          {
+            "detected": false,
+            "detected_at": null,
+            "period": null,
+            "seed": 7329412578799757050,
+            "transient": null,
+            "trial": 10
+          },
+          {
+            "detected": false,
+            "detected_at": null,
+            "period": null,
+            "seed": 4508564720017187246,
+            "transient": null,
+            "trial": 11
+          }
+        ]
+      },
+      "trial_seeds": [
+        11101646993166286548,
+        6816250495541910959,
+        5770036986990018337,
+        16155287087530375624,
+        6857642436244012550,
+        10020760536557180921,
+        12011346354631365910,
+        8697218130833953071,
+        1079270692714382134,
+        7102991130174087822,
+        7329412578799757050,
+        4508564720017187246
+      ]
+    },
+    {
+      "config": {
+        "confidence": 0.95,
+        "master_seed": 20260727,
+        "p": 0.5,
+        "sample_every": 10,
+        "size": 32,
+        "steps": 200,
+        "trials": 12
+      },
+      "elapsed_seconds": 0.026487027000001717,
+      "label": "EMPIRICAL FINITE-SIZE RESULTS: finite periodic tori and finite run lengths; no asymptotic theorem is inferred.",
+      "measurements": [
+        {
+          "activity": {
+            "ci_high": null,
+            "ci_low": null,
+            "mean": null,
+            "n": 0
+          },
+          "density": {
+            "ci_high": 0.5045723507071588,
+            "ci_low": 0.48794067012617454,
+            "mean": 0.4962565104166667,
+            "n": 12
+          },
+          "generation": 0
+        },
+        {
+          "activity": {
+            "ci_high": 0.20958359282531333,
+            "ci_low": 0.17387994884135335,
+            "mean": 0.19173177083333334,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.22129144816925958,
+            "ci_low": 0.17991297891407373,
+            "mean": 0.20060221354166666,
+            "n": 12
+          },
+          "generation": 10
+        },
+        {
+          "activity": {
+            "ci_high": 0.15177872288339675,
+            "ci_low": 0.11872908961660325,
+            "mean": 0.13525390625,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.17402032090105743,
+            "ci_low": 0.14564113743227589,
+            "mean": 0.15983072916666666,
+            "n": 12
+          },
+          "generation": 20
+        },
+        {
+          "activity": {
+            "ci_high": 0.13905081555432403,
+            "ci_low": 0.09792835111234263,
+            "mean": 0.11848958333333333,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.16154265299963738,
+            "ci_low": 0.1198701074170293,
+            "mean": 0.14070638020833334,
+            "n": 12
+          },
+          "generation": 30
+        },
+        {
+          "activity": {
+            "ci_high": 0.12997618043387388,
+            "ci_low": 0.08535585081612611,
+            "mean": 0.107666015625,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.15028238486698142,
+            "ci_low": 0.10704183388301859,
+            "mean": 0.128662109375,
+            "n": 12
+          },
+          "generation": 40
+        },
+        {
+          "activity": {
+            "ci_high": 0.09492917957702322,
+            "ci_low": 0.06734295583964343,
+            "mean": 0.08113606770833333,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.12900288576685517,
+            "ci_low": 0.09397888506647817,
+            "mean": 0.11149088541666667,
+            "n": 12
+          },
+          "generation": 50
+        },
+        {
+          "activity": {
+            "ci_high": 0.08152738843578895,
+            "ci_low": 0.052261674064211054,
+            "mean": 0.06689453125,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.10889251458018219,
+            "ci_low": 0.07697988125315115,
+            "mean": 0.09293619791666667,
+            "n": 12
+          },
+          "generation": 60
+        },
+        {
+          "activity": {
+            "ci_high": 0.09258969559578069,
+            "ci_low": 0.05975405440421931,
+            "mean": 0.076171875,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.11020261491820776,
+            "ci_low": 0.08071535383179224,
+            "mean": 0.095458984375,
+            "n": 12
+          },
+          "generation": 70
+        },
+        {
+          "activity": {
+            "ci_high": 0.07618632378054342,
+            "ci_low": 0.05304544705278992,
+            "mean": 0.06461588541666667,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.09880974781718144,
+            "ci_low": 0.07322801259948522,
+            "mean": 0.08601888020833333,
+            "n": 12
+          },
+          "generation": 80
+        },
+        {
+          "activity": {
+            "ci_high": 0.07290785721952844,
+            "ci_low": 0.04965073653047155,
+            "mean": 0.061279296875,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.0956745340133767,
+            "ci_low": 0.0649699972366233,
+            "mean": 0.080322265625,
+            "n": 12
+          },
+          "generation": 90
+        },
+        {
+          "activity": {
+            "ci_high": 0.07703936881913269,
+            "ci_low": 0.04486818326420064,
+            "mean": 0.060953776041666664,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.08989966864135451,
+            "ci_low": 0.06488548760864549,
+            "mean": 0.077392578125,
+            "n": 12
+          },
+          "generation": 100
+        },
+        {
+          "activity": {
+            "ci_high": 0.06514972547562065,
+            "ci_low": 0.04015626410771269,
+            "mean": 0.052652994791666664,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.09143808803707348,
+            "ci_low": 0.06009185987959318,
+            "mean": 0.07576497395833333,
+            "n": 12
+          },
+          "generation": 110
+        },
+        {
+          "activity": {
+            "ci_high": 0.08190988298924724,
+            "ci_low": 0.0453687628440861,
+            "mean": 0.06363932291666667,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.10056974684366883,
+            "ci_low": 0.06153962815633117,
+            "mean": 0.0810546875,
+            "n": 12
+          },
+          "generation": 120
+        },
+        {
+          "activity": {
+            "ci_high": 0.07791378846491887,
+            "ci_low": 0.04155235736841447,
+            "mean": 0.059733072916666664,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.10253050136378827,
+            "ci_low": 0.05469606113621173,
+            "mean": 0.07861328125,
+            "n": 12
+          },
+          "generation": 130
+        },
+        {
+          "activity": {
+            "ci_high": 0.08209220236591105,
+            "ci_low": 0.04014087055075562,
+            "mean": 0.061116536458333336,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.10137127777409036,
+            "ci_low": 0.056994607642576293,
+            "mean": 0.07918294270833333,
+            "n": 12
+          },
+          "generation": 140
+        },
+        {
+          "activity": {
+            "ci_high": 0.08039423603455653,
+            "ci_low": 0.033049774382110146,
+            "mean": 0.056722005208333336,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.10774286877582495,
+            "ci_low": 0.055668589557508384,
+            "mean": 0.08170572916666667,
+            "n": 12
+          },
+          "generation": 150
+        },
+        {
+          "activity": {
+            "ci_high": 0.07850139500206459,
+            "ci_low": 0.040150948747935414,
+            "mean": 0.059326171875,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.09789818949646459,
+            "ci_low": 0.05395727925353541,
+            "mean": 0.075927734375,
+            "n": 12
+          },
+          "generation": 160
+        },
+        {
+          "activity": {
+            "ci_high": 0.08900158942400382,
+            "ci_low": 0.04267158765932952,
+            "mean": 0.06583658854166667,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.10726203129952243,
+            "ci_low": 0.05598666661714423,
+            "mean": 0.08162434895833333,
+            "n": 12
+          },
+          "generation": 170
+        },
+        {
+          "activity": {
+            "ci_high": 0.0751742737057642,
+            "ci_low": 0.03550280962756913,
+            "mean": 0.055338541666666664,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.1058542515168798,
+            "ci_low": 0.0557668422331202,
+            "mean": 0.080810546875,
+            "n": 12
+          },
+          "generation": 180
+        },
+        {
+          "activity": {
+            "ci_high": 0.07499928688049229,
+            "ci_low": 0.030143942286174376,
+            "mean": 0.052571614583333336,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.10523510804467785,
+            "ci_low": 0.05475838153865549,
+            "mean": 0.07999674479166667,
+            "n": 12
+          },
+          "generation": 190
+        },
+        {
+          "activity": {
+            "ci_high": 0.06594184035356868,
+            "ci_low": 0.024064670063098002,
+            "mean": 0.045003255208333336,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.09293023960128932,
+            "ci_low": 0.04850856248204403,
+            "mean": 0.07071940104166667,
+            "n": 12
+          },
+          "generation": 200
+        }
+      ],
+      "period_detection": {
+        "detected_fraction": {
+          "ci_high": 0.6119104836900906,
+          "ci_low": 0.05475618297657597,
+          "mean": 0.3333333333333333,
+          "n": 12
+        },
+        "period_detected_only": {
+          "ci_high": 2.065792867038086,
+          "ci_low": 0.9342071329619143,
+          "mean": 1.5,
+          "n": 4
+        },
+        "transient_detected_only": {
+          "ci_high": 187.77467133364985,
+          "ci_low": 140.72532866635015,
+          "mean": 164.25,
+          "n": 4
+        },
+        "trials": [
+          {
+            "detected": false,
+            "detected_at": null,
+            "period": null,
+            "seed": 12215688898647033939,
+            "transient": null,
+            "trial": 0
+          },
+          {
+            "detected": false,
+            "detected_at": null,
+            "period": null,
+            "seed": 17489437716044538510,
+            "transient": null,
+            "trial": 1
+          },
+          {
+            "detected": false,
+            "detected_at": null,
+            "period": null,
+            "seed": 16016135288210040307,
+            "transient": null,
+            "trial": 2
+          },
+          {
+            "detected": false,
+            "detected_at": null,
+            "period": null,
+            "seed": 8423171270163258514,
+            "transient": null,
+            "trial": 3
+          },
+          {
+            "detected": false,
+            "detected_at": null,
+            "period": null,
+            "seed": 15835749606836166856,
+            "transient": null,
+            "trial": 4
+          },
+          {
+            "detected": true,
+            "detected_at": 183,
+            "period": 2,
+            "seed": 15687339126878354631,
+            "transient": 181,
+            "trial": 5
+          },
+          {
+            "detected": true,
+            "detected_at": 162,
+            "period": 2,
+            "seed": 16412836701283938843,
+            "transient": 160,
+            "trial": 6
+          },
+          {
+            "detected": true,
+            "detected_at": 185,
+            "period": 1,
+            "seed": 8922035819450896363,
+            "transient": 184,
+            "trial": 7
+          },
+          {
+            "detected": false,
+            "detected_at": null,
+            "period": null,
+            "seed": 12319215887523157069,
+            "transient": null,
+            "trial": 8
+          },
+          {
+            "detected": false,
+            "detected_at": null,
+            "period": null,
+            "seed": 10667288706721851290,
+            "transient": null,
+            "trial": 9
+          },
+          {
+            "detected": true,
+            "detected_at": 133,
+            "period": 1,
+            "seed": 13880355668378052857,
+            "transient": 132,
+            "trial": 10
+          },
+          {
+            "detected": false,
+            "detected_at": null,
+            "period": null,
+            "seed": 10529891971529923306,
+            "transient": null,
+            "trial": 11
+          }
+        ]
+      },
+      "trial_seeds": [
+        12215688898647033939,
+        17489437716044538510,
+        16016135288210040307,
+        8423171270163258514,
+        15835749606836166856,
+        15687339126878354631,
+        16412836701283938843,
+        8922035819450896363,
+        12319215887523157069,
+        10667288706721851290,
+        13880355668378052857,
+        10529891971529923306
+      ]
+    },
+    {
+      "config": {
+        "confidence": 0.95,
+        "master_seed": 20260727,
+        "p": 0.5,
+        "sample_every": 10,
+        "size": 64,
+        "steps": 200,
+        "trials": 12
+      },
+      "elapsed_seconds": 0.044743513000014445,
+      "label": "EMPIRICAL FINITE-SIZE RESULTS: finite periodic tori and finite run lengths; no asymptotic theorem is inferred.",
+      "measurements": [
+        {
+          "activity": {
+            "ci_high": null,
+            "ci_low": null,
+            "mean": null,
+            "n": 0
+          },
+          "density": {
+            "ci_high": 0.5012733299447582,
+            "ci_low": 0.4940879981802418,
+            "mean": 0.4976806640625,
+            "n": 12
+          },
+          "generation": 0
+        },
+        {
+          "activity": {
+            "ci_high": 0.19561697258049002,
+            "ci_low": 0.18528309252367667,
+            "mean": 0.19045003255208334,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.20632839750931165,
+            "ci_low": 0.19788709728235504,
+            "mean": 0.20210774739583334,
+            "n": 12
+          },
+          "generation": 10
+        },
+        {
+          "activity": {
+            "ci_high": 0.14868160990882226,
+            "ci_low": 0.13647464009117774,
+            "mean": 0.142578125,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.1685505190433443,
+            "ci_low": 0.1595744809566557,
+            "mean": 0.1640625,
+            "n": 12
+          },
+          "generation": 20
+        },
+        {
+          "activity": {
+            "ci_high": 0.13389966855089136,
+            "ci_low": 0.11805345644910864,
+            "mean": 0.1259765625,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.15465378702936647,
+            "ci_low": 0.13737909057480022,
+            "mean": 0.14601643880208334,
+            "n": 12
+          },
+          "generation": 30
+        },
+        {
+          "activity": {
+            "ci_high": 0.11741745487261215,
+            "ci_low": 0.10011184200238785,
+            "mean": 0.1087646484375,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.1399361933637978,
+            "ci_low": 0.12320671028203552,
+            "mean": 0.13157145182291666,
+            "n": 12
+          },
+          "generation": 40
+        },
+        {
+          "activity": {
+            "ci_high": 0.11039378476746699,
+            "ci_low": 0.09114430117003301,
+            "mean": 0.10076904296875,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.1325252009982597,
+            "ci_low": 0.11580650473090695,
+            "mean": 0.12416585286458333,
+            "n": 12
+          },
+          "generation": 50
+        },
+        {
+          "activity": {
+            "ci_high": 0.10422492563152047,
+            "ci_low": 0.08937858999347953,
+            "mean": 0.0968017578125,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.12254836268628524,
+            "ci_low": 0.11015834304288141,
+            "mean": 0.11635335286458333,
+            "n": 12
+          },
+          "generation": 60
+        },
+        {
+          "activity": {
+            "ci_high": 0.08917598169927808,
+            "ci_low": 0.07700240371738858,
+            "mean": 0.08308919270833333,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.11213788455652482,
+            "ci_low": 0.09936927690180852,
+            "mean": 0.10575358072916667,
+            "n": 12
+          },
+          "generation": 70
+        },
+        {
+          "activity": {
+            "ci_high": 0.08117456857325032,
+            "ci_low": 0.07015192882258302,
+            "mean": 0.07566324869791667,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.10648872426947745,
+            "ci_low": 0.09150932260552255,
+            "mean": 0.0989990234375,
+            "n": 12
+          },
+          "generation": 80
+        },
+        {
+          "activity": {
+            "ci_high": 0.0796670842997819,
+            "ci_low": 0.0658407282002181,
+            "mean": 0.07275390625,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.09965995473732443,
+            "ci_low": 0.08812487599184222,
+            "mean": 0.09389241536458333,
+            "n": 12
+          },
+          "generation": 90
+        },
+        {
+          "activity": {
+            "ci_high": 0.07732724573974412,
+            "ci_low": 0.06101910842692254,
+            "mean": 0.06917317708333333,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.09901057161495853,
+            "ci_low": 0.08372868619754147,
+            "mean": 0.09136962890625,
+            "n": 12
+          },
+          "generation": 100
+        },
+        {
+          "activity": {
+            "ci_high": 0.07639731375792581,
+            "ci_low": 0.05535724353374085,
+            "mean": 0.06587727864583333,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.09667060859084642,
+            "ci_low": 0.07858167005498692,
+            "mean": 0.08762613932291667,
+            "n": 12
+          },
+          "generation": 110
+        },
+        {
+          "activity": {
+            "ci_high": 0.07272158973406506,
+            "ci_low": 0.05585913943260159,
+            "mean": 0.06429036458333333,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.0932733021414867,
+            "ci_low": 0.07913066921267996,
+            "mean": 0.08620198567708333,
+            "n": 12
+          },
+          "generation": 120
+        },
+        {
+          "activity": {
+            "ci_high": 0.06896408684564351,
+            "ci_low": 0.05074619961268982,
+            "mean": 0.059855143229166664,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.09239020020408849,
+            "ci_low": 0.07541578937924485,
+            "mean": 0.08390299479166667,
+            "n": 12
+          },
+          "generation": 130
+        },
+        {
+          "activity": {
+            "ci_high": 0.07531555396370275,
+            "ci_low": 0.05208516218213059,
+            "mean": 0.06370035807291667,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.09255485083391873,
+            "ci_low": 0.07504768822858127,
+            "mean": 0.08380126953125,
+            "n": 12
+          },
+          "generation": 140
+        },
+        {
+          "activity": {
+            "ci_high": 0.06799742759724063,
+            "ci_low": 0.0482948901110927,
+            "mean": 0.058146158854166664,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.09051082252754067,
+            "ci_low": 0.07172062278495933,
+            "mean": 0.08111572265625,
+            "n": 12
+          },
+          "generation": 150
+        },
+        {
+          "activity": {
+            "ci_high": 0.06147711717452948,
+            "ci_low": 0.04423577345047052,
+            "mean": 0.0528564453125,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.08432531081377459,
+            "ci_low": 0.06614669439455875,
+            "mean": 0.07523600260416667,
+            "n": 12
+          },
+          "generation": 160
+        },
+        {
+          "activity": {
+            "ci_high": 0.05875819712753471,
+            "ci_low": 0.04561192005996529,
+            "mean": 0.05218505859375,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.08232998227596282,
+            "ci_low": 0.06509026511987052,
+            "mean": 0.07371012369791667,
+            "n": 12
+          },
+          "generation": 170
+        },
+        {
+          "activity": {
+            "ci_high": 0.06354476079518057,
+            "ci_low": 0.04090673660065276,
+            "mean": 0.052225748697916664,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.08275636720681169,
+            "ci_low": 0.06315834633485497,
+            "mean": 0.07295735677083333,
+            "n": 12
+          },
+          "generation": 180
+        },
+        {
+          "activity": {
+            "ci_high": 0.05895786097711916,
+            "ci_low": 0.038861149439547514,
+            "mean": 0.048909505208333336,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.0801026402358205,
+            "ci_low": 0.0610106410141795,
+            "mean": 0.070556640625,
+            "n": 12
+          },
+          "generation": 190
+        },
+        {
+          "activity": {
+            "ci_high": 0.058851410306101866,
+            "ci_low": 0.03900829021473146,
+            "mean": 0.048929850260416664,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.07907715021934668,
+            "ci_low": 0.05947265446815332,
+            "mean": 0.06927490234375,
+            "n": 12
+          },
+          "generation": 200
+        }
+      ],
+      "period_detection": {
+        "detected_fraction": {
+          "ci_high": 0.0,
+          "ci_low": 0.0,
+          "mean": 0.0,
+          "n": 12
+        },
+        "period_detected_only": {
+          "ci_high": null,
+          "ci_low": null,
+          "mean": null,
+          "n": 0
+        },
+        "transient_detected_only": {
+          "ci_high": null,
+          "ci_low": null,
+          "mean": null,
+          "n": 0
+        },
+        "trials": [
+          {
+            "detected": false,
+            "detected_at": null,
+            "period": null,
+            "seed": 10203935375921844874,
+            "transient": null,
+            "trial": 0
+          },
+          {
+            "detected": false,
+            "detected_at": null,
+            "period": null,
+            "seed": 9939223318259148628,
+            "transient": null,
+            "trial": 1
+          },
+          {
+            "detected": false,
+            "detected_at": null,
+            "period": null,
+            "seed": 15176474939351932904,
+            "transient": null,
+            "trial": 2
+          },
+          {
+            "detected": false,
+            "detected_at": null,
+            "period": null,
+            "seed": 11433976960919677039,
+            "transient": null,
+            "trial": 3
+          },
+          {
+            "detected": false,
+            "detected_at": null,
+            "period": null,
+            "seed": 12783063220317881447,
+            "transient": null,
+            "trial": 4
+          },
+          {
+            "detected": false,
+            "detected_at": null,
+            "period": null,
+            "seed": 3638330896847201027,
+            "transient": null,
+            "trial": 5
+          },
+          {
+            "detected": false,
+            "detected_at": null,
+            "period": null,
+            "seed": 8424546850477424205,
+            "transient": null,
+            "trial": 6
+          },
+          {
+            "detected": false,
+            "detected_at": null,
+            "period": null,
+            "seed": 9430475558344194865,
+            "transient": null,
+            "trial": 7
+          },
+          {
+            "detected": false,
+            "detected_at": null,
+            "period": null,
+            "seed": 5196597963553688571,
+            "transient": null,
+            "trial": 8
+          },
+          {
+            "detected": false,
+            "detected_at": null,
+            "period": null,
+            "seed": 7667779248887388672,
+            "transient": null,
+            "trial": 9
+          },
+          {
+            "detected": false,
+            "detected_at": null,
+            "period": null,
+            "seed": 6879050880658534513,
+            "transient": null,
+            "trial": 10
+          },
+          {
+            "detected": false,
+            "detected_at": null,
+            "period": null,
+            "seed": 15379667782267780637,
+            "transient": null,
+            "trial": 11
+          }
+        ]
+      },
+      "trial_seeds": [
+        10203935375921844874,
+        9939223318259148628,
+        15176474939351932904,
+        11433976960919677039,
+        12783063220317881447,
+        3638330896847201027,
+        8424546850477424205,
+        9430475558344194865,
+        5196597963553688571,
+        7667779248887388672,
+        6879050880658534513,
+        15379667782267780637
+      ]
+    },
+    {
+      "config": {
+        "confidence": 0.95,
+        "master_seed": 20260727,
+        "p": 0.5,
+        "sample_every": 10,
+        "size": 128,
+        "steps": 200,
+        "trials": 12
+      },
+      "elapsed_seconds": 0.11531047899998725,
+      "label": "EMPIRICAL FINITE-SIZE RESULTS: finite periodic tori and finite run lengths; no asymptotic theorem is inferred.",
+      "measurements": [
+        {
+          "activity": {
+            "ci_high": null,
+            "ci_low": null,
+            "mean": null,
+            "n": 0
+          },
+          "density": {
+            "ci_high": 0.5038105462014281,
+            "ci_low": 0.4994650071839887,
+            "mean": 0.5016377766927084,
+            "n": 12
+          },
+          "generation": 0
+        },
+        {
+          "activity": {
+            "ci_high": 0.1859322070712332,
+            "ci_low": 0.1767692089443918,
+            "mean": 0.1813507080078125,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.2022787777869898,
+            "ci_low": 0.1939309390098852,
+            "mean": 0.1981048583984375,
+            "n": 12
+          },
+          "generation": 10
+        },
+        {
+          "activity": {
+            "ci_high": 0.1451009639227838,
+            "ci_low": 0.1328531376397162,
+            "mean": 0.13897705078125,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.16390831424638225,
+            "ci_low": 0.15442054317549275,
+            "mean": 0.1591644287109375,
+            "n": 12
+          },
+          "generation": 20
+        },
+        {
+          "activity": {
+            "ci_high": 0.12491137720234538,
+            "ci_low": 0.11210847956848796,
+            "mean": 0.11850992838541667,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.14621072674812097,
+            "ci_low": 0.13540548418937903,
+            "mean": 0.14080810546875,
+            "n": 12
+          },
+          "generation": 30
+        },
+        {
+          "activity": {
+            "ci_high": 0.11284546104707717,
+            "ci_low": 0.10014688921333949,
+            "mean": 0.10649617513020833,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.13593366725965417,
+            "ci_low": 0.12450334445909583,
+            "mean": 0.130218505859375,
+            "n": 12
+          },
+          "generation": 40
+        },
+        {
+          "activity": {
+            "ci_high": 0.1041040289469759,
+            "ci_low": 0.0954504144123991,
+            "mean": 0.0997772216796875,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.12635074892584797,
+            "ci_low": 0.11724055966790205,
+            "mean": 0.121795654296875,
+            "n": 12
+          },
+          "generation": 50
+        },
+        {
+          "activity": {
+            "ci_high": 0.09958271349574901,
+            "ci_low": 0.08852763806675099,
+            "mean": 0.09405517578125,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.12123143443231067,
+            "ci_low": 0.11221786569789767,
+            "mean": 0.11672465006510417,
+            "n": 12
+          },
+          "generation": 60
+        },
+        {
+          "activity": {
+            "ci_high": 0.09454650586785396,
+            "ci_low": 0.08150940233527104,
+            "mean": 0.0880279541015625,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.11520000492094049,
+            "ci_low": 0.10405862138114286,
+            "mean": 0.10962931315104167,
+            "n": 12
+          },
+          "generation": 70
+        },
+        {
+          "activity": {
+            "ci_high": 0.08836396084314158,
+            "ci_low": 0.07954375400060842,
+            "mean": 0.083953857421875,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.1109210905797172,
+            "ci_low": 0.0997722687952828,
+            "mean": 0.1053466796875,
+            "n": 12
+          },
+          "generation": 80
+        },
+        {
+          "activity": {
+            "ci_high": 0.08493193004962592,
+            "ci_low": 0.07397309924724908,
+            "mean": 0.0794525146484375,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.10765353283703125,
+            "ci_low": 0.09694648343901041,
+            "mean": 0.10230000813802083,
+            "n": 12
+          },
+          "generation": 90
+        },
+        {
+          "activity": {
+            "ci_high": 0.08082620987156115,
+            "ci_low": 0.07414205184718885,
+            "mean": 0.077484130859375,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.1036297598566478,
+            "ci_low": 0.09550760993501886,
+            "mean": 0.09956868489583333,
+            "n": 12
+          },
+          "generation": 100
+        },
+        {
+          "activity": {
+            "ci_high": 0.07841088603675923,
+            "ci_low": 0.06813452411949077,
+            "mean": 0.073272705078125,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.10098098851317835,
+            "ci_low": 0.08981490992432165,
+            "mean": 0.09539794921875,
+            "n": 12
+          },
+          "generation": 110
+        },
+        {
+          "activity": {
+            "ci_high": 0.07444845997892215,
+            "ci_low": 0.06432514028149451,
+            "mean": 0.06938680013020833,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.09566937601266898,
+            "ci_low": 0.08525917216441437,
+            "mean": 0.09046427408854167,
+            "n": 12
+          },
+          "generation": 120
+        },
+        {
+          "activity": {
+            "ci_high": 0.0709216843560519,
+            "ci_low": 0.060364936737698105,
+            "mean": 0.065643310546875,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.09258906033758339,
+            "ci_low": 0.08234787000095826,
+            "mean": 0.08746846516927083,
+            "n": 12
+          },
+          "generation": 130
+        },
+        {
+          "activity": {
+            "ci_high": 0.06579646766558483,
+            "ci_low": 0.059132324652123494,
+            "mean": 0.062464396158854164,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.08625582682199989,
+            "ci_low": 0.07762356770925011,
+            "mean": 0.081939697265625,
+            "n": 12
+          },
+          "generation": 140
+        },
+        {
+          "activity": {
+            "ci_high": 0.06546060782561577,
+            "ci_low": 0.055053308190009226,
+            "mean": 0.0602569580078125,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.08859012620015931,
+            "ci_low": 0.07781205478942403,
+            "mean": 0.08320109049479167,
+            "n": 12
+          },
+          "generation": 150
+        },
+        {
+          "activity": {
+            "ci_high": 0.06282763562252548,
+            "ci_low": 0.05332226672122452,
+            "mean": 0.058074951171875,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.08412076217180472,
+            "ci_low": 0.07466219681257028,
+            "mean": 0.0793914794921875,
+            "n": 12
+          },
+          "generation": 160
+        },
+        {
+          "activity": {
+            "ci_high": 0.06152207617801111,
+            "ci_low": 0.053752988926155564,
+            "mean": 0.057637532552083336,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.08362496797942787,
+            "ci_low": 0.07549368436432213,
+            "mean": 0.079559326171875,
+            "n": 12
+          },
+          "generation": 170
+        },
+        {
+          "activity": {
+            "ci_high": 0.06096472317213777,
+            "ci_low": 0.049946328260153904,
+            "mean": 0.055455525716145836,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.0825760197939575,
+            "ci_low": 0.07274828033625085,
+            "mean": 0.07766215006510417,
+            "n": 12
+          },
+          "generation": 180
+        },
+        {
+          "activity": {
+            "ci_high": 0.05878774686563781,
+            "ci_low": 0.050332939983320515,
+            "mean": 0.054560343424479164,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.08201658493068482,
+            "ci_low": 0.07140545282973183,
+            "mean": 0.07671101888020833,
+            "n": 12
+          },
+          "generation": 190
+        },
+        {
+          "activity": {
+            "ci_high": 0.06074075075985483,
+            "ci_low": 0.0490513228078535,
+            "mean": 0.054896036783854164,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.08149552482155988,
+            "ci_low": 0.07118391853781512,
+            "mean": 0.0763397216796875,
+            "n": 12
+          },
+          "generation": 200
+        }
+      ],
+      "period_detection": {
+        "detected_fraction": {
+          "ci_high": 0.0,
+          "ci_low": 0.0,
+          "mean": 0.0,
+          "n": 12
+        },
+        "period_detected_only": {
+          "ci_high": null,
+          "ci_low": null,
+          "mean": null,
+          "n": 0
+        },
+        "transient_detected_only": {
+          "ci_high": null,
+          "ci_low": null,
+          "mean": null,
+          "n": 0
+        },
+        "trials": [
+          {
+            "detected": false,
+            "detected_at": null,
+            "period": null,
+            "seed": 17055796923664734668,
+            "transient": null,
+            "trial": 0
+          },
+          {
+            "detected": false,
+            "detected_at": null,
+            "period": null,
+            "seed": 3433624068311459892,
+            "transient": null,
+            "trial": 1
+          },
+          {
+            "detected": false,
+            "detected_at": null,
+            "period": null,
+            "seed": 17434973942822586659,
+            "transient": null,
+            "trial": 2
+          },
+          {
+            "detected": false,
+            "detected_at": null,
+            "period": null,
+            "seed": 16971965674724084287,
+            "transient": null,
+            "trial": 3
+          },
+          {
+            "detected": false,
+            "detected_at": null,
+            "period": null,
+            "seed": 12996837237071829758,
+            "transient": null,
+            "trial": 4
+          },
+          {
+            "detected": false,
+            "detected_at": null,
+            "period": null,
+            "seed": 12265370014215067441,
+            "transient": null,
+            "trial": 5
+          },
+          {
+            "detected": false,
+            "detected_at": null,
+            "period": null,
+            "seed": 12165442851015679686,
+            "transient": null,
+            "trial": 6
+          },
+          {
+            "detected": false,
+            "detected_at": null,
+            "period": null,
+            "seed": 6354681252403906640,
+            "transient": null,
+            "trial": 7
+          },
+          {
+            "detected": false,
+            "detected_at": null,
+            "period": null,
+            "seed": 6321405574532411777,
+            "transient": null,
+            "trial": 8
+          },
+          {
+            "detected": false,
+            "detected_at": null,
+            "period": null,
+            "seed": 8091221249362615579,
+            "transient": null,
+            "trial": 9
+          },
+          {
+            "detected": false,
+            "detected_at": null,
+            "period": null,
+            "seed": 2186350134942220811,
+            "transient": null,
+            "trial": 10
+          },
+          {
+            "detected": false,
+            "detected_at": null,
+            "period": null,
+            "seed": 3904637085061058782,
+            "transient": null,
+            "trial": 11
+          }
+        ]
+      },
+      "trial_seeds": [
+        17055796923664734668,
+        3433624068311459892,
+        17434973942822586659,
+        16971965674724084287,
+        12996837237071829758,
+        12265370014215067441,
+        12165442851015679686,
+        6354681252403906640,
+        6321405574532411777,
+        8091221249362615579,
+        2186350134942220811,
+        3904637085061058782
+      ]
+    },
+    {
+      "config": {
+        "confidence": 0.95,
+        "master_seed": 20260727,
+        "p": 0.7,
+        "sample_every": 10,
+        "size": 32,
+        "steps": 200,
+        "trials": 12
+      },
+      "elapsed_seconds": 0.020667958000018416,
+      "label": "EMPIRICAL FINITE-SIZE RESULTS: finite periodic tori and finite run lengths; no asymptotic theorem is inferred.",
+      "measurements": [
+        {
+          "activity": {
+            "ci_high": null,
+            "ci_low": null,
+            "mean": null,
+            "n": 0
+          },
+          "density": {
+            "ci_high": 0.7140271402992995,
+            "ci_low": 0.6948270263673673,
+            "mean": 0.7044270833333334,
+            "n": 12
+          },
+          "generation": 0
+        },
+        {
+          "activity": {
+            "ci_high": 0.034509206193594086,
+            "ci_low": 0.01431891880640591,
+            "mean": 0.0244140625,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.03767198304689463,
+            "ci_low": 0.02157280861977203,
+            "mean": 0.029622395833333332,
+            "n": 12
+          },
+          "generation": 10
+        },
+        {
+          "activity": {
+            "ci_high": 0.02883344842977193,
+            "ci_low": 0.014135301570228069,
+            "mean": 0.021484375,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.042063463578492465,
+            "ci_low": 0.023366223921507535,
+            "mean": 0.03271484375,
+            "n": 12
+          },
+          "generation": 20
+        },
+        {
+          "activity": {
+            "ci_high": 0.0403421725806869,
+            "ci_low": 0.015321889919313107,
+            "mean": 0.02783203125,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.05366112056123194,
+            "ci_low": 0.024952160688768057,
+            "mean": 0.039306640625,
+            "n": 12
+          },
+          "generation": 30
+        },
+        {
+          "activity": {
+            "ci_high": 0.048775942316870255,
+            "ci_low": 0.017630307683129745,
+            "mean": 0.033203125,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.05643490718259899,
+            "ci_low": 0.02624738448406768,
+            "mean": 0.041341145833333336,
+            "n": 12
+          },
+          "generation": 40
+        },
+        {
+          "activity": {
+            "ci_high": 0.03883546948896253,
+            "ci_low": 0.014549947177704135,
+            "mean": 0.026692708333333332,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.060673704745321966,
+            "ci_low": 0.025426555671344706,
+            "mean": 0.043050130208333336,
+            "n": 12
+          },
+          "generation": 50
+        },
+        {
+          "activity": {
+            "ci_high": 0.048728608277538873,
+            "ci_low": 0.015561756305794459,
+            "mean": 0.032145182291666664,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.0657099022124406,
+            "ci_low": 0.026086972787559403,
+            "mean": 0.0458984375,
+            "n": 12
+          },
+          "generation": 60
+        },
+        {
+          "activity": {
+            "ci_high": 0.04849987300864482,
+            "ci_low": 0.015139449908021851,
+            "mean": 0.031819661458333336,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.07215975420717216,
+            "ci_low": 0.027124099959494507,
+            "mean": 0.049641927083333336,
+            "n": 12
+          },
+          "generation": 70
+        },
+        {
+          "activity": {
+            "ci_high": 0.04440173454448297,
+            "ci_low": 0.01288993212218369,
+            "mean": 0.028645833333333332,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.06878673725451481,
+            "ci_low": 0.025939825245485187,
+            "mean": 0.04736328125,
+            "n": 12
+          },
+          "generation": 80
+        },
+        {
+          "activity": {
+            "ci_high": 0.047913766058398005,
+            "ci_low": 0.00937790060826866,
+            "mean": 0.028645833333333332,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.05319017164192146,
+            "ci_low": 0.02216790127474521,
+            "mean": 0.037679036458333336,
+            "n": 12
+          },
+          "generation": 90
+        },
+        {
+          "activity": {
+            "ci_high": 0.03052091192438162,
+            "ci_low": 0.011308515158951715,
+            "mean": 0.020914713541666668,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.04718726845529494,
+            "ci_low": 0.02198590862803839,
+            "mean": 0.034586588541666664,
+            "n": 12
+          },
+          "generation": 100
+        },
+        {
+          "activity": {
+            "ci_high": 0.03439601699920735,
+            "ci_low": 0.012641743417459314,
+            "mean": 0.023518880208333332,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.04175667282605349,
+            "ci_low": 0.020417806340613173,
+            "mean": 0.031087239583333332,
+            "n": 12
+          },
+          "generation": 110
+        },
+        {
+          "activity": {
+            "ci_high": 0.027747471449974245,
+            "ci_low": 0.00903638271669242,
+            "mean": 0.018391927083333332,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.04856309127308758,
+            "ci_low": 0.021098367060245746,
+            "mean": 0.034830729166666664,
+            "n": 12
+          },
+          "generation": 120
+        },
+        {
+          "activity": {
+            "ci_high": 0.025370970965175328,
+            "ci_low": 0.010110799868158007,
+            "mean": 0.017740885416666668,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.04235023517412536,
+            "ci_low": 0.019987004409207976,
+            "mean": 0.031168619791666668,
+            "n": 12
+          },
+          "generation": 130
+        },
+        {
+          "activity": {
+            "ci_high": 0.0340631163442294,
+            "ci_low": 0.009882196155770599,
+            "mean": 0.02197265625,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.04895822073214603,
+            "ci_low": 0.019075633434520643,
+            "mean": 0.034016927083333336,
+            "n": 12
+          },
+          "generation": 140
+        },
+        {
+          "activity": {
+            "ci_high": 0.03833283578919679,
+            "ci_low": 0.00919320587746988,
+            "mean": 0.023763020833333332,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.049147048985335284,
+            "ci_low": 0.018235763514664716,
+            "mean": 0.03369140625,
+            "n": 12
+          },
+          "generation": 150
+        },
+        {
+          "activity": {
+            "ci_high": 0.028740174017880777,
+            "ci_low": 0.007392638482119223,
+            "mean": 0.01806640625,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.041897007371663186,
+            "ci_low": 0.017347784295003478,
+            "mean": 0.029622395833333332,
+            "n": 12
+          },
+          "generation": 160
+        },
+        {
+          "activity": {
+            "ci_high": 0.026989436167909137,
+            "ci_low": 0.004911605498757526,
+            "mean": 0.015950520833333332,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.041074248391677226,
+            "ci_low": 0.016380178691656106,
+            "mean": 0.028727213541666668,
+            "n": 12
+          },
+          "generation": 170
+        },
+        {
+          "activity": {
+            "ci_high": 0.026639421686266616,
+            "ci_low": 0.006889224147066719,
+            "mean": 0.016764322916666668,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.042017206869058715,
+            "ci_low": 0.016413782714274624,
+            "mean": 0.029215494791666668,
+            "n": 12
+          },
+          "generation": 180
+        },
+        {
+          "activity": {
+            "ci_high": 0.028908530306937866,
+            "ci_low": 0.006573240526395472,
+            "mean": 0.017740885416666668,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.04996138867596596,
+            "ci_low": 0.016607621740700716,
+            "mean": 0.033284505208333336,
+            "n": 12
+          },
+          "generation": 190
+        },
+        {
+          "activity": {
+            "ci_high": 0.03185073474654506,
+            "ci_low": 0.007049004836788275,
+            "mean": 0.019449869791666668,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.047962581945513116,
+            "ci_low": 0.017467105554486884,
+            "mean": 0.03271484375,
+            "n": 12
+          },
+          "generation": 200
+        }
+      ],
+      "period_detection": {
+        "detected_fraction": {
+          "ci_high": 1.0,
+          "ci_low": 0.4941105478602584,
+          "mean": 0.75,
+          "n": 12
+        },
+        "period_detected_only": {
+          "ci_high": 2.0658654045409013,
+          "ci_low": 1.489690151014654,
+          "mean": 1.7777777777777777,
+          "n": 9
+        },
+        "transient_detected_only": {
+          "ci_high": 109.03451455547666,
+          "ci_low": 17.854374333412224,
+          "mean": 63.44444444444444,
+          "n": 9
+        },
+        "trials": [
+          {
+            "detected": true,
+            "detected_at": 5,
+            "period": 1,
+            "seed": 15283341184617061200,
+            "transient": 4,
+            "trial": 0
+          },
+          {
+            "detected": false,
+            "detected_at": null,
+            "period": null,
+            "seed": 5170523674759545272,
+            "transient": null,
+            "trial": 1
+          },
+          {
+            "detected": true,
+            "detected_at": 42,
+            "period": 2,
+            "seed": 12823755516919793814,
+            "transient": 40,
+            "trial": 2
+          },
+          {
+            "detected": true,
+            "detected_at": 46,
+            "period": 2,
+            "seed": 7643988197124662156,
+            "transient": 44,
+            "trial": 3
+          },
+          {
+            "detected": true,
+            "detected_at": 7,
+            "period": 1,
+            "seed": 2515081897353262965,
+            "transient": 6,
+            "trial": 4
+          },
+          {
+            "detected": true,
+            "detected_at": 137,
+            "period": 2,
+            "seed": 10399713425980601978,
+            "transient": 135,
+            "trial": 5
+          },
+          {
+            "detected": false,
+            "detected_at": null,
+            "period": null,
+            "seed": 7220038704491455176,
+            "transient": null,
+            "trial": 6
+          },
+          {
+            "detected": false,
+            "detected_at": null,
+            "period": null,
+            "seed": 18333749163383560061,
+            "transient": null,
+            "trial": 7
+          },
+          {
+            "detected": true,
+            "detected_at": 14,
+            "period": 2,
+            "seed": 4402958850656298966,
+            "transient": 12,
+            "trial": 8
+          },
+          {
+            "detected": true,
+            "detected_at": 171,
+            "period": 2,
+            "seed": 11700659316464285493,
+            "transient": 169,
+            "trial": 9
+          },
+          {
+            "detected": true,
+            "detected_at": 6,
+            "period": 2,
+            "seed": 10436530696731592918,
+            "transient": 4,
+            "trial": 10
+          },
+          {
+            "detected": true,
+            "detected_at": 159,
+            "period": 2,
+            "seed": 14689757208514489231,
+            "transient": 157,
+            "trial": 11
+          }
+        ]
+      },
+      "trial_seeds": [
+        15283341184617061200,
+        5170523674759545272,
+        12823755516919793814,
+        7643988197124662156,
+        2515081897353262965,
+        10399713425980601978,
+        7220038704491455176,
+        18333749163383560061,
+        4402958850656298966,
+        11700659316464285493,
+        10436530696731592918,
+        14689757208514489231
+      ]
+    },
+    {
+      "config": {
+        "confidence": 0.95,
+        "master_seed": 20260727,
+        "p": 0.7,
+        "sample_every": 10,
+        "size": 64,
+        "steps": 200,
+        "trials": 12
+      },
+      "elapsed_seconds": 0.03632349900001941,
+      "label": "EMPIRICAL FINITE-SIZE RESULTS: finite periodic tori and finite run lengths; no asymptotic theorem is inferred.",
+      "measurements": [
+        {
+          "activity": {
+            "ci_high": null,
+            "ci_low": null,
+            "mean": null,
+            "n": 0
+          },
+          "density": {
+            "ci_high": 0.705599764365346,
+            "ci_low": 0.6978019283429873,
+            "mean": 0.7017008463541666,
+            "n": 12
+          },
+          "generation": 0
+        },
+        {
+          "activity": {
+            "ci_high": 0.025940729065920425,
+            "ci_low": 0.015481796975746238,
+            "mean": 0.020711263020833332,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.03509769364209594,
+            "ci_low": 0.023577436566237397,
+            "mean": 0.029337565104166668,
+            "n": 12
+          },
+          "generation": 10
+        },
+        {
+          "activity": {
+            "ci_high": 0.03392087642236444,
+            "ci_low": 0.017918316285968898,
+            "mean": 0.025919596354166668,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.042531040706304195,
+            "ci_low": 0.025543503564529134,
+            "mean": 0.034037272135416664,
+            "n": 12
+          },
+          "generation": 20
+        },
+        {
+          "activity": {
+            "ci_high": 0.034656753286201394,
+            "ci_low": 0.01909487431796527,
+            "mean": 0.026875813802083332,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.0447361280545871,
+            "ci_low": 0.027407426632912898,
+            "mean": 0.03607177734375,
+            "n": 12
+          },
+          "generation": 30
+        },
+        {
+          "activity": {
+            "ci_high": 0.03608729987096771,
+            "ci_low": 0.02238437981653229,
+            "mean": 0.02923583984375,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.04867344849379043,
+            "ci_low": 0.029044650464542892,
+            "mean": 0.038859049479166664,
+            "n": 12
+          },
+          "generation": 40
+        },
+        {
+          "activity": {
+            "ci_high": 0.04048145894125555,
+            "ci_low": 0.02218130147541112,
+            "mean": 0.031331380208333336,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.05025560304213295,
+            "ci_low": 0.030554943832867047,
+            "mean": 0.0404052734375,
+            "n": 12
+          },
+          "generation": 50
+        },
+        {
+          "activity": {
+            "ci_high": 0.04215425187874236,
+            "ci_low": 0.02201404239209097,
+            "mean": 0.032084147135416664,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.05561954177955457,
+            "ci_low": 0.03251522384544543,
+            "mean": 0.0440673828125,
+            "n": 12
+          },
+          "generation": 60
+        },
+        {
+          "activity": {
+            "ci_high": 0.040009815427967235,
+            "ci_low": 0.0224494944678661,
+            "mean": 0.031229654947916668,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.05013886401129537,
+            "ci_low": 0.030712372967871302,
+            "mean": 0.040425618489583336,
+            "n": 12
+          },
+          "generation": 70
+        },
+        {
+          "activity": {
+            "ci_high": 0.03929129290698223,
+            "ci_low": 0.0213369623013511,
+            "mean": 0.030314127604166668,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.05323886956341167,
+            "ci_low": 0.031071026269921656,
+            "mean": 0.042154947916666664,
+            "n": 12
+          },
+          "generation": 80
+        },
+        {
+          "activity": {
+            "ci_high": 0.04772031685215444,
+            "ci_low": 0.024260477418678886,
+            "mean": 0.035990397135416664,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.06115569012649333,
+            "ci_low": 0.03454743487350667,
+            "mean": 0.0478515625,
+            "n": 12
+          },
+          "generation": 90
+        },
+        {
+          "activity": {
+            "ci_high": 0.04989235777092409,
+            "ci_low": 0.025140194312409245,
+            "mean": 0.037516276041666664,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.0660567510746651,
+            "ci_low": 0.037621634342001574,
+            "mean": 0.051839192708333336,
+            "n": 12
+          },
+          "generation": 100
+        },
+        {
+          "activity": {
+            "ci_high": 0.05221795188971082,
+            "ci_low": 0.02716844133945585,
+            "mean": 0.039693196614583336,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.06614618431248827,
+            "ci_low": 0.03818324277084506,
+            "mean": 0.052164713541666664,
+            "n": 12
+          },
+          "generation": 110
+        },
+        {
+          "activity": {
+            "ci_high": 0.05789795281871811,
+            "ci_low": 0.02734781541044856,
+            "mean": 0.042622884114583336,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.07134727000719349,
+            "ci_low": 0.039004292492806514,
+            "mean": 0.05517578125,
+            "n": 12
+          },
+          "generation": 120
+        },
+        {
+          "activity": {
+            "ci_high": 0.051583248224698106,
+            "ci_low": 0.025524499171135223,
+            "mean": 0.038553873697916664,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.06709015381774575,
+            "ci_low": 0.03658823159892092,
+            "mean": 0.051839192708333336,
+            "n": 12
+          },
+          "generation": 130
+        },
+        {
+          "activity": {
+            "ci_high": 0.051859446034304424,
+            "ci_low": 0.0251262310490289,
+            "mean": 0.038492838541666664,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.0668070853142855,
+            "ci_low": 0.037034060519047826,
+            "mean": 0.051920572916666664,
+            "n": 12
+          },
+          "generation": 140
+        },
+        {
+          "activity": {
+            "ci_high": 0.048948088194135556,
+            "ci_low": 0.02478238055586444,
+            "mean": 0.036865234375,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.06551839099972176,
+            "ci_low": 0.03795654389611157,
+            "mean": 0.051737467447916664,
+            "n": 12
+          },
+          "generation": 150
+        },
+        {
+          "activity": {
+            "ci_high": 0.048428874478411654,
+            "ci_low": 0.025301594271588346,
+            "mean": 0.036865234375,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.06137945743041531,
+            "ci_low": 0.035259539965418016,
+            "mean": 0.048319498697916664,
+            "n": 12
+          },
+          "generation": 160
+        },
+        {
+          "activity": {
+            "ci_high": 0.0465958741420457,
+            "ci_low": 0.024489737837120974,
+            "mean": 0.035542805989583336,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.06085999318240108,
+            "ci_low": 0.03687763702593225,
+            "mean": 0.048868815104166664,
+            "n": 12
+          },
+          "generation": 170
+        },
+        {
+          "activity": {
+            "ci_high": 0.04263986461951206,
+            "ci_low": 0.02409190621382127,
+            "mean": 0.033365885416666664,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.058927444333902484,
+            "ci_low": 0.03718258170776419,
+            "mean": 0.048055013020833336,
+            "n": 12
+          },
+          "generation": 180
+        },
+        {
+          "activity": {
+            "ci_high": 0.051020783017550246,
+            "ci_low": 0.027999399274116425,
+            "mean": 0.039510091145833336,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.0644656971562034,
+            "ci_low": 0.0395382090937966,
+            "mean": 0.052001953125,
+            "n": 12
+          },
+          "generation": 190
+        },
+        {
+          "activity": {
+            "ci_high": 0.047832734173616345,
+            "ci_low": 0.028379830930550326,
+            "mean": 0.038106282552083336,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.06218654216861562,
+            "ci_low": 0.03978285887305105,
+            "mean": 0.050984700520833336,
+            "n": 12
+          },
+          "generation": 200
+        }
+      ],
+      "period_detection": {
+        "detected_fraction": {
+          "ci_high": 0.0,
+          "ci_low": 0.0,
+          "mean": 0.0,
+          "n": 12
+        },
+        "period_detected_only": {
+          "ci_high": null,
+          "ci_low": null,
+          "mean": null,
+          "n": 0
+        },
+        "transient_detected_only": {
+          "ci_high": null,
+          "ci_low": null,
+          "mean": null,
+          "n": 0
+        },
+        "trials": [
+          {
+            "detected": false,
+            "detected_at": null,
+            "period": null,
+            "seed": 5351593358308865955,
+            "transient": null,
+            "trial": 0
+          },
+          {
+            "detected": false,
+            "detected_at": null,
+            "period": null,
+            "seed": 11339647560316525678,
+            "transient": null,
+            "trial": 1
+          },
+          {
+            "detected": false,
+            "detected_at": null,
+            "period": null,
+            "seed": 14657577166837111378,
+            "transient": null,
+            "trial": 2
+          },
+          {
+            "detected": false,
+            "detected_at": null,
+            "period": null,
+            "seed": 3502865196037637798,
+            "transient": null,
+            "trial": 3
+          },
+          {
+            "detected": false,
+            "detected_at": null,
+            "period": null,
+            "seed": 9884303536158132308,
+            "transient": null,
+            "trial": 4
+          },
+          {
+            "detected": false,
+            "detected_at": null,
+            "period": null,
+            "seed": 8714419018557437557,
+            "transient": null,
+            "trial": 5
+          },
+          {
+            "detected": false,
+            "detected_at": null,
+            "period": null,
+            "seed": 11884795822940330884,
+            "transient": null,
+            "trial": 6
+          },
+          {
+            "detected": false,
+            "detected_at": null,
+            "period": null,
+            "seed": 9983876227284326486,
+            "transient": null,
+            "trial": 7
+          },
+          {
+            "detected": false,
+            "detected_at": null,
+            "period": null,
+            "seed": 13819523539711929818,
+            "transient": null,
+            "trial": 8
+          },
+          {
+            "detected": false,
+            "detected_at": null,
+            "period": null,
+            "seed": 14115713342019592981,
+            "transient": null,
+            "trial": 9
+          },
+          {
+            "detected": false,
+            "detected_at": null,
+            "period": null,
+            "seed": 7317302431186478877,
+            "transient": null,
+            "trial": 10
+          },
+          {
+            "detected": false,
+            "detected_at": null,
+            "period": null,
+            "seed": 15833858819560532181,
+            "transient": null,
+            "trial": 11
+          }
+        ]
+      },
+      "trial_seeds": [
+        5351593358308865955,
+        11339647560316525678,
+        14657577166837111378,
+        3502865196037637798,
+        9884303536158132308,
+        8714419018557437557,
+        11884795822940330884,
+        9983876227284326486,
+        13819523539711929818,
+        14115713342019592981,
+        7317302431186478877,
+        15833858819560532181
+      ]
+    },
+    {
+      "config": {
+        "confidence": 0.95,
+        "master_seed": 20260727,
+        "p": 0.7,
+        "sample_every": 10,
+        "size": 128,
+        "steps": 200,
+        "trials": 12
+      },
+      "elapsed_seconds": 0.09407202799999936,
+      "label": "EMPIRICAL FINITE-SIZE RESULTS: finite periodic tori and finite run lengths; no asymptotic theorem is inferred.",
+      "measurements": [
+        {
+          "activity": {
+            "ci_high": null,
+            "ci_low": null,
+            "mean": null,
+            "n": 0
+          },
+          "density": {
+            "ci_high": 0.7017950683797841,
+            "ci_low": 0.6980767577920909,
+            "mean": 0.6999359130859375,
+            "n": 12
+          },
+          "generation": 0
+        },
+        {
+          "activity": {
+            "ci_high": 0.022485071471715856,
+            "ci_low": 0.018591588684534144,
+            "mean": 0.020538330078125,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.033310749216480584,
+            "ci_low": 0.02846700143456108,
+            "mean": 0.030888875325520832,
+            "n": 12
+          },
+          "generation": 10
+        },
+        {
+          "activity": {
+            "ci_high": 0.028202515585929407,
+            "ci_low": 0.023290811236987258,
+            "mean": 0.025746663411458332,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.038534046214211026,
+            "ci_low": 0.0321650097753723,
+            "mean": 0.035349527994791664,
+            "n": 12
+          },
+          "generation": 20
+        },
+        {
+          "activity": {
+            "ci_high": 0.02864603490938535,
+            "ci_low": 0.02118917016873965,
+            "mean": 0.0249176025390625,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.040369892468558,
+            "ci_low": 0.032475566515817,
+            "mean": 0.0364227294921875,
+            "n": 12
+          },
+          "generation": 30
+        },
+        {
+          "activity": {
+            "ci_high": 0.02952485348460291,
+            "ci_low": 0.020910530629980426,
+            "mean": 0.025217692057291668,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.04070782956906105,
+            "ci_low": 0.03228004477989728,
+            "mean": 0.036493937174479164,
+            "n": 12
+          },
+          "generation": 40
+        },
+        {
+          "activity": {
+            "ci_high": 0.030080433058776015,
+            "ci_low": 0.021524791550598985,
+            "mean": 0.0258026123046875,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.04183511552842183,
+            "ci_low": 0.03439779462782817,
+            "mean": 0.038116455078125,
+            "n": 12
+          },
+          "generation": 50
+        },
+        {
+          "activity": {
+            "ci_high": 0.029569047336930283,
+            "ci_low": 0.021995487168278052,
+            "mean": 0.025782267252604168,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.04212990976910255,
+            "ci_low": 0.035130425517355776,
+            "mean": 0.038630167643229164,
+            "n": 12
+          },
+          "generation": 60
+        },
+        {
+          "activity": {
+            "ci_high": 0.029012779245480194,
+            "ci_low": 0.021280189504519806,
+            "mean": 0.025146484375,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.041465798484103415,
+            "ci_low": 0.034065207375271585,
+            "mean": 0.0377655029296875,
+            "n": 12
+          },
+          "generation": 70
+        },
+        {
+          "activity": {
+            "ci_high": 0.02896153336742427,
+            "ci_low": 0.02105677717945073,
+            "mean": 0.0250091552734375,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.0420114258220726,
+            "ci_low": 0.03398751623521907,
+            "mean": 0.037999471028645836,
+            "n": 12
+          },
+          "generation": 80
+        },
+        {
+          "activity": {
+            "ci_high": 0.027991046113376845,
+            "ci_low": 0.022301922636623155,
+            "mean": 0.025146484375,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.04153707977262592,
+            "ci_low": 0.03566222035758241,
+            "mean": 0.038599650065104164,
+            "n": 12
+          },
+          "generation": 90
+        },
+        {
+          "activity": {
+            "ci_high": 0.029549847203161644,
+            "ci_low": 0.02274710917704669,
+            "mean": 0.026148478190104168,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.04338409149477322,
+            "ci_low": 0.03595143910418511,
+            "mean": 0.039667765299479164,
+            "n": 12
+          },
+          "generation": 100
+        },
+        {
+          "activity": {
+            "ci_high": 0.030310821067485325,
+            "ci_low": 0.023064423073139675,
+            "mean": 0.0266876220703125,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.0439968226242559,
+            "ci_low": 0.0368137242507441,
+            "mean": 0.0404052734375,
+            "n": 12
+          },
+          "generation": 110
+        },
+        {
+          "activity": {
+            "ci_high": 0.0310148792180091,
+            "ci_low": 0.023754000990324237,
+            "mean": 0.027384440104166668,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.04656207091546887,
+            "ci_low": 0.03786989523036446,
+            "mean": 0.042215983072916664,
+            "n": 12
+          },
+          "generation": 120
+        },
+        {
+          "activity": {
+            "ci_high": 0.03301923972124373,
+            "ci_low": 0.02408932147667293,
+            "mean": 0.028554280598958332,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.0477887710640263,
+            "ci_low": 0.03893201344118203,
+            "mean": 0.043360392252604164,
+            "n": 12
+          },
+          "generation": 130
+        },
+        {
+          "activity": {
+            "ci_high": 0.031955526851868005,
+            "ci_low": 0.02277266325229866,
+            "mean": 0.027364095052083332,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.04707356095455609,
+            "ci_low": 0.03800944685794391,
+            "mean": 0.04254150390625,
+            "n": 12
+          },
+          "generation": 140
+        },
+        {
+          "activity": {
+            "ci_high": 0.03324227557974524,
+            "ci_low": 0.025300611790046428,
+            "mean": 0.029271443684895832,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.047855178101375045,
+            "ci_low": 0.038855433877791626,
+            "mean": 0.043355305989583336,
+            "n": 12
+          },
+          "generation": 150
+        },
+        {
+          "activity": {
+            "ci_high": 0.03190537380914799,
+            "ci_low": 0.023779033742935343,
+            "mean": 0.027842203776041668,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.04736297301858588,
+            "ci_low": 0.03793365784078912,
+            "mean": 0.0426483154296875,
+            "n": 12
+          },
+          "generation": 160
+        },
+        {
+          "activity": {
+            "ci_high": 0.03134507767920282,
+            "ci_low": 0.023474665159338846,
+            "mean": 0.027409871419270832,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.04829112819195474,
+            "ci_low": 0.03838896620908693,
+            "mean": 0.043340047200520836,
+            "n": 12
+          },
+          "generation": 170
+        },
+        {
+          "activity": {
+            "ci_high": 0.03196031741517303,
+            "ci_low": 0.02162854977232697,
+            "mean": 0.02679443359375,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.04874824235260704,
+            "ci_low": 0.03811495751718463,
+            "mean": 0.043431599934895836,
+            "n": 12
+          },
+          "generation": 180
+        },
+        {
+          "activity": {
+            "ci_high": 0.03254637788663389,
+            "ci_low": 0.02285319893628277,
+            "mean": 0.027699788411458332,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.048728076372571,
+            "ci_low": 0.038491161908679,
+            "mean": 0.043609619140625,
+            "n": 12
+          },
+          "generation": 190
+        },
+        {
+          "activity": {
+            "ci_high": 0.03211758158665645,
+            "ci_low": 0.023393893022718545,
+            "mean": 0.0277557373046875,
+            "n": 12
+          },
+          "density": {
+            "ci_high": 0.046609000813971235,
+            "ci_low": 0.038179003743320436,
+            "mean": 0.042394002278645836,
+            "n": 12
+          },
+          "generation": 200
+        }
+      ],
+      "period_detection": {
+        "detected_fraction": {
+          "ci_high": 0.0,
+          "ci_low": 0.0,
+          "mean": 0.0,
+          "n": 12
+        },
+        "period_detected_only": {
+          "ci_high": null,
+          "ci_low": null,
+          "mean": null,
+          "n": 0
+        },
+        "transient_detected_only": {
+          "ci_high": null,
+          "ci_low": null,
+          "mean": null,
+          "n": 0
+        },
+        "trials": [
+          {
+            "detected": false,
+            "detected_at": null,
+            "period": null,
+            "seed": 2819229997305384982,
+            "transient": null,
+            "trial": 0
+          },
+          {
+            "detected": false,
+            "detected_at": null,
+            "period": null,
+            "seed": 12606197293733335134,
+            "transient": null,
+            "trial": 1
+          },
+          {
+            "detected": false,
+            "detected_at": null,
+            "period": null,
+            "seed": 3089752057753660309,
+            "transient": null,
+            "trial": 2
+          },
+          {
+            "detected": false,
+            "detected_at": null,
+            "period": null,
+            "seed": 5061624835152424283,
+            "transient": null,
+            "trial": 3
+          },
+          {
+            "detected": false,
+            "detected_at": null,
+            "period": null,
+            "seed": 71213760360455810,
+            "transient": null,
+            "trial": 4
+          },
+          {
+            "detected": false,
+            "detected_at": null,
+            "period": null,
+            "seed": 12513662084525086180,
+            "transient": null,
+            "trial": 5
+          },
+          {
+            "detected": false,
+            "detected_at": null,
+            "period": null,
+            "seed": 14886737113705160861,
+            "transient": null,
+            "trial": 6
+          },
+          {
+            "detected": false,
+            "detected_at": null,
+            "period": null,
+            "seed": 1654873775357726982,
+            "transient": null,
+            "trial": 7
+          },
+          {
+            "detected": false,
+            "detected_at": null,
+            "period": null,
+            "seed": 12176079347898170728,
+            "transient": null,
+            "trial": 8
+          },
+          {
+            "detected": false,
+            "detected_at": null,
+            "period": null,
+            "seed": 5463380757044147169,
+            "transient": null,
+            "trial": 9
+          },
+          {
+            "detected": false,
+            "detected_at": null,
+            "period": null,
+            "seed": 14944580638455215522,
+            "transient": null,
+            "trial": 10
+          },
+          {
+            "detected": false,
+            "detected_at": null,
+            "period": null,
+            "seed": 12113025047397138404,
+            "transient": null,
+            "trial": 11
+          }
+        ]
+      },
+      "trial_seeds": [
+        2819229997305384982,
+        12606197293733335134,
+        3089752057753660309,
+        5061624835152424283,
+        71213760360455810,
+        12513662084525086180,
+        14886737113705160861,
+        1654873775357726982,
+        12176079347898170728,
+        5463380757044147169,
+        14944580638455215522,
+        12113025047397138404
+      ]
+    }
+  ],
+  "label": "EMPIRICAL FINITE-SIZE RESULTS: finite periodic tori and finite run lengths; no asymptotic theorem is inferred.",
+  "schema_version": 1
+}
