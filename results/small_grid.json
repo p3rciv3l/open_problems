@@ -1,0 +1,366 @@
+{
+  "results": [
+    {
+      "bounds": {
+        "lower": 4,
+        "upper": 4
+      },
+      "objective": {
+        "density": {
+          "denominator": 9,
+          "numerator": 4
+        },
+        "density_decimal": "0.444444444444",
+        "spacetime_cells": 9,
+        "total_live": 4
+      },
+      "parameters": {
+        "exact_period": true,
+        "height": 3,
+        "period": 1,
+        "rule": "B3/S23",
+        "topology": "torus_directional_moore",
+        "width": 3
+      },
+      "schema": "life-density/v1",
+      "solver": {
+        "backend": "z3",
+        "elapsed_seconds": 0.021729,
+        "method": "incremental binary search over finite integer bounds",
+        "seed": 0,
+        "version": "4.16.0"
+      },
+      "status": "optimal",
+      "verification": {
+        "errors": [],
+        "least_period": 1,
+        "valid": true
+      },
+      "witness": {
+        "phases": [
+          [
+            ".OO",
+            "OO.",
+            "..."
+          ]
+        ]
+      }
+    },
+    {
+      "parameters": {
+        "exact_period": true,
+        "height": 3,
+        "period": 2,
+        "rule": "B3/S23",
+        "topology": "torus_directional_moore",
+        "width": 3
+      },
+      "schema": "life-density/v1",
+      "solver": {
+        "backend": "z3",
+        "elapsed_seconds": 0.038173,
+        "seed": 0,
+        "version": "4.16.0"
+      },
+      "status": "unsat"
+    },
+    {
+      "bounds": {
+        "lower": 6,
+        "upper": 6
+      },
+      "objective": {
+        "density": {
+          "denominator": 12,
+          "numerator": 6
+        },
+        "density_decimal": "0.500000000000",
+        "spacetime_cells": 12,
+        "total_live": 6
+      },
+      "parameters": {
+        "exact_period": true,
+        "height": 4,
+        "period": 1,
+        "rule": "B3/S23",
+        "topology": "torus_directional_moore",
+        "width": 3
+      },
+      "schema": "life-density/v1",
+      "solver": {
+        "backend": "z3",
+        "elapsed_seconds": 0.021147,
+        "method": "incremental binary search over finite integer bounds",
+        "seed": 0,
+        "version": "4.16.0"
+      },
+      "status": "optimal",
+      "verification": {
+        "errors": [],
+        "least_period": 1,
+        "valid": true
+      },
+      "witness": {
+        "phases": [
+          [
+            "...",
+            "OOO",
+            "...",
+            "OOO"
+          ]
+        ]
+      }
+    },
+    {
+      "bounds": {
+        "lower": 12,
+        "upper": 12
+      },
+      "objective": {
+        "density": {
+          "denominator": 24,
+          "numerator": 12
+        },
+        "density_decimal": "0.500000000000",
+        "spacetime_cells": 24,
+        "total_live": 12
+      },
+      "parameters": {
+        "exact_period": true,
+        "height": 4,
+        "period": 2,
+        "rule": "B3/S23",
+        "topology": "torus_directional_moore",
+        "width": 3
+      },
+      "schema": "life-density/v1",
+      "solver": {
+        "backend": "z3",
+        "elapsed_seconds": 0.067807,
+        "method": "incremental binary search over finite integer bounds",
+        "seed": 0,
+        "version": "4.16.0"
+      },
+      "status": "optimal",
+      "verification": {
+        "errors": [],
+        "least_period": 2,
+        "valid": true
+      },
+      "witness": {
+        "phases": [
+          [
+            "...",
+            "...",
+            "OOO",
+            "OOO"
+          ],
+          [
+            "OOO",
+            "OOO",
+            "...",
+            "..."
+          ]
+        ]
+      }
+    },
+    {
+      "bounds": {
+        "lower": 6,
+        "upper": 6
+      },
+      "objective": {
+        "density": {
+          "denominator": 12,
+          "numerator": 6
+        },
+        "density_decimal": "0.500000000000",
+        "spacetime_cells": 12,
+        "total_live": 6
+      },
+      "parameters": {
+        "exact_period": true,
+        "height": 3,
+        "period": 1,
+        "rule": "B3/S23",
+        "topology": "torus_directional_moore",
+        "width": 4
+      },
+      "schema": "life-density/v1",
+      "solver": {
+        "backend": "z3",
+        "elapsed_seconds": 0.022743,
+        "method": "incremental binary search over finite integer bounds",
+        "seed": 0,
+        "version": "4.16.0"
+      },
+      "status": "optimal",
+      "verification": {
+        "errors": [],
+        "least_period": 1,
+        "valid": true
+      },
+      "witness": {
+        "phases": [
+          [
+            "O.O.",
+            "O.O.",
+            "O.O."
+          ]
+        ]
+      }
+    },
+    {
+      "bounds": {
+        "lower": 12,
+        "upper": 12
+      },
+      "objective": {
+        "density": {
+          "denominator": 24,
+          "numerator": 12
+        },
+        "density_decimal": "0.500000000000",
+        "spacetime_cells": 24,
+        "total_live": 12
+      },
+      "parameters": {
+        "exact_period": true,
+        "height": 3,
+        "period": 2,
+        "rule": "B3/S23",
+        "topology": "torus_directional_moore",
+        "width": 4
+      },
+      "schema": "life-density/v1",
+      "solver": {
+        "backend": "z3",
+        "elapsed_seconds": 0.128352,
+        "method": "incremental binary search over finite integer bounds",
+        "seed": 0,
+        "version": "4.16.0"
+      },
+      "status": "optimal",
+      "verification": {
+        "errors": [],
+        "least_period": 2,
+        "valid": true
+      },
+      "witness": {
+        "phases": [
+          [
+            "OO..",
+            "OO..",
+            "OO.."
+          ],
+          [
+            "..OO",
+            "..OO",
+            "..OO"
+          ]
+        ]
+      }
+    },
+    {
+      "bounds": {
+        "lower": 8,
+        "upper": 8
+      },
+      "objective": {
+        "density": {
+          "denominator": 16,
+          "numerator": 8
+        },
+        "density_decimal": "0.500000000000",
+        "spacetime_cells": 16,
+        "total_live": 8
+      },
+      "parameters": {
+        "exact_period": true,
+        "height": 4,
+        "period": 1,
+        "rule": "B3/S23",
+        "topology": "torus_directional_moore",
+        "width": 4
+      },
+      "schema": "life-density/v1",
+      "solver": {
+        "backend": "z3",
+        "elapsed_seconds": 0.054286,
+        "method": "incremental binary search over finite integer bounds",
+        "seed": 0,
+        "version": "4.16.0"
+      },
+      "status": "optimal",
+      "verification": {
+        "errors": [],
+        "least_period": 1,
+        "valid": true
+      },
+      "witness": {
+        "phases": [
+          [
+            ".O.O",
+            ".O.O",
+            ".O.O",
+            ".O.O"
+          ]
+        ]
+      }
+    },
+    {
+      "bounds": {
+        "lower": 16,
+        "upper": 16
+      },
+      "objective": {
+        "density": {
+          "denominator": 32,
+          "numerator": 16
+        },
+        "density_decimal": "0.500000000000",
+        "spacetime_cells": 32,
+        "total_live": 16
+      },
+      "parameters": {
+        "exact_period": true,
+        "height": 4,
+        "period": 2,
+        "rule": "B3/S23",
+        "topology": "torus_directional_moore",
+        "width": 4
+      },
+      "schema": "life-density/v1",
+      "solver": {
+        "backend": "z3",
+        "elapsed_seconds": 0.759283,
+        "method": "incremental binary search over finite integer bounds",
+        "seed": 0,
+        "version": "4.16.0"
+      },
+      "status": "optimal",
+      "verification": {
+        "errors": [],
+        "least_period": 2,
+        "valid": true
+      },
+      "witness": {
+        "phases": [
+          [
+            "O.OO",
+            "O...",
+            "...O",
+            "OO.O"
+          ],
+          [
+            "..O.",
+            "OOO.",
+            ".OOO",
+            ".O.."
+          ]
+        ]
+      }
+    }
+  ],
+  "schema": "life-density-grid/v1"
+}
