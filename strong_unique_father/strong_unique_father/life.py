@@ -30,6 +30,24 @@ def verify_image(
     return all(evolve_cell(predecessor, cell) == value for cell, value in image.items())
 
 
+def evolve_finite(live: frozenset[Cell] | set[Cell]) -> frozenset[Cell]:
+    candidates = {
+        (x + dx, y + dy)
+        for x, y in live
+        for dx, dy in OFFSETS
+    }
+    result = set()
+    for x, y in candidates:
+        neighbors = sum(
+            (x + dx, y + dy) in live
+            for dx, dy in OFFSETS
+            if (dx, dy) != (0, 0)
+        )
+        if life_value((x, y) in live, neighbors):
+            result.add((x, y))
+    return frozenset(result)
+
+
 def convex_hull_cells(live: frozenset[Cell]) -> set[Cell]:
     points = sorted(live)
     if len(points) <= 1:

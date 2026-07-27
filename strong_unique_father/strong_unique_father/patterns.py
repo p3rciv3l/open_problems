@@ -107,3 +107,22 @@ def expand_kynnoes_stabilization(
 
 
 STABILIZATION_710 = expand_kynnoes_stabilization(STABILIZATION_334, 2, 2)
+
+KYNNOES_BOUNDARY_OBSTRUCTION = frozenset(
+    {(6, 0), (7, 0), (8, 0), (8, 1), (9, -1), (9, 0), (9, 1)}
+)
+
+
+def kynnoes_boundary_counter_predecessor(pattern: Pattern) -> frozenset[Cell]:
+    return pattern.live ^ KYNNOES_BOUNDARY_OBSTRUCTION
+
+
+def kynnoes_family_combinatorics(repeats: int) -> dict[str, int]:
+    if repeats < 0:
+        raise ValueError("repeats must be nonnegative")
+    return {
+        "width": 32 + 6 * repeats,
+        "height": 26 + 6 * repeats,
+        "population": 16 * repeats * repeats + 156 * repeats + 334,
+        "convex_hull_cells": 36 * repeats * repeats + 348 * repeats + 740,
+    }

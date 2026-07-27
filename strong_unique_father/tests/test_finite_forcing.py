@@ -1,9 +1,13 @@
 from strong_unique_father.forcing import analyze_stabilization
-from strong_unique_father.life import verify_image
+from strong_unique_father.life import convex_hull_cells, evolve_finite, verify_image
 from strong_unique_father.patterns import (
+    KYNNOES_BOUNDARY_OBSTRUCTION,
     KYNNOES_TILE,
     STABILIZATION_334,
     STABILIZATION_710,
+    expand_kynnoes_stabilization,
+    kynnoes_boundary_counter_predecessor,
+    kynnoes_family_combinatorics,
 )
 
 
@@ -84,3 +88,27 @@ def test_expanded_stabilization_improves_coverage_with_dead_annulus() -> None:
     assert len(report["counter_predecessors"]) == 102
     assert report["claim_scope"]["dead_output_annulus"] == 2
     assert report["claim_scope"]["strong_unique_father_solved"] is False
+
+
+def test_parametric_family_combinatorics() -> None:
+    for repeats in range(6):
+        pattern = expand_kynnoes_stabilization(
+            STABILIZATION_334, repeats, repeats
+        )
+        expected = kynnoes_family_combinatorics(repeats)
+        assert pattern.width == expected["width"]
+        assert pattern.height == expected["height"]
+        assert len(pattern.live) == expected["population"]
+        assert len(convex_hull_cells(pattern.live)) == expected["convex_hull_cells"]
+
+
+def test_exact_boundary_obstruction_applies_to_entire_family() -> None:
+    assert (8, 0) in STABILIZATION_334.live
+    assert (8, 0) in KYNNOES_BOUNDARY_OBSTRUCTION
+    for repeats in (0, 1, 2, 5, 10):
+        pattern = expand_kynnoes_stabilization(
+            STABILIZATION_334, repeats, repeats
+        )
+        predecessor = kynnoes_boundary_counter_predecessor(pattern)
+        assert (8, 0) not in predecessor
+        assert evolve_finite(predecessor) == pattern.live
