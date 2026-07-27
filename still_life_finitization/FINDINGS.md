@@ -1,5 +1,84 @@
 # Scoped findings: still-life finitization
 
+## Complete period-3 all-window theorem
+
+Let `P` be any Conway Life still life invariant under translations by `(3,0)`
+and `(0,3)`. Every nonempty finite axis-aligned rectangular window cut from
+`P`, at every origin and of every positive width and height, has a finite
+still-life extension with dead-exterior margin at most 4.
+
+This is a complete theorem for the class, not a bounded-margin search. It
+includes 126 nonempty dense agars, including agars with interacting infinite
+live components, and therefore goes beyond both the separated-component
+family and the alternating-row family.
+
+### Exhaustive host classification
+
+In a 3x3-periodic configuration, the eight neighbors of a cell occupy each of
+the other eight residue classes exactly once. If the tile has `K` live
+residues, a live cell has `K-1` live neighbors and a dead cell has `K`. The
+still-life rule therefore leaves exactly the empty tile and the
+`binomial(9,4) = 126` tiles with four live residues. Thus every listed host is
+globally stable on the whole plane; periodic stability is not inferred from a
+finite window. The empty host has the empty finite extension and needs no SAT
+seed.
+
+The independent classifier also enumerates all 512 bit tiles and obtains
+exactly the same 127 tiles. Translation and the eight square symmetries reduce
+the 126 nonempty tiles to five orbits, represented by
+
+```
+11.  11.  11.  11.  1..
+1..  11.  1..  1..  1..
+1..  ...  .1.  ..1  .11
+```
+
+Square symmetries preserve the Life rule, finite support, Chebyshev margin,
+and axis-aligned rectangles, so these five representatives cover every host.
+
+### Finite-state pumping certificate
+
+For each of the five representatives, nine window-origin phases, and all
+width/height pairs in `1..15`, SAT finds a finite still life in margin 4.
+There are 10,125 seeds. A dimension below 10 is a finite base case. A
+dimension at least 10 uses one of the six bases `10..15`, selected by its
+residue modulo 6.
+
+Every pumpable seed additionally equates the two columns immediately before
+a six-column block with the two columns immediately before its far seam. The
+analogous equalities hold for row pumps. These pairs are the complete
+radius-1 transfer boundary state. Duplicating the six-column or six-row block
+therefore creates only local three-column or three-row neighborhoods already
+present in the checked seed. Six is two host periods, so duplication preserves
+the fixed core. Horizontal and vertical pumps commute.
+
+For arbitrary width `w >= 10`, choose the unique base in `10..15` congruent
+to `w` modulo 6 and repeat the horizontal pump. Do the same independently for
+height. This proves coverage of every positive dimension, rather than
+extrapolating from 15. `automata/period3_certificate.json` stores every seed
+as a bounded bitmap, a digest of the ordered seed list, and an aggregate
+digest of all 10,125 deterministic CNFs. The independent verifier exhaustively
+rechecks the host classification, orbit coverage, every finite still life,
+all seam states, one-step pumps, combined pumps, commutation, seed coverage,
+and the seed digest without calling SAT. The checked certificate SHA-256 is
+`8233abbabae6ffcafb657466d9f306e4faa3613b58e52571f271370b9568dcda`.
+
+### Counterexample search direction and exact limit
+
+The same exhaustive classification is also a counterexample search over every
+3x3 periodic candidate host. No non-finitizable window exists in this class,
+by the pumping theorem. Finite searches on the first dense representative
+gave first-SAT margins 1, 2, 3, and 3 for aligned square windows of sides 1,
+3, 6, and 9. The preceding UNSAT solver results have no retained proof traces;
+they motivated the boundary-state search but are not used in the theorem or
+to claim non-finitizability. Each sequence terminates in a directly checked
+finite witness.
+
+The theorem does not settle periodic hosts whose horizontal or vertical period
+does not divide 3, general sofic hosts, or arbitrary infinite still lifes. No
+finite-margin UNSAT result is presented as a counterexample, and no general
+compactness principle follows from this class-specific transfer automaton.
+
 ## Alternating-row all-window theorem
 
 Let `R_e` have every cell in even-numbered rows live and every cell in

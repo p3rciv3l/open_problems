@@ -8,6 +8,16 @@ import tempfile
 import unittest
 
 from still_life_finitization.still_life.pattern import PeriodicPattern, Window
+from still_life_finitization.still_life.period3_transfer import (
+    MARGIN as PERIOD3_MARGIN,
+    REPRESENTATIVES as PERIOD3_REPRESENTATIVES,
+    Period3Seed,
+    classify_period3_tiles,
+    construct_from_seeds as construct_period3_from_seeds,
+    pump_horizontal as pump_period3_horizontal,
+    pump_vertical as pump_period3_vertical,
+    verify_period3_certificate,
+)
 from still_life_finitization.still_life.sat import build_encoding, enumerate_margins
 from still_life_finitization.still_life.stripe_transfer import (
     COLUMN_STRIPE_PATTERN,
@@ -313,6 +323,80 @@ class AlternatingRowTheoremTests(unittest.TestCase):
         damaged["seeds"][0]["live_cells"].append([100, 100])
         errors = verify_stripe_certificate(damaged)
         self.assertEqual(errors, ["seed digest does not match"])
+
+
+class Period3TheoremTests(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        certificate_path = (
+            Path(__file__).resolve().parents[1]
+            / "automata"
+            / "period3_certificate.json"
+        )
+        cls.certificate = json.loads(certificate_path.read_text())
+        cls.seeds = {}
+        for data in cls.certificate["seeds"]:
+            seed = Period3Seed.from_dict(data)
+            cls.seeds[
+                (
+                    seed.representative,
+                    seed.window.x,
+                    seed.window.y,
+                    seed.window.width,
+                    seed.window.height,
+                )
+            ] = seed
+
+    def test_exhaustive_tile_classification(self):
+        self.assertEqual(
+            classify_period3_tiles(),
+            self.certificate["classification"],
+        )
+        self.assertEqual(self.certificate["classification"]["stable_count"], 127)
+        self.assertEqual(self.certificate["classification"]["four_live_count"], 126)
+        self.assertEqual(self.certificate["classification"]["other_live_count"], 0)
+        self.assertEqual(
+            len(self.certificate["classification"]["symmetry_orbits"]), 5
+        )
+
+    def test_exact_certificate_verifies(self):
+        self.assertEqual(verify_period3_certificate(self.certificate), [])
+        self.assertEqual(self.certificate["summary"]["seed_count"], 10125)
+        self.assertEqual(self.certificate["summary"]["margin_bound"], 4)
+
+    def test_repeated_pumps_commute(self):
+        seed = self.seeds[(0, 0, 0, 10, 10)]
+        first = pump_period3_vertical(pump_period3_horizontal(seed, 2), 3)
+        second = pump_period3_horizontal(pump_period3_vertical(seed, 3), 2)
+        self.assertEqual(first, second)
+        self.assertEqual(
+            verify_cells(
+                PeriodicPattern(PERIOD3_REPRESENTATIVES[0]),
+                first.window,
+                PERIOD3_MARGIN,
+                set(first.live_cells),
+            ),
+            [],
+        )
+
+    def test_constructs_large_windows_for_every_orbit(self):
+        for representative, x, y, width, height in itertools.product(
+            range(5), (-4, 0, 5), (-5, 0, 4), (1, 10, 17, 34), (2, 11, 22, 39)
+        ):
+            window = Window(x, y, width, height)
+            live_cells = construct_period3_from_seeds(
+                representative, window, self.seeds
+            )
+            self.assertEqual(
+                verify_cells(
+                    PeriodicPattern(PERIOD3_REPRESENTATIVES[representative]),
+                    window,
+                    PERIOD3_MARGIN,
+                    live_cells,
+                ),
+                [],
+                (representative, x, y, width, height),
+            )
 
 
 if __name__ == "__main__":

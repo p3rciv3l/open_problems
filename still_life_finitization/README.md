@@ -30,6 +30,8 @@ python -m still_life_finitization.experiments.run_adversarial
 python -m still_life_finitization.automata.generate_certificate
 python -m still_life_finitization.automata.generate_stripe_certificate
 python -m still_life_finitization.automata.verify_stripe_certificate
+python -m still_life_finitization.automata.generate_period3_certificate --jobs 3
+python -m still_life_finitization.automata.verify_period3_certificate
 ```
 
 `automata/block_4x4_certificate.json` is a deterministic finite-state transfer
@@ -51,6 +53,15 @@ contains 264 directly verified finite seeds. Horizontal transfer inserts a
 3-column pump, vertical transfer inserts a 4-row pump, and the two pumps
 commute. The seed partition covers both vertical phases and every positive
 width and height, proving a uniform margin bound of 3.
+
+`automata/period3_certificate.json` proves an all-window theorem for every
+Life still life invariant under translations by `(3,0)` and `(0,3)`. Direct
+classification reduces all 512 tiles to the empty tile and 126 four-live-cell
+tiles in five dihedral/translation orbits. The certificate contains 10,125
+directly checked finite seeds for all representatives, phases, and pump
+residue classes. Six-column and six-row transfers cover every larger
+rectangle, with a uniform margin bound of 4. Its verifier uses only the Life
+rule and certificate bitmaps; it does not invoke SAT.
 
 Result files retain every tested SAT/UNSAT status, variable and clause counts,
 solver statistics, and a SHA-256 digest of the deterministic clause stream.
