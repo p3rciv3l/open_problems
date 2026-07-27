@@ -6,18 +6,25 @@ solver="${CADICAL:-cadical}"
 
 mkdir -p "$root/artifacts/proofs"
 python3 "$root/scripts/generate.py"
-for bound in 0 1 2; do
+
+solve() {
+  name="$1"
   set +e
   "$solver" --quiet --no-binary \
-    "$root/artifacts/cnf/period2-pop-le-$bound.cnf" \
-    "$root/artifacts/proofs/period2-pop-le-$bound.drat" \
-    >"$root/artifacts/proofs/period2-pop-le-$bound.solver.txt"
+    "$root/artifacts/cnf/$name.cnf" \
+    "$root/artifacts/proofs/$name.drat" \
+    >"$root/artifacts/proofs/$name.solver.txt"
   status=$?
   set -e
   if [[ $status -ne 20 ]]; then
-    echo "solver did not report UNSAT for bound $bound (exit $status)" >&2
+    echo "solver did not report UNSAT for $name (exit $status)" >&2
     exit 1
   fi
+}
+
+for bound in 0 1 2; do
+  solve "period2-pop-le-$bound"
 done
+solve "goe45-predecessor"
 python3 "$root/scripts/generate.py"
 "$root/scripts/verify_proofs.sh"

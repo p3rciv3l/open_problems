@@ -11,7 +11,7 @@ ROOT = Path(__file__).resolve().parents[1]
 
 def main(path):
     manifest = json.loads(Path(path).read_text(encoding="utf-8"))
-    assert manifest["schema"] == 1
+    assert manifest["schema"] == 2
     expected = set(manifest["files"])
     actual = {
         str(item.relative_to(ROOT))

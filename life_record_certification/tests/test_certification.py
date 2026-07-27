@@ -20,6 +20,7 @@ class CertificationTests(unittest.TestCase):
 
     def test_witness(self):
         self.run_script("check_witness.py")
+        self.run_script("check_goe_target.py")
 
     def test_cnf_encoding(self):
         self.run_script("check_cnf_encoding.py")

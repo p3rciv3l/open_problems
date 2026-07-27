@@ -16,3 +16,9 @@ for bound in 0 1 2; do
     grep -q "s VERIFIED"
   echo "DRAT OK: bound $bound"
 done
+
+"$checker" \
+  "$root/artifacts/cnf/goe45-predecessor.cnf" \
+  "$root/artifacts/proofs/goe45-predecessor.drat" |
+  grep -q "s VERIFIED"
+echo "DRAT OK: 45-cell GoE has no predecessor"
