@@ -28,15 +28,21 @@ def _serialized_assignment(assignment: dict[Cell, bool]) -> list[list[int]]:
 
 
 def analyze_stabilization(
-    pattern: Pattern, independent: bool = False
+    pattern: Pattern, independent: bool = False, output_annulus: int = 0
 ) -> dict[str, object]:
-    image = pattern.assignment
+    if output_annulus < 0:
+        raise ValueError("output_annulus must be nonnegative")
+    image = {
+        (x, y): (x, y) in pattern.live
+        for y in range(-output_annulus, pattern.height + output_annulus)
+        for x in range(-output_annulus, pattern.width + output_annulus)
+    }
     primary = LifePreimageCNF(image, "cardinality")
     requested = pattern.live | convex_hull_cells(pattern.live)
     forced: set[Cell] = set()
     counter_predecessors: dict[str, list[list[int]]] = {}
 
-    with Minisat22(bootstrap_with=primary.clauses) as solver:
+    with Cadical195(bootstrap_with=primary.clauses) as solver:
         if not solver.solve():
             raise ValueError("image patch has no predecessor")
         for cell in sorted(requested):
@@ -53,7 +59,7 @@ def analyze_stabilization(
     independently_verified = False
     if independent:
         check = LifePreimageCNF(image, "truth-table")
-        with Cadical195(bootstrap_with=check.clauses) as solver:
+        with Minisat22(bootstrap_with=check.clauses) as solver:
             for cell in sorted(forced):
                 if solver.solve(assumptions=[check.literal(cell, not image[cell])]):
                     raise AssertionError(f"independent encoding refuted forced cell {cell}")
@@ -65,11 +71,18 @@ def analyze_stabilization(
     return {
         "claim_scope": {
             "image_rectangle": [pattern.width, pattern.height],
+            "dead_output_annulus": output_annulus,
+            "constrained_output_bounds": [
+                -output_annulus,
+                pattern.width + output_annulus - 1,
+                -output_annulus,
+                pattern.height + output_annulus - 1,
+            ],
             "predecessor_halo": [
-                -1,
-                pattern.width,
-                -1,
-                pattern.height,
+                -output_annulus - 1,
+                pattern.width + output_annulus,
+                -output_annulus - 1,
+                pattern.height + output_annulus,
             ],
             "arbitrary_global_predecessor_covered": True,
             "reason": (
@@ -77,6 +90,12 @@ def analyze_stabilization(
                 "outside cells cannot affect this image rectangle."
             ),
             "strong_unique_father_solved": False,
+            "countermodels_prove_global_nonforcing": False,
+            "countermodel_caveat": (
+                "A finite countermodel may fail to extend through a larger dead-output "
+                "annulus; only forced-cell UNSAT conclusions quantify over arbitrary "
+                "global predecessors."
+            ),
         },
         "population": len(pattern.live),
         "live_cells": {**asdict(live_metric), "fraction": live_metric.fraction, "complete": live_metric.complete},

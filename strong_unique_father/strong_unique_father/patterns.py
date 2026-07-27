@@ -82,3 +82,28 @@ def parse_rle(rle: str) -> Pattern:
 
 
 STABILIZATION_334 = parse_rle(STABILIZATION_334_RLE)
+
+
+def expand_kynnoes_stabilization(
+    pattern: Pattern, horizontal_repeats: int, vertical_repeats: int
+) -> Pattern:
+    if horizontal_repeats < 0 or vertical_repeats < 0:
+        raise ValueError("repeat counts must be nonnegative")
+    rows = [
+        [(x, y) in pattern.live for x in range(pattern.width)]
+        for y in range(pattern.height)
+    ]
+    for _ in range(horizontal_repeats):
+        rows = [row[:12] + row[12:18] + row[12:] for row in rows]
+    for _ in range(vertical_repeats):
+        rows = rows[:10] + rows[10:16] + rows[10:]
+    live = frozenset(
+        (x, y)
+        for y, row in enumerate(rows)
+        for x, value in enumerate(row)
+        if value
+    )
+    return Pattern(len(rows[0]), len(rows), live)
+
+
+STABILIZATION_710 = expand_kynnoes_stabilization(STABILIZATION_334, 2, 2)

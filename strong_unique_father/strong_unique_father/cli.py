@@ -5,15 +5,20 @@ import json
 from pathlib import Path
 
 from .forcing import analyze_stabilization
-from .patterns import STABILIZATION_334
+from .patterns import STABILIZATION_334, STABILIZATION_710
 
 
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--output", type=Path)
     parser.add_argument("--independent", action="store_true")
+    parser.add_argument("--annulus", type=int, default=2)
+    parser.add_argument("--candidate", choices=("334", "710"), default="710")
     args = parser.parse_args()
-    report = analyze_stabilization(STABILIZATION_334, independent=args.independent)
+    pattern = STABILIZATION_334 if args.candidate == "334" else STABILIZATION_710
+    report = analyze_stabilization(
+        pattern, independent=args.independent, output_annulus=args.annulus
+    )
     serialized = json.dumps(report, indent=2, sort_keys=True) + "\n"
     if args.output:
         args.output.write_text(serialized)
