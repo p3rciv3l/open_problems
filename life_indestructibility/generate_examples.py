@@ -5,6 +5,7 @@ from pathlib import Path
 from life_safety import (
     check_all_single_gliders,
     check_bounded_flip,
+    exclude_still_life_classes,
     search_still_life_classes,
     search_three_by_three_invariant,
 )
@@ -158,6 +159,47 @@ def main() -> None:
                         len(collision.final),
                     ]
                 )
+
+    exclusions = exclude_still_life_classes()
+    with (EXAMPLES / "still_life_5x5_exclusion.csv").open(
+        "w", newline=""
+    ) as output:
+        writer = csv.writer(output, lineterminator="\n")
+        writer.writerow(
+            [
+                "candidate",
+                "population",
+                "pattern",
+                "attack_count",
+                "attacks_tried",
+                "excluded",
+                "witness_direction",
+                "witness_phase",
+                "witness_lane",
+                "witness_settled_generation",
+                "witness_period",
+            ]
+        )
+        for exclusion in exclusions:
+            witness = exclusion.witness
+            writer.writerow(
+                [
+                    exclusion.candidate.identifier,
+                    len(exclusion.candidate.pattern),
+                    json.dumps(
+                        serialize(exclusion.candidate.pattern),
+                        separators=(",", ":"),
+                    ),
+                    exclusion.attack_count,
+                    exclusion.attacks_tried,
+                    witness is not None,
+                    witness.attack.direction if witness else "",
+                    witness.attack.phase if witness else "",
+                    witness.attack.lane if witness else "",
+                    witness.settled_generation if witness else "",
+                    witness.settled_period if witness else "",
+                ]
+            )
 
 
 if __name__ == "__main__":

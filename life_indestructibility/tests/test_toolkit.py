@@ -1,5 +1,9 @@
 import csv
+import gzip
+import hashlib
 import json
+import subprocess
+import tempfile
 import unittest
 from itertools import product
 from pathlib import Path
@@ -12,7 +16,11 @@ from life_safety import (
     search_three_by_three_invariant,
     step,
 )
-from life_safety.candidates import canonical_pattern
+from life_safety.candidates import (
+    _enumerate_still_lives,
+    canonical_pattern,
+    exclude_still_life_classes,
+)
 from life_safety.gliders import DIRECTIONS, glider, simulate_collision
 from life_safety.independent import dense_step
 from life_safety.invariant import (
@@ -169,6 +177,44 @@ class BoundaryInvariantTests(unittest.TestCase):
                         ranks[elimination.successor],
                         elimination.round,
                     )
+
+
+class BoundaryMemoryTests(unittest.TestCase):
+    def test_packed_ranked_witnesses_verify_exhaustively(self):
+        with (HERE / "examples" / "boundary_memory_summary.json").open() as source:
+            summary = json.load(source)
+        self.assertEqual(summary["center_alive"]["states"], 1 << 24)
+        self.assertEqual(summary["center_dead"]["states"], 1 << 24)
+        with tempfile.TemporaryDirectory() as temporary:
+            temporary_path = Path(temporary)
+            output_path = temporary_path / "certificates"
+            process = subprocess.run(
+                [
+                    "python3",
+                    str(HERE / "generate_boundary_memory.py"),
+                    "--output",
+                    str(output_path),
+                ],
+                check=True,
+                capture_output=True,
+                text=True,
+            )
+            self.assertIn("verified protected=1", process.stdout)
+            self.assertIn("verified protected=0", process.stdout)
+            for name, key in (("live", "center_alive"), ("dead", "center_dead")):
+                compressed_path = output_path / f"boundary_memory_{name}.bin.gz"
+                compressed = compressed_path.read_bytes()
+                self.assertEqual(len(compressed), summary[key]["gzip_bytes"])
+                self.assertEqual(
+                    hashlib.sha256(compressed).hexdigest(),
+                    summary[key]["gzip_sha256"],
+                )
+                raw = gzip.decompress(compressed)
+                self.assertEqual(len(raw), summary[key]["raw_bytes"])
+                self.assertEqual(
+                    hashlib.sha256(raw).hexdigest(),
+                    summary[key]["raw_sha256"],
+                )
 
 
 class GliderEnumerationTests(unittest.TestCase):
@@ -328,6 +374,49 @@ class StillLifeCandidateTests(unittest.TestCase):
             max(int(row["restored"]) for row in self.candidate_rows),
             4,
         )
+
+    def test_row_transfer_enumerates_every_five_by_five_still_life(self):
+        four_by_four = _enumerate_still_lives(4, 4)
+        five_by_five = _enumerate_still_lives(5, 5)
+        self.assertEqual(len(four_by_four), 83)
+        self.assertEqual(len(five_by_five), 417)
+        self.assertEqual(len(set(five_by_five)), len(five_by_five))
+        for pattern in five_by_five:
+            self.assertEqual(dense_step(pattern), pattern)
+        classes = enumerate_still_life_classes(5, 5)
+        self.assertEqual(len(classes), 38)
+
+    def test_five_by_five_early_witnesses_are_certified(self):
+        with (HERE / "examples" / "still_life_5x5_exclusion.csv").open() as source:
+            rows = list(csv.DictReader(source))
+        self.assertEqual(len(rows), 38)
+        candidates = {
+            candidate.identifier: candidate
+            for candidate in enumerate_still_life_classes(5, 5)
+        }
+        for row in rows:
+            self.assertEqual(row["excluded"], "True")
+            candidate = candidates[row["candidate"]]
+            key = (
+                row["witness_direction"],
+                int(row["witness_phase"]),
+                int(row["witness_lane"]),
+            )
+            attacks = enumerate_interacting_attacks(candidate.pattern)
+            self.assertEqual(len(attacks), int(row["attack_count"]))
+            attack = next(
+                attack
+                for attack in attacks
+                if (attack.direction, attack.phase, attack.lane) == key
+            )
+            collision = simulate_collision(candidate.pattern, attack, horizon=512)
+            self.assertEqual(collision.outcome, "changed_periodic")
+            self.assertEqual(
+                collision.settled_generation,
+                int(row["witness_settled_generation"]),
+            )
+        exclusions = exclude_still_life_classes()
+        self.assertTrue(all(exclusion.witness for exclusion in exclusions))
 
 
 if __name__ == "__main__":

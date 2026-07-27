@@ -1,7 +1,12 @@
 from dataclasses import dataclass
 
-from .gliders import CollisionResult, check_all_single_gliders
-from .life import Pattern, bounding_box, step
+from .gliders import (
+    CollisionResult,
+    check_all_single_gliders,
+    enumerate_interacting_attacks,
+    simulate_collision,
+)
+from .life import Pattern
 
 
 def _transform(cell: tuple[int, int], transform: int) -> tuple[int, int]:
@@ -60,21 +65,85 @@ class CandidateResult:
         )
 
 
+@dataclass(frozen=True)
+class CandidateExclusion:
+    candidate: StillLifeClass
+    attack_count: int
+    attacks_tried: int
+    witness: CollisionResult | None
+
+
+def _stable_row(
+    above: int,
+    current: int,
+    below: int,
+    expected: int,
+    width: int,
+) -> bool:
+    for x in range(-1, width + 1):
+        neighbors = sum(
+            bool(row & (1 << neighbor_x))
+            for row in (above, current, below)
+            for neighbor_x in (x - 1, x, x + 1)
+            if 0 <= neighbor_x < width
+        )
+        alive = 0 <= x < width and bool(current & (1 << x))
+        neighbors -= alive
+        output = neighbors == 3 or (alive and neighbors == 2)
+        expected_alive = 0 <= x < width and bool(expected & (1 << x))
+        if output != expected_alive:
+            return False
+    return True
+
+
+def _enumerate_still_lives(width: int, height: int) -> tuple[Pattern, ...]:
+    row_count = 1 << width
+    transitions = {
+        (above, current): tuple(
+            below
+            for below in range(row_count)
+            if _stable_row(above, current, below, current, width)
+        )
+        for above in range(row_count)
+        for current in range(row_count)
+    }
+    rows: list[tuple[int, ...]] = []
+
+    def extend(prefix: tuple[int, ...]) -> None:
+        if len(prefix) == height:
+            if _stable_row(prefix[-2], prefix[-1], 0, prefix[-1], width) and (
+                _stable_row(prefix[-1], 0, 0, 0, width)
+            ):
+                rows.append(prefix)
+            return
+        above = prefix[-2] if len(prefix) > 1 else 0
+        for below in transitions[above, prefix[-1]]:
+            extend(prefix + (below,))
+
+    for first in range(row_count):
+        if _stable_row(0, 0, first, 0, width):
+            extend((first,))
+    return tuple(
+        frozenset(
+            (x, y)
+            for y, row in enumerate(pattern_rows)
+            for x in range(width)
+            if row & (1 << x)
+        )
+        for pattern_rows in rows
+    )
+
+
 def enumerate_still_life_classes(
     width: int = 4, height: int = 4
 ) -> tuple[StillLifeClass, ...]:
-    if width < 1 or height < 1:
-        raise ValueError("dimensions must be positive")
-    cells = tuple((x, y) for y in range(height) for x in range(width))
-    classes: set[tuple[tuple[int, int], ...]] = set()
-    for mask in range(1, 1 << len(cells)):
-        pattern = frozenset(
-            cell for index, cell in enumerate(cells) if mask & (1 << index)
-        )
-        xmin, _, ymin, _ = bounding_box(pattern)
-        if xmin != 0 or ymin != 0 or step(pattern) != pattern:
-            continue
-        classes.add(canonical_pattern(pattern))
+    if width < 2 or height < 2:
+        raise ValueError("dimensions must be at least two")
+    classes = {
+        canonical_pattern(pattern)
+        for pattern in _enumerate_still_lives(width, height)
+        if pattern
+    }
     ordered = sorted(classes, key=lambda pattern: (len(pattern), pattern))
     return tuple(
         StillLifeClass(
@@ -104,4 +173,36 @@ def search_still_life_classes(
             None,
         )
         output.append(CandidateResult(candidate, collisions, witness))
+    return tuple(output)
+
+
+def exclude_still_life_classes(
+    width: int = 5,
+    height: int = 5,
+    collision_horizon: int = 512,
+) -> tuple[CandidateExclusion, ...]:
+    output: list[CandidateExclusion] = []
+    for candidate in enumerate_still_life_classes(width, height):
+        attacks = enumerate_interacting_attacks(candidate.pattern)
+        witness = None
+        attacks_tried = 0
+        for attack in attacks:
+            attacks_tried += 1
+            collision = simulate_collision(
+                candidate.pattern,
+                attack,
+                horizon=collision_horizon,
+                keep_trace=0,
+            )
+            if collision.outcome == "changed_periodic":
+                witness = collision
+                break
+        output.append(
+            CandidateExclusion(
+                candidate,
+                len(attacks),
+                attacks_tried,
+                witness,
+            )
+        )
     return tuple(output)
