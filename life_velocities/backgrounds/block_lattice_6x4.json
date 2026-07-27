@@ -1,0 +1,12 @@
+{
+  "name": "static 2x2 block lattice on a 6x4 cell",
+  "x_period": 6,
+  "y_period": 4,
+  "temporal_period": 1,
+  "live": [
+    [1, 1],
+    [1, 2],
+    [2, 1],
+    [2, 2]
+  ]
+}
