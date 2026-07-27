@@ -81,13 +81,14 @@ class TimedGlider:
         if len(self.cells) != 5:
             raise ValueError("a glider phase has exactly five live cells")
         after_four = trajectory(self.cells, 4)[-1]
-        shifts = {
-            (x2 - x1, y2 - y1)
-            for x1, y1 in self.cells
-            for x2, y2 in after_four
-        }
-        if not any(translate(self.cells, dx, dy) == after_four for dx, dy in shifts):
-            raise ValueError("cells are not a period-four translating glider")
+        diagonal_shifts = ((-1, -1), (-1, 1), (1, -1), (1, 1))
+        if not any(
+            translate(self.cells, dx, dy) == after_four
+            for dx, dy in diagonal_shifts
+        ):
+            raise ValueError(
+                "cells are not a period-four glider with one-cell diagonal displacement"
+            )
 
     def transformed(self, transform: Transform) -> "TimedGlider":
         return TimedGlider(self.generation, transform_cells(self.cells, transform))
@@ -209,6 +210,12 @@ class LocalMove:
 
 @dataclass(frozen=True)
 class Verification:
+    """Simulation result.
+
+    ``activity_box`` bounds observed non-baseline live cells. If there are
+    none, it deterministically falls back to the move's declared affected box.
+    """
+
     move_name: str
     valid: bool
     observed_final: Pattern
@@ -233,10 +240,13 @@ def verify_move(move: LocalMove) -> Verification:
     changed_activity = frozenset().union(*(
         state - outside_baseline for state in states
     ))
-    activity_box = Box(
-        min(x for x, _ in changed_activity), min(y for _, y in changed_activity),
-        max(x for x, _ in changed_activity), max(y for _, y in changed_activity),
-    )
+    if changed_activity:
+        activity_box = Box(
+            min(x for x, _ in changed_activity), min(y for _, y in changed_activity),
+            max(x for x, _ in changed_activity), max(y for _, y in changed_activity),
+        )
+    else:
+        activity_box = move.affected_box
     first_stable = next(
         (generation for generation, state in enumerate(states)
          if generation < len(states) - 1 and states[generation + 1] == state),

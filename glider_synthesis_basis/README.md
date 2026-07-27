@@ -4,7 +4,7 @@ This directory provides an executable finite experiment, not a proof that a fini
 
 ## Model
 
-`LocalMove` records exact input and output still-life contexts, glider phases at their boundary generations, duration, and a closed affected box. `TimedGlider` validates its five cells by directly checking period-four diagonal translation. A move is valid only when unbounded-plane Life simulation reaches its declared output exactly and every cell outside the affected box remains equal to the input context throughout.
+`LocalMove` records exact input and output still-life contexts, glider phases at their boundary generations, duration, and a closed affected box. `TimedGlider` validates its five cells by requiring exactly one cell of diagonal displacement after four generations; zero-translation five-cell still lifes are rejected. A move is valid only when unbounded-plane Life simulation reaches its declared output exactly and every cell outside the affected box remains equal to the input context throughout. Verification reports the bounding box of observed non-baseline live cells, or deterministically uses the declared affected box when a quiescent/identity move has no such cells.
 
 Canonical keys take the lexicographically least representation over all eight square symmetries after translation. Names are metadata and do not affect equivalence. `bounded_closure` builds a finite graph of whole-context rewrites. It deliberately does not infer subpattern embedding, non-interaction, or arbitrary repetition.
 
