@@ -5,12 +5,18 @@ import shutil
 import subprocess
 import tempfile
 import unittest
+from fractions import Fraction
 
 from life_probability import (
     bernstein_to_power,
     exact_probability,
     evaluate_power,
     monte_carlo,
+)
+from verify_protected_blinker import (
+    cylinder_exponent,
+    cylinder_probability,
+    verify_horizon,
 )
 
 
@@ -106,6 +112,22 @@ class ExactProbabilityTests(unittest.TestCase):
     def test_rejects_unsupported_time(self):
         with self.assertRaisesRegex(ValueError, "limited"):
             exact_probability(3)
+
+
+class ProtectedBlinkerTests(unittest.TestCase):
+    def test_protected_blinker_across_horizons(self):
+        for horizon in range(21):
+            verify_horizon(horizon)
+
+    def test_cylinder_exponent_and_probability(self):
+        self.assertEqual(
+            [cylinder_exponent(horizon) for horizon in range(4)],
+            [22, 46, 78, 118],
+        )
+        p = Fraction(1, 4)
+        for horizon in range(4):
+            expected = p**3 * (1 - p) ** ((2 * (horizon + 2) + 1) ** 2 - 3)
+            self.assertEqual(cylinder_probability(horizon, p), expected)
 
 
 if __name__ == "__main__":

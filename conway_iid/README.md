@@ -11,6 +11,11 @@ independent Bernoulli(\(p\)) variables. The implementation is exact for
 \(t=0,1,2\), uses only the Python standard library, and emits integer
 coefficients.
 
+See [`GLOBAL_ACTIVITY.md`](GLOBAL_ACTIVITY.md) for separate rigorous results
+on infinitely many changes at every finite time and almost-sure spatial
+density at each fixed time. Those results do not assert local nonfixation or
+convergence of the densities as time tends to infinity.
+
 ## Finite-time theorem
 
 The state of the origin at time \(t\) is a Boolean function of only the
