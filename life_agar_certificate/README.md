@@ -1,8 +1,40 @@
 # Local Life agar certificate experiments
 
-The strongest certificate here independently reproduces the published
-`1176/2087 ≈ 0.563488` upper bound for every finite, spatially periodic
-Life orbit. It does **not** prove the conjectured `1/2` bound.
+The strongest certificate here proves the new bound
+`43578/78167 ≈ 0.557499` for every finite, spatially periodic Life orbit,
+improving the published `1176/2087 ≈ 0.563488` bound. It does **not**
+prove the conjectured `1/2` bound.
+
+## Exact `6 x 8` strip-pyramid optimum
+
+`pyramid_6x8.cert` assigns nonnegative integer weights to a `6 x 8`
+slice at time `t`, its determined central `4 x 6` slice at `t+1`, and
+the determined central `2 x 4` slice at `t+2`. Its weights sum to
+312668. Exact max-plus row dynamic programming exhausts all `2^48`
+initial slices and proves maximum live weight 174312. Translating the
+weighted shape over a space-time torus therefore gives density
+
+```
+174312/312668 = 43578/78167.
+```
+
+The same certificate contains a 19-slice exact dual distribution. On
+every reflection orbit of cell positions its expected live count is at
+least `43578/78167` times that orbit's size. Consequently every
+normalized nonnegative weighting on this fixed shape has some legal
+slice with score at least `43578/78167`. Reflection-averaging shows this
+for arbitrary positional weights, not just symmetric ones. The bound is
+therefore the exact optimum of the full nonnegative positional-weight
+family on this `6 x 8 -> 4 x 6 -> 2 x 4` shape.
+
+This is a proved fixed-window obstruction above `1/2`; it does not
+obstruct larger shapes, additional time layers, or signed telescoping
+potentials. `pyramid_6x8_search.py` reproduces the primal and dual by
+sparse LP column generation. `strip_pyramid_separator.cpp` performs
+each separation exactly and returns a maximizing legal slice.
+`pyramid_6x8_verify.cpp` independently checks the integer certificate,
+all `2^48` initial slices, and every dual marginal using only the C++17
+standard library.
 
 ## Three-generation `6 x 6` pyramid
 
@@ -103,6 +135,8 @@ python verify.py
 python strip2_verify.py
 g++ -O3 -std=c++17 pyramid_verify.cpp -o pyramid_verify
 ./pyramid_verify pyramid_6x6.cert
+g++ -O3 -std=c++17 pyramid_6x8_verify.cpp -o pyramid_6x8_verify
+./pyramid_6x8_verify pyramid_6x8.cert
 python -m unittest discover -s tests -v
 ```
 
@@ -114,6 +148,7 @@ python -m pip install -r requirements.txt
 python solve.py
 python strip2_solve.py
 python pyramid_search.py
+python pyramid_6x8_search.py
 python verify.py
 python strip2_verify.py
 ```

@@ -90,6 +90,9 @@ class PyramidCertificateTests(unittest.TestCase):
     def setUpClass(cls):
         cls.temporary_directory = tempfile.TemporaryDirectory()
         cls.executable = Path(cls.temporary_directory.name) / "pyramid_verify"
+        cls.strong_executable = (
+            Path(cls.temporary_directory.name) / "pyramid_6x8_verify"
+        )
         subprocess.run(
             [
                 "g++",
@@ -101,6 +104,17 @@ class PyramidCertificateTests(unittest.TestCase):
             ],
             check=True,
         )
+        subprocess.run(
+            [
+                "g++",
+                "-O3",
+                "-std=c++17",
+                str(DIRECTORY / "pyramid_6x8_verify.cpp"),
+                "-o",
+                str(cls.strong_executable),
+            ],
+            check=True,
+        )
 
     @classmethod
     def tearDownClass(cls):
@@ -109,6 +123,14 @@ class PyramidCertificateTests(unittest.TestCase):
     def run_verifier(self, certificate):
         return subprocess.run(
             [str(self.executable), str(certificate)],
+            check=False,
+            capture_output=True,
+            text=True,
+        )
+
+    def run_strong_verifier(self, certificate):
+        return subprocess.run(
+            [str(self.strong_executable), str(certificate)],
             check=False,
             capture_output=True,
             text=True,
@@ -132,6 +154,27 @@ class PyramidCertificateTests(unittest.TestCase):
             stream.write(source.replace("maximum_live_weight 4704", "maximum_live_weight 4703"))
             stream.flush()
             result = self.run_verifier(stream.name)
+        self.assertNotEqual(result.returncode, 0)
+
+    def test_exact_stronger_certificate_and_dual_obstruction(self):
+        result = self.run_strong_verifier(DIRECTORY / "pyramid_6x8.cert")
+        self.assertEqual(result.returncode, 0, result.stderr)
+        report = json.loads(result.stdout)
+        self.assertEqual(report["initial_slices"], 1 << 48)
+        self.assertEqual(report["maximum_live_weight"], 174312)
+        self.assertEqual(report["total_weight"], 312668)
+        self.assertEqual(Fraction(report["density_bound"]), Fraction(43578, 78167))
+        self.assertLess(
+            Fraction(report["density_bound"]), Fraction(1176, 2087)
+        )
+        self.assertEqual(report["dual_support"], 19)
+
+    def test_tampered_stronger_dual_is_rejected(self):
+        source = (DIRECTORY / "pyramid_6x8.cert").read_text(encoding="utf-8")
+        with tempfile.NamedTemporaryFile(mode="w", encoding="utf-8") as stream:
+            stream.write(source.replace("witness 281474976710655 12789", "witness 281474976710655 12788"))
+            stream.flush()
+            result = self.run_strong_verifier(stream.name)
         self.assertNotEqual(result.returncode, 0)
 
 
