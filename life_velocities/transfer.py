@@ -5,6 +5,7 @@ import itertools
 import json
 from collections import deque
 from dataclasses import asdict, dataclass
+from functools import lru_cache
 from pathlib import Path
 from typing import Iterable
 
@@ -52,7 +53,7 @@ class TransferSpec:
     period: int = 10
     displacement: int = 6
     width: int = 4
-    max_column_deviations: int = 1
+    max_column_deviations: int = 2
     background_phase: int = 0
 
     def validate(self, background: Background) -> None:
@@ -69,6 +70,39 @@ class TransferSpec:
 
 
 BoundaryState = tuple[int, tuple[int, ...]]
+
+
+@lru_cache(maxsize=None)
+def _allowed_following_rows(
+    width: int,
+    previous_row: int,
+    center_row: int,
+    next_row: int,
+) -> tuple[int, ...]:
+    allowed = []
+    for following_row in range(1 << width):
+        valid = True
+        for y in range(width):
+            neighbors = sum(
+                bool(previous_row & (1 << ((y + dy) % width)))
+                for dy in (-1, 0, 1)
+            )
+            neighbors += sum(
+                bool(center_row & (1 << ((y + dy) % width)))
+                for dy in (-1, 1)
+            )
+            neighbors += sum(
+                bool(following_row & (1 << ((y + dy) % width)))
+                for dy in (-1, 0, 1)
+            )
+            current = bool(center_row & (1 << y))
+            expected = neighbors == 3 or (current and neighbors == 2)
+            if bool(next_row & (1 << y)) != expected:
+                valid = False
+                break
+        if valid:
+            allowed.append(following_row)
+    return tuple(allowed)
 
 
 class TransferSearch:
@@ -130,34 +164,81 @@ class TransferSearch:
 
     def valid_extension(self, state: BoundaryState, following: int) -> bool:
         _, columns = state
-        center = columns[-1]
-        previous = columns[-2]
-        wrapped_following = columns[0]
+        row_mask = (1 << self.spec.width) - 1
+        return all(
+            self._valid_time_row(
+                columns,
+                t,
+                (following >> (t * self.spec.width)) & row_mask,
+            )
+            for t in range(self.spec.period)
+        )
+
+    def _valid_time_row(
+        self,
+        columns: tuple[int, ...],
+        t: int,
+        following_row: int,
+    ) -> bool:
+        width = self.spec.width
+        row_mask = (1 << width) - 1
+        previous_row = (columns[-2] >> (t * width)) & row_mask
+        center_row = (columns[-1] >> (t * width)) & row_mask
+        next_row = (
+            (columns[-1] >> ((t + 1) * width)) & row_mask
+            if t + 1 < self.spec.period
+            else columns[0] & row_mask
+        )
+        return following_row in _allowed_following_rows(
+            width,
+            previous_row,
+            center_row,
+            next_row,
+        )
+
+    def extension_columns(self, state: BoundaryState) -> Iterable[int]:
+        phase, columns = state
+        next_phase = (phase + 1) % self.background.x_period
+        base = self.background_column(next_phase)
+        width = self.spec.width
+        row_mask = (1 << width) - 1
+        partial: list[tuple[int, int]] = [(0, 0)]
+
         for t in range(self.spec.period):
-            for y in range(self.spec.width):
-                neighbors = 0
-                for dx, column in ((-1, previous), (0, center), (1, following)):
-                    for dy in (-1, 0, 1):
-                        if dx == 0 and dy == 0:
-                            continue
-                        neighbors += self._bit(column, t, y + dy)
-                current = self._bit(center, t, y)
-                next_alive = (
-                    self._bit(center, t + 1, y)
-                    if t + 1 < self.spec.period
-                    else self._bit(wrapped_following, 0, y)
+            base_row = (base >> (t * width)) & row_mask
+            previous_row = (columns[-2] >> (t * width)) & row_mask
+            center_row = (columns[-1] >> (t * width)) & row_mask
+            next_row = (
+                (columns[-1] >> ((t + 1) * width)) & row_mask
+                if t + 1 < self.spec.period
+                else columns[0] & row_mask
+            )
+            row_options = [
+                (row, (row ^ base_row).bit_count())
+                for row in _allowed_following_rows(
+                    width,
+                    previous_row,
+                    center_row,
+                    next_row,
                 )
-                expected = neighbors == 3 or (current and neighbors == 2)
-                if next_alive != expected:
-                    return False
-        return True
+            ]
+            combined = []
+            for column, cost in partial:
+                for row, row_cost in row_options:
+                    total = cost + row_cost
+                    if total <= self.spec.max_column_deviations:
+                        combined.append((column | (row << (t * width)), total))
+            partial = combined
+            if not partial:
+                break
+
+        yield from sorted(column for column, _ in partial)
 
     def extensions(self, state: BoundaryState) -> Iterable[BoundaryState]:
         phase, columns = state
         next_phase = (phase + 1) % self.background.x_period
-        for following in self.candidates(next_phase):
-            if self.valid_extension(state, following):
-                yield next_phase, columns[1:] + (following,)
+        for following in self.extension_columns(state):
+            yield next_phase, columns[1:] + (following,)
 
     def is_background_state(self, state: BoundaryState) -> bool:
         return state == self.background_state(state[0])

@@ -24,17 +24,26 @@ A transfer column contains all 40 bits `C(t,x,y)` for `0 <= t < 10` and
 `x+1` decides every Life equation centered at `x`; for the last time slice it
 uses the exact identity `C(10,x,y) = C(0,x-6,y)`.
 
-The checked class bounds each spacetime column to at most one bit different
-from the stated background column. This gives 41 candidates per background
-phase. Breadth-first search exhausts the reachable boundary-state graph from
-the background cycle. An `absent` result is exact only for this finite state
-class. The JSON preserves state/edge counts and a deterministic SHA-256 digest
-of the ordered reachable graph so the certificate can be reproduced:
+The checked class bounds each spacetime column to at most two bits different
+from the stated background column. This gives 821 candidates per background
+phase. Rather than testing that raw alphabet at every boundary, the exact
+expander solves each four-bit transverse row independently and combines only
+row solutions whose total Hamming cost is at most two. This is equivalent to
+enumerating all 821 columns, not a relaxation.
+
+Breadth-first search exhausts the reachable boundary-state graph from the
+background cycle. An `absent` result is exact only for this finite state class.
+The JSON preserves state/edge counts and a deterministic SHA-256 digest of the
+ordered reachable graph so the certificate can be reproduced:
 
 ```sh
 python -m life_velocities.search_transfer
 python -m life_velocities.verify_transfer
 ```
+
+The preserved two-deviation result is `absent` after exhausting 371,885
+reachable boundary states and 371,885 edges. It strictly contains the earlier
+one-deviation class.
 
 Negative-spaceship searches and elementary speed/period bounds are different
 questions and are intentionally not encoded or claimed here.

@@ -30,7 +30,7 @@ def main() -> int:
         "result",
         type=Path,
         nargs="?",
-        default=here / "results" / "isolated_block6x4_k1.json",
+        default=here / "results" / "isolated_block6x4_k2.json",
     )
     parser.add_argument(
         "--background",

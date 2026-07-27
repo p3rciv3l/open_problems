@@ -42,6 +42,18 @@ class TransferTests(unittest.TestCase):
         self.assertEqual(result["reachable_states"], self.background.x_period)
         self.assertEqual(result["reachable_edges"], self.background.x_period)
 
+    def test_compressed_expander_equals_raw_alphabet(self):
+        search = TransferSearch(TransferSpec(max_column_deviations=2), self.background)
+        for phase in range(self.background.x_period):
+            state = search.background_state(phase)
+            compressed = set(search.extension_columns(state))
+            raw = {
+                column
+                for column in search.candidates(phase + 1)
+                if search.valid_extension(state, column)
+            }
+            self.assertEqual(compressed, raw)
+
     def test_result_round_trips_as_json(self):
         result = TransferSearch(
             TransferSpec(max_column_deviations=0), self.background
@@ -66,6 +78,22 @@ class TransferTests(unittest.TestCase):
         self.assertEqual(
             result["ordered_graph_sha256"],
             "68dc45920a04ca8186d7612407da0374a75628bbac77e11b49bea50fc446550e",
+        )
+
+    def test_preserved_k2_absence_scope(self):
+        result = json.loads(
+            (HERE / "results" / "isolated_block6x4_k2.json").read_text()
+        )
+        self.assertEqual(result["status"], "absent")
+        self.assertEqual(result["spec"]["period"], 10)
+        self.assertEqual(result["spec"]["displacement"], 6)
+        self.assertEqual(result["spec"]["max_column_deviations"], 2)
+        self.assertEqual(result["state_class"]["candidate_columns_per_phase"], 821)
+        self.assertEqual(result["reachable_states"], 371885)
+        self.assertEqual(result["reachable_edges"], 371885)
+        self.assertEqual(
+            result["ordered_graph_sha256"],
+            "5ad188dfa4698aa8af22626475afd12bbb3a014c4b536b1d0f1545f9aa10f488",
         )
 
     def test_incompatible_static_background_is_rejected(self):

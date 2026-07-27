@@ -15,12 +15,12 @@ def main() -> int:
         type=Path,
         default=here / "backgrounds" / "block_lattice_6x4.json",
     )
-    parser.add_argument("--max-column-deviations", type=int, default=1)
+    parser.add_argument("--max-column-deviations", type=int, default=2)
     parser.add_argument("--width", type=int, default=4)
     parser.add_argument(
         "--output",
         type=Path,
-        default=here / "results" / "isolated_block6x4_k1.json",
+        default=here / "results" / "isolated_block6x4_k2.json",
     )
     args = parser.parse_args()
     search = TransferSearch(

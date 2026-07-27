@@ -1,0 +1,44 @@
+{
+  "background": {
+    "live": [
+      [
+        1,
+        1
+      ],
+      [
+        1,
+        2
+      ],
+      [
+        2,
+        1
+      ],
+      [
+        2,
+        2
+      ]
+    ],
+    "name": "static 2x2 block lattice on a 6x4 cell",
+    "temporal_period": 1,
+    "x_period": 6,
+    "y_period": 4
+  },
+  "format": "life_velocities.isolated_transfer.v1",
+  "ordered_graph_sha256": "5ad188dfa4698aa8af22626475afd12bbb3a014c4b536b1d0f1545f9aa10f488",
+  "reachable_edges": 371885,
+  "reachable_states": 371885,
+  "spec": {
+    "background_phase": 0,
+    "displacement": 6,
+    "max_column_deviations": 2,
+    "period": 10,
+    "width": 4
+  },
+  "state_class": {
+    "boundary_columns": 7,
+    "candidate_columns_per_phase": 821,
+    "column_bits": 40,
+    "maximum_deviations_per_column": 2
+  },
+  "status": "absent"
+}
