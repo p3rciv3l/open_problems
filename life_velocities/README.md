@@ -1,48 +1,40 @@
-# Problem 9: orthogonal translating Life waves
+# Problem 9: isolated orthogonal translating Life waves
 
-This directory contains an exact finite-quotient SAT/SMT search targeting
-displacement 6 in period 10 (`3c/5`). It starts with user-selected small strip
-lengths and transverse widths:
+This is an exact finite-state transfer search for a Life configuration with
+
+```
+C(t + 10, x + 6, y) = C(t, x, y)
+```
+
+and certified semi-infinite background tails. There is no longitudinal seam:
+the search scans every integer `x` from an exact left background tail and only
+accepts a witness after its boundary state returns to the exact right tail.
+Such a finite path can be pumped in time by the translation relation and is an
+isolated `3c/5` orthogonal wave, not a periodic wave train.
+
+## Stated background and finite class
+
+The background is the explicit static 2x2-block lattice in
+`backgrounds/block_lattice_6x4.json`. Its x period 6 makes it compatible with
+displacement 6; its y period and the searched cylinder width are 4. The code
+checks both Life evolution and translation compatibility before searching.
+
+A transfer column contains all 40 bits `C(t,x,y)` for `0 <= t < 10` and
+`0 <= y < 4`. A boundary retains seven consecutive columns. Appending column
+`x+1` decides every Life equation centered at `x`; for the last time slice it
+uses the exact identity `C(10,x,y) = C(0,x-6,y)`.
+
+The checked class bounds each spacetime column to at most one bit different
+from the stated background column. This gives 41 candidates per background
+phase. Breadth-first search exhausts the reachable boundary-state graph from
+the background cycle. An `absent` result is exact only for this finite state
+class. The JSON preserves state/edge counts and a deterministic SHA-256 digest
+of the ordered reachable graph so the certificate can be reproduced:
 
 ```sh
-python -m pip install -r life_velocities/requirements.txt
-python -m life_velocities.search --lengths 4:8 --widths 1:4
+python -m life_velocities.search_transfer
+python -m life_velocities.verify_transfer
 ```
 
-Each JSON file is retained whether the bounded instance is `sat`, `unsat`, or
-`unknown`. `unsat` is an exact result for that fully specified quotient;
-timeouts are recorded as `unknown`, never as UNSAT. SAT files contain all live
-quotient cosets and background cells and are independently simulated over
-three copies on both sides of every temporal and spatial seam.
-
-## Exact encoding
-
-For cell state `C(t,x,y)`, with transverse coordinate periodic modulo `W`, the
-finite quotient explicitly imposes
-
-```
-C(t + 10, x + 6, y) = C(t, x, y)       translation
-C(t - S, x + L, y)  = C(t, x, y)       spatial seam and seam phase S
-```
-
-The quotient has `W * (10L + 6S)` Boolean cells. Life's B3/S23 rule is imposed
-at every quotient cell. A separate background torus has independently chosen
-time, x, and y periods. Guard columns at both ends equal that background at
-the explicit `--background-phase`; at least one interior cell must differ.
-By default the background must contain a live cell, and generation 10 must
-differ from generation 0 at the same coordinates. The latter prevents a
-stationary pattern from satisfying the translation equation merely because
-the displacement vanishes modulo its spatial period.
-
-This is sound as an infinite, doubly periodic wave train: any SAT assignment
-lifts to all integer `(t,x,y)` and obeys Life everywhere. It does **not**
-represent a single isolated wave with semi-infinite background on both sides,
-because the spatial seam repeats the disturbance every `L` cells. Therefore a
-SAT witness here must not be claimed as an isolated infinite wave. Proving or
-finding that stronger object requires a transfer construction with certified
-background tails (or an unbounded limit argument), which this finite quotient
-does not provide.
-
-Because a spatially periodic object can admit more than one equivalent
-displacement, this encoding establishes the stated displacement relation and
-non-stationarity, not a unique velocity modulo every possible spatial period.
+Negative-spaceship searches and elementary speed/period bounds are different
+questions and are intentionally not encoded or claimed here.

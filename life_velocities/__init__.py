@@ -1,5 +1,5 @@
-"""Exact finite-quotient searches for translating Life patterns."""
+"""Finite-state transfer searches for isolated translating Life waves."""
 
-from .quotient import StripQuotient
+from .transfer import Background, TransferSearch, TransferSpec
 
-__all__ = ["StripQuotient"]
+__all__ = ["Background", "TransferSearch", "TransferSpec"]
