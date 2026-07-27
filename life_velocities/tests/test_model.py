@@ -7,6 +7,16 @@ from life_velocities.simulate import verify_witness
 
 
 class ModelTests(unittest.TestCase):
+    @staticmethod
+    def _force_stationary_block(model):
+        for variable in model.background.values():
+            model.solver.add(z3.Not(variable))
+        for t, x, y in model.representatives.values():
+            model.solver.add(
+                model.cell(t, x, y)
+                == ((x % 4, y % 4) in {(1, 1), (1, 2), (2, 1), (2, 2)})
+            )
+
     def test_life_rule_truth_table(self):
         current = z3.Bool("current")
         following = z3.Bool("following")
@@ -48,14 +58,48 @@ class ModelTests(unittest.TestCase):
             require_motion=False,
         )
         model = WaveModel(spec)
-        # Force a 2x2 block away from the seam and use dead background.
-        for variable in model.background.values():
-            model.solver.add(z3.Not(variable))
-        for t, x, y in model.representatives.values():
-            model.solver.add(model.cell(t, x, y) == ((x % 4, y % 4) in {(1, 1), (1, 2), (2, 1), (2, 2)}))
+        self._force_stationary_block(model)
         result = model.solve()
         self.assertEqual(result["status"], "sat")
         self.assertEqual(verify_witness(result), [])
+
+    def test_encoder_rejects_stationary_witness_when_motion_required(self):
+        spec = SearchSpec(
+            length=4,
+            width=4,
+            period=1,
+            displacement=0,
+            background_x_period=4,
+            background_y_period=4,
+            guard_columns=1,
+            require_live_background=False,
+            require_motion=True,
+        )
+        model = WaveModel(spec)
+        self._force_stationary_block(model)
+        self.assertEqual(model.solve()["status"], "unsat")
+
+    def test_verifier_rejects_stationary_witness_when_motion_required(self):
+        spec = SearchSpec(
+            length=4,
+            width=4,
+            period=1,
+            displacement=0,
+            background_x_period=4,
+            background_y_period=4,
+            guard_columns=1,
+            require_live_background=False,
+            require_motion=False,
+        )
+        model = WaveModel(spec)
+        self._force_stationary_block(model)
+        result = model.solve()
+        self.assertEqual(result["status"], "sat")
+        result["spec"]["require_motion"] = True
+        self.assertEqual(
+            verify_witness(result),
+            ["witness is stationary over the required period"],
+        )
 
 
 if __name__ == "__main__":

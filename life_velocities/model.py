@@ -142,7 +142,7 @@ class WaveModel:
         self.solver.add(z3.Or(differences))
         if spec.require_live_background:
             self.solver.add(z3.Or(list(self.background.values())))
-        if spec.require_motion and spec.displacement:
+        if spec.require_motion:
             self.solver.add(
                 z3.Or(
                     [

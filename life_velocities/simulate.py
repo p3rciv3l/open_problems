@@ -61,6 +61,14 @@ def verify_witness(witness: dict[str, Any]) -> list[str]:
                     errors.append(f"spatial seam mismatch at {(t, x, y)}")
                     return errors
 
+    if spec.require_motion and all(
+        cell(spec.period, x, y) == cell(0, x, y)
+        for x in range(spec.length)
+        for y in range(spec.width)
+    ):
+        errors.append("witness is stationary over the required period")
+        return errors
+
     for t in range(-spec.background_period, 2 * spec.background_period):
         for x in range(-spec.background_x_period, 2 * spec.background_x_period):
             for y in range(-spec.background_y_period, 2 * spec.background_y_period):
