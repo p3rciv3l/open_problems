@@ -4,6 +4,7 @@ set -euo pipefail
 root="$(cd "$(dirname "$0")/.." && pwd)"
 solver="${CADICAL:-cadical}"
 
+mkdir -p "$root/artifacts/proofs"
 python3 "$root/scripts/generate.py"
 for bound in 0 1 2; do
   set +e
