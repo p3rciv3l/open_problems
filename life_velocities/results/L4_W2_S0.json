@@ -1,0 +1,19 @@
+{
+  "format": "life_velocities.wave.v1",
+  "quotient_index": 40,
+  "spec": {
+    "background_period": 1,
+    "background_phase": 0,
+    "background_x_period": 4,
+    "background_y_period": 4,
+    "displacement": 6,
+    "guard_columns": 1,
+    "length": 4,
+    "period": 10,
+    "require_live_background": true,
+    "require_motion": true,
+    "seam_phase": 0,
+    "width": 2
+  },
+  "status": "unsat"
+}
