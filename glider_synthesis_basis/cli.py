@@ -1,6 +1,12 @@
 """Print reproducible bounded findings for the built-in corpus."""
 from .analysis import bounded_closure
-from .block_arrays import BlockArrayInstance, assess
+from .block_arrays import BlockArrayInstance, assess, construct_spaced_block_array
+from .corpus import (
+    REWINDABLE_TWO_GLIDER_CORPUS,
+    candidate_basis_report,
+    corpus_population_spectrum,
+)
+from .published import certify_two_row_extension_theorem
 from .reactions import BUILTIN_REACTIONS, verify_builtins
 
 
@@ -32,6 +38,30 @@ def main() -> None:
             f"gaps=({instance.horizontal_gap},{instance.vertical_gap}): "
             f"reachable={finding.reachable_in_supplied_graph} witness={finding.witness}"
         )
+
+    print(
+        f"rewindable two-glider corpus: {len(REWINDABLE_TWO_GLIDER_CORPUS)} "
+        f"reactions, output populations={corpus_population_spectrum()}"
+    )
+    candidate = candidate_basis_report()
+    print(
+        f"B8 candidate exact closure: {candidate.exact_contexts_from_empty} contexts, "
+        f"universal_claim={candidate.universal_claim}"
+    )
+    spaced = construct_spaced_block_array(
+        BlockArrayInstance(3, 4, horizontal_gap=6, vertical_gap=6)
+    )
+    print(
+        f"certified spaced 3x4 array: {spaced.glider_count} gliders, "
+        f"output_population={len(spaced.move.output_context)}"
+    )
+    theorem = certify_two_row_extension_theorem()
+    print(
+        f"published 2xn extension: directly checked "
+        f"{theorem.directly_verified_widths[0]}.."
+        f"{theorem.directly_verified_widths[-1]}, "
+        f"locality_margin={theorem.locality_margin}"
+    )
 
     if not all(result.valid for result in verifications):
         raise SystemExit(1)
