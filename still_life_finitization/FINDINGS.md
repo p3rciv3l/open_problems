@@ -1,6 +1,61 @@
 # Scoped findings: still-life finitization
 
-## All-window theorem
+## Alternating-row all-window theorem
+
+Let `R_e` have every cell in even-numbered rows live and every cell in
+odd-numbered rows dead; let `R_o` be its one-row translate. Every finite
+nonempty rectangular window cut from either pattern has a finite still-life
+extension with dead-exterior margin at most 3. The result holds for every
+origin, width, and height. By rotation, it also holds for both phases of the
+patterns with alternating entirely-live and entirely-dead columns.
+
+These agars are not separated finite-component arrays: each live row or column
+is an infinite live component. The theorem therefore lies outside the
+component-agar lemma below.
+
+### Pump construction
+
+The exact certificate partitions dimensions at thresholds 9:
+
+| Seed class | Widths | Heights | Phases | Count |
+|---|---:|---:|---:|---:|
+| finite | 1..8 | 1..8 | 2 | 128 |
+| horizontal pump | 9..11 | 1..8 | 2 | 48 |
+| vertical pump | 1..8 | 9..12 | 2 | 64 |
+| two-dimensional pump | 9..11 | 9..12 | 2 | 24 |
+
+There are 264 seeds in total. Every seed is a finite still life agreeing with
+its core and dead outside margin 3. A horizontal pump duplicates a 3-column
+block. Its two columns of left context equal the two columns at the wrap seam.
+A vertical pump similarly duplicates a 4-row block with two matching context
+rows. Conway Life has radius 1, so every newly created local 3-column (or
+3-row) neighborhood is identical to one already verified in the seed.
+Horizontal insertion preserves the core because the agar is constant along a
+row. Vertical insertion preserves it because four rows are two full periods.
+The two insertions commute.
+
+For arbitrary width `w >= 9`, choose the unique base width in `9..11`
+congruent to `w` modulo 3 and pump `(w-base)/3` times. For arbitrary height
+`h >= 9`, choose the unique base height in `9..12` congruent to `h` modulo 4
+and pump `(h-base)/4` times. Dimensions below 9 select the corresponding
+one-directional or finite seed. The two seed phases cover the window's top-row
+parity; horizontal translation is immaterial because the pattern has period 1
+in that direction. This covers every positive `(w,h)`, not a finite cutoff.
+
+`automata/alternating_rows_certificate.json` retains every seed witness, its
+CNF digest and solver counters, and a digest of the complete ordered seed list.
+The independent verifier does not trust SAT for the upper bound: it directly
+checks all 264 still lifes, seam equalities, one-step pumps, combined pumps,
+commutation, coverage, and digests. Repeated pumping then follows from the
+radius-1 seam argument. The checked certificate SHA-256 is
+`2c604b60dbb8fdc8d66d844d4f406853e1711fc0175c74e3792b77f453d4ea6b`.
+
+The previous SAT sequence for live-row height-1 windows begins
+`1,1,2,2,3,...`, so margin 3 is attained in those solver results. The theorem
+asserted here is the independently checkable uniform upper bound; the
+certificate does not turn the UNSAT sides into proof traces.
+
+## Separated-block all-window theorem
 
 For integers `p,q >= 4`, let `A(p,q)` be the infinite Life pattern consisting
 of a 2x2 block at every translate `(ip,jq)`, `i,j` integral. For **every**
@@ -94,15 +149,15 @@ exploratory phase sweep:
 | 6x6 loaf agar, (5,3) | `0,0,0,1,2,2,2,2,2,2,2,2,2,2,2,2` |
 | 6x6 pond agar, (5,5) | `0,0,1,1,0,0,0,1,1,1,0,0,0,1,1,1` |
 
-A denser agar with infinite live components was also tested: alternating
-entirely-live and entirely-dead rows. For live-row windows of height 1 and
-width 1..32, the exact minima are
+A denser agar with infinite live components was also tested before the pump
+theorem above was constructed: alternating entirely-live and entirely-dead
+rows. For live-row windows of height 1 and width 1..32, the exact minima are
 
 `1,1,2,2,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3`.
 
-This gives genuine finite growth from 1 to 3 in a non-component agar, followed
-by a plateau through width 32. It is not an obstruction theorem and does not
-show either a global bound of 3 or unbounded growth.
+This gives genuine finite growth from 1 to 3 in a non-component agar. The
+finite plateau alone did not justify extrapolation; the separate pump
+certificate above now proves the global upper bound of 3 for all rectangles.
 
 ## Interpretation limits
 
@@ -118,3 +173,6 @@ The all-window separated-component theorem is different: it follows from the
 explicit completion and finite-state/component invariants above, so it is not
 limited by the experimental cutoff. It does not settle agars with interacting
 or infinite live components.
+
+The alternating-row theorem settles this one interacting, infinite-component
+family only. It does not imply a bound for arbitrary periodic still lifes.

@@ -28,6 +28,8 @@ Reproduce the checked experiment result from the repository root:
 python -m still_life_finitization.experiments.run_experiments
 python -m still_life_finitization.experiments.run_adversarial
 python -m still_life_finitization.automata.generate_certificate
+python -m still_life_finitization.automata.generate_stripe_certificate
+python -m still_life_finitization.automata.verify_stripe_certificate
 ```
 
 `automata/block_4x4_certificate.json` is a deterministic finite-state transfer
@@ -42,6 +44,13 @@ More generally, `ComponentAgar` proves a constructive bound for any periodic
 array of finite still-life motifs whose distinct copies have Chebyshev
 separation at least 3: complete every motif that intersects the core. The
 uniform margin is at most the motif's Chebyshev diameter.
+
+`automata/alternating_rows_certificate.json` proves the separate all-window
+theorem for the non-component agar with every other row entirely live. It
+contains 264 directly verified finite seeds. Horizontal transfer inserts a
+3-column pump, vertical transfer inserts a 4-row pump, and the two pumps
+commute. The seed partition covers both vertical phases and every positive
+width and height, proving a uniform margin bound of 3.
 
 Result files retain every tested SAT/UNSAT status, variable and clause counts,
 solver statistics, and a SHA-256 digest of the deterministic clause stream.

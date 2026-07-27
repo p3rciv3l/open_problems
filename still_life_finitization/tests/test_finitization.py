@@ -9,6 +9,17 @@ import unittest
 
 from still_life_finitization.still_life.pattern import PeriodicPattern, Window
 from still_life_finitization.still_life.sat import build_encoding, enumerate_margins
+from still_life_finitization.still_life.stripe_transfer import (
+    COLUMN_STRIPE_PATTERN,
+    MARGIN as STRIPE_MARGIN,
+    STRIPE_PATTERN,
+    StripeSeed,
+    construct_columns_from_seeds,
+    construct_from_seeds,
+    pump_horizontal,
+    pump_vertical,
+    verify_stripe_certificate,
+)
 from still_life_finitization.still_life.transfer import (
     RectangleTransferAutomaton,
     analyze_component_agar,
@@ -16,6 +27,7 @@ from still_life_finitization.still_life.transfer import (
     verify_transfer_certificate,
 )
 from still_life_finitization.still_life.verify import verify_witness
+from still_life_finitization.still_life.verify import verify_cells
 
 
 class PatternTests(unittest.TestCase):
@@ -228,6 +240,79 @@ class AdversarialSearchTests(unittest.TestCase):
             if case["family"] == "alternating-live-rows-height-1"
         ]
         self.assertEqual(stripes, [1, 1, 2, 2] + [3] * 28)
+
+
+class AlternatingRowTheoremTests(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        certificate_path = (
+            Path(__file__).resolve().parents[1]
+            / "automata"
+            / "alternating_rows_certificate.json"
+        )
+        cls.certificate = json.loads(certificate_path.read_text())
+        cls.seeds = {
+            (
+                data["window"]["y"],
+                data["window"]["width"],
+                data["window"]["height"],
+            ): StripeSeed.from_dict(data)
+            for data in cls.certificate["seeds"]
+        }
+
+    def test_exact_certificate_verifies(self):
+        self.assertEqual(verify_stripe_certificate(self.certificate), [])
+        self.assertEqual(self.certificate["summary"]["seed_count"], 264)
+        self.assertEqual(self.certificate["summary"]["margin_bound"], 3)
+
+    def test_pumps_commute_and_preserve_still_life_repeatedly(self):
+        seed = self.seeds[(0, 9, 9)]
+        first = pump_vertical(pump_horizontal(seed, 3), 2)
+        second = pump_horizontal(pump_vertical(seed, 2), 3)
+        self.assertEqual(first, second)
+        self.assertEqual(
+            verify_cells(
+                STRIPE_PATTERN,
+                first.window,
+                STRIPE_MARGIN,
+                set(first.live_cells),
+            ),
+            [],
+        )
+
+    def test_constructs_all_phase_and_residue_classes(self):
+        dimensions = (
+            list(range(1, 18))
+            + [23, 31, 44, 57]
+        )
+        for x, y, width, height in itertools.product(
+            (-7, 0, 13), (-8, -7, 0, 1), dimensions, dimensions
+        ):
+            window = Window(x, y, width, height)
+            live_cells = construct_from_seeds(window, self.seeds)
+            self.assertEqual(
+                verify_cells(STRIPE_PATTERN, window, 3, live_cells),
+                [],
+                (x, y, width, height),
+            )
+
+    def test_rotates_to_all_column_phases(self):
+        for x, y, width, height in itertools.product(
+            (-3, -2, 0, 1), (-5, 0, 8), (1, 5, 9, 17, 26), (1, 4, 10, 23)
+        ):
+            window = Window(x, y, width, height)
+            live_cells = construct_columns_from_seeds(window, self.seeds)
+            self.assertEqual(
+                verify_cells(COLUMN_STRIPE_PATTERN, window, 3, live_cells),
+                [],
+                (x, y, width, height),
+            )
+
+    def test_tampered_stripe_certificate_is_rejected(self):
+        damaged = copy.deepcopy(self.certificate)
+        damaged["seeds"][0]["live_cells"].append([100, 100])
+        errors = verify_stripe_certificate(damaged)
+        self.assertEqual(errors, ["seed digest does not match"])
 
 
 if __name__ == "__main__":
