@@ -50,6 +50,49 @@ The theorem-grade target must instead specify a macro-rule recurrence,
 increasing generation intervals, or construction machinery. “Produces two
 copies once” is not an inductive replicator theorem.
 
+## Local macro-rule SAT exclusion
+
+`sat_macro_rule.py` searches the theorem-grade predicate directly for a
+one-phase horizontal tile. A geometry `(w,h,L,T)` has an unknown nonempty
+minimal-box pattern `P` in `[0,w-1] x [0,h-1]`, horizontal macro pitch `L`,
+and period `T`. The integer plane is partitioned into width-`L` output
+windows, one per macro site.
+
+For each of the eight radius-one macro contexts `(left,centre,right)`, the SAT
+instance starts Life from the corresponding union of copies at translations
+`-L`, `0`, and `L`. At time `T`, the complete central output window, including
+the full vertical light cone, must be exactly `P` or empty according to the
+selected macro-rule bit. Interactions in contexts with two or three input
+tiles are simulated normally; independent evolution is not assumed. A
+geometric precondition proves that sites outside the three-cell context
+cannot reach the central window in `T` ticks.
+
+Consequently, a satisfying tile would prove the local identity for every
+finite macro-configuration. Induction would be a complete Life replicator
+theorem, not evidence from one doubling event.
+
+The searched macro rules are additive ECA rules 60, 90, 102, and 150. Each
+has an unbounded singleton orbit: over `GF(2)`, its update is multiplication
+by a Laurent polynomial with at least two terms, and at times `2^k` the
+Frobenius identity scales the distinct exponents by `2^k`.
+
+The exact UNSAT scopes are:
+
+- all `1 <= w,h <= 4`, `L=w+1`, `T=L`, for all four rules: 64 instances;
+- all `1 <= w,h <= 3`, `L=w+2`, `T in {L,L+1}`, for all four rules:
+  72 instances.
+
+Vertical tile reflection is removed in every scope. Horizontal reflection is
+also removed for symmetric rules 90 and 150. The direct B3/S23 verifier
+independently enumerates all tiles in the `2x2`, `L=3`, `T=3` subscopes and
+agrees with all four SAT exclusions. No macro tile was found.
+
+This exclusion allows parity-style controlled collisions but is deliberately
+limited to one translated phase. The pre-pulsar's reflected second child
+shows why a next search should admit a two-phase tile alphabet with a
+reflection-changing transition; its close spacing still requires controlled
+collision rather than independent copies.
+
 ## Bounded SAT exclusion
 
 `sat_clean_doubling.py` encodes B3/S23 exactly. For each scope, the unknown
