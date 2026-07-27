@@ -50,6 +50,67 @@ The theorem-grade target must instead specify a macro-rule recurrence,
 increasing generation intervals, or construction machinery. “Produces two
 copies once” is not an inductive replicator theorem.
 
+## Finite-phase branching obstruction
+
+The same finite-speed argument excludes a substantially broader class,
+including reflection-changing and phase-changing macrotiles whose daughters
+may interact arbitrarily between sampling times.
+
+**Theorem (finite-phase superquadratic obstruction).** Let `G` be a
+two-dimensional radius-`rho` cellular automaton with a quiescent state. Start
+from a finite pattern in a `w` by `h` box. Suppose that at every time `n*T`
+the complete configuration is exactly a pairwise-disjoint union of finite
+nonempty macrotiles from a fixed finite phase alphabet `Q` (reflections and
+rotations may be separate phases). If `c_n` is the number of macrotiles at
+that time, then
+
+`c_n <= (w + 2*rho*T*n)(h + 2*rho*T*n)`.
+
+In particular, this class contains no system for which `c_n` grows
+superquadratically.
+
+**Proof.** Quiescence and radius `rho` imply inductively that after `n*T`
+steps every nonquiescent cell lies in the initial bounding box enlarged by
+`rho*T*n` in each direction. That box contains exactly
+`(w + 2*rho*T*n)(h + 2*rho*T*n)` sites. Every endpoint macrotile is nonempty,
+and endpoint macrotiles are pairwise disjoint, so selecting one
+nonquiescent cell from each gives an injection from the `c_n` macrotiles
+into those sites. The displayed inequality follows. Its right side is a
+quadratic polynomial in `n`, which excludes superquadratic `c_n`. `QED`
+
+**Corollary (context-free finite-phase substitutions).** Suppose in addition
+that one macro-generation replaces each phase `q` by a fixed finite multiset
+of daughter phases, that endpoint daughters are pairwise disjoint globally,
+and that this identity repeats after the fixed time `T`. Let the nonnegative
+integer substitution matrix be `M`, with `M[q,r]` daughters of phase `r`
+from phase `q`. If the singleton-reachable part of `M` has spectral radius
+greater than one, no such Life system exists.
+
+Indeed, exact phase counts are `e_q M^n`. Perron--Frobenius growth on the
+reachable supercritical component makes their sum exponential (a finite
+transient before that component is irrelevant), contradicting the theorem.
+This covers any finite number of reflected/rotated phases, unequal offspring
+counts, transient phases, and all interactions during a macro-period. It does
+not assume that daughters evolve independently. The necessary escape hatch
+is endpoint cancellation/coalescence or another context-dependent macro-rule,
+such as parity, or non-fixed generation times. Thus merely adding a reflected
+second phase to clean doubling cannot work.
+
+`branching_certificate.py` performs only exact integer recurrence and
+light-cone arithmetic. The committed certificate uses the two-phase
+substitution `A -> B`, `B -> A+B`; reproduce and independently verify it:
+
+```sh
+python -m elementary_replicator.branching_certificate \
+  --output elementary_replicator/certificates/two_phase_fibonacci.json
+python -m elementary_replicator.branching_certificate \
+  --verify elementary_replicator/certificates/two_phase_fibonacci.json
+```
+
+The certificate is not claimed as a Life construction or a finite-horizon
+replicator. It is a machine-checkable finite contradiction for one
+representative member of the theorem's infinite excluded class.
+
 ## Local macro-rule SAT exclusion
 
 `sat_macro_rule.py` searches the theorem-grade predicate directly for a
