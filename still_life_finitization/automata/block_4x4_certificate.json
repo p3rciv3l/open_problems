@@ -1,0 +1,49 @@
+{
+  "alphabet": [
+    "E",
+    "S"
+  ],
+  "checks": {
+    "canonical_states_verified": 256,
+    "finite_motif_still_life": true,
+    "minimum_copy_chebyshev_separation": 3,
+    "periodic_tile_still_life": true,
+    "transfers_commute": true,
+    "transitions_closed": true
+  },
+  "format": "component-agar-transfer-certificate-v1",
+  "initial_state_count": 16,
+  "motif": [
+    [
+      0,
+      0
+    ],
+    [
+      1,
+      0
+    ],
+    [
+      0,
+      1
+    ],
+    [
+      1,
+      1
+    ]
+  ],
+  "name": "separated-block-4x4",
+  "period": [
+    4,
+    4
+  ],
+  "state": [
+    "left_phase",
+    "right_phase",
+    "top_phase",
+    "bottom_phase"
+  ],
+  "state_count": 256,
+  "transition_count": 512,
+  "transition_sha256": "2ffca6d4ea2f1c0e1a245ae944f59218e339e1601e8691fa5a25cc1043aa6c96",
+  "uniform_margin_bound": 1
+}
