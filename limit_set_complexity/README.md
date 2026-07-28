@@ -78,6 +78,18 @@ CaDiCaL search. Every reported nonforced cell includes a complete two-layer
 SAT model in `slice_result.json`; the command directly replays both Life steps
 before writing it. The checked-in CNF is gzip-compressed.
 
+The all-phase, finite-type-family obstruction is:
+
+```bash
+python type_family_search.py --workers 4 --output type_family_result.json
+```
+
+This checks all 32 spatial phases and all 25 placements of a noncontracting
+`38 x 34` predecessor type. Each same-phase nonedge has a complete SAT model
+whose two Life steps are replayed directly. Canonical predecessors exclude all
+different-phase edges, and deletion monotonicity extends the result from the
+full rectangle to every matching subtarget in the box.
+
 ## Files
 
 - `forcing.py`: direct CNF encoder, PySAT verifier, and DIMACS exporter.
@@ -91,6 +103,8 @@ before writing it. The checked-in CNF is gzip-compressed.
   transverse row `y=17`, with replayed countermodels.
 - `slice_forcing.cnf.gz`: independently parsed and UNSAT-checked aggregate
   universal claim for the cap transition and all forced cells on that row.
+- `type_family_search.py`: all-phase finite-type transition-graph search.
+- `type_family_result.json`: replayed certificates showing that graph is empty.
 - `research_note.md`: exact logical scope, a complete conditional reduction
   skeleton, and the fixed-ring finite-state obstruction.
 

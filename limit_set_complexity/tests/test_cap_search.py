@@ -23,6 +23,7 @@ from cap_search import (
     write_forcing_claim_dimacs,
 )
 from forcing import OFFSETS, life
+from type_family_search import PHASES, phase_rectangle_differs, placements
 
 
 def clause_holds(clause, assignment):
@@ -158,6 +159,61 @@ class CapEncoderTests(unittest.TestCase):
                 result["witnessed"],
             )
             self.assertNotEqual(result["expected"], result["witnessed"])
+
+    def test_noncontracting_placements_share_obstruction_cell(self):
+        domain = dimensions(15)
+        self.assertEqual(len(placements(domain)), 25)
+        self.assertTrue(
+            all(
+                ox <= 29 < ox + domain.width and oy <= 17 < oy + domain.height
+                for ox, oy in placements(domain)
+            )
+        )
+
+    def test_distinct_phases_differ_on_every_full_size_placement(self):
+        domain = dimensions(15)
+        for phase in PHASES:
+            for other in PHASES:
+                if phase == other:
+                    continue
+                for origin in placements(domain):
+                    self.assertTrue(
+                        phase_rectangle_differs(
+                            phase,
+                            other,
+                            origin,
+                            domain.width,
+                            domain.height,
+                        )
+                    )
+
+    def test_checked_type_family_countermodels_replay(self):
+        result_path = Path(__file__).parents[1] / "type_family_result.json"
+        report = json.loads(result_path.read_text())
+        domain = dimensions(15)
+        self.assertTrue(report["passed"])
+        self.assertFalse(report["transition_graph"]["contains_cycle"])
+        self.assertEqual(len(report["results"]), len(PHASES))
+        for result in report["results"]:
+            phase = tuple(result["source_phase"])
+            counterexample = result["same_phase_counterexample"]
+            cell = tuple(counterexample["cell"])
+            self.assertTrue(
+                all(
+                    ox <= cell[0] < ox + domain.width
+                    and oy <= cell[1] < oy + domain.height
+                    for ox, oy in placements(domain)
+                )
+            )
+            self.assertTrue(
+                replay_witness(domain, counterexample["witness"], *phase)
+            )
+            self.assertNotEqual(
+                predecessor_witness_bit(
+                    domain, counterexample["witness"], *cell
+                ),
+                band_value(*cell, *phase),
+            )
 
 
 if __name__ == "__main__":

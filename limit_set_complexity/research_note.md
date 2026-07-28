@@ -246,12 +246,39 @@ canonical marching-band predecessor can force a noncontracting canonical
 row. This monotonicity statement is exact and unbounded over the collection
 of subsets of `D`; its SAT input is only the stated finite box.
 
-The obstruction does **not** cover a larger bounding box, values inconsistent
-with the canonical agar but admitting another composable predecessor type,
-other phases, off-agar side or corner gadgets, longer inverse time, or a
-finite alphabet of types. In particular it is not a no-go theorem for an
-expanding cone and does not improve the PSPACE-hardness result to
-`Pi^0_1`-hardness.
+By itself, the slice certificate does **not** cover a larger bounding box,
+values inconsistent with the canonical agar, other phases, off-agar side or
+corner gadgets, longer inverse time, or a finite alphabet of types. The next
+search closes the all-phase finite-alphabet case within this bounding box.
+
+## All-phase finite-type no-go theorem
+
+The same-box path can be closed more broadly than the single phase and slice
+above. Let the 32 types be the spatial phases of the `8 x 4` marching band.
+For each source phase, constrain the `38 x 34` output box either completely or
+at an arbitrary subset of its cells, always to that phase. A noncontracting
+destination is a complete `38 x 34` rectangle of any one of the 32 types,
+placed at any of the 25 origins in `[-2,2] x [-2,2]` in the complete
+`42 x 38` two-step predecessor domain.
+
+The resulting directed type graph is empty. For a destination equal to the
+source phase, `type_family_result.json` records, for every source phase, a SAT
+predecessor with the opposite value at a reported cell in the common
+`[2,35] x [2,31]` core of all 25 placements, together with the complete
+intermediate layer. Both Life steps are replayed directly. For every different
+destination phase, the canonical source-phase predecessor itself is a
+counterexample: direct comparison of the two periodic patterns finds a
+differing cell in every placement. The marching band is fixed by two Life
+steps, so this canonical counterexample exists. Deleting output constraints
+only admits more predecessors, proving the claim simultaneously for every
+matching subtarget, including every nonrectangular target, in the box.
+
+Thus no finite alphabet assembled from canonical marching-band phases in this
+box has an edge, let alone a noncontracting cycle. This is a broad no-go
+theorem for the full all-phase, arbitrary-subshape type family rather than
+another forced-interval estimate. Its boundary is still important: larger
+boxes, off-agar side or corner types, and three or more inverse steps are not
+covered, so it does not supply the missing `Pi^0_1` reduction.
 
 ## Sources for this obstruction
 
