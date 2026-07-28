@@ -51,6 +51,92 @@ Several even-area tori also admit complementary period-2 maximizers with no
 survivors: every live cell dies and the other half is born. Thus equality can
 be supported both by zero flux and by maximal flux; any general proof must
 handle both rather than assuming near-maximizers are almost still lifes.
+## Translation-consistent spacetime clusters
+
+`cluster_hierarchy.py` implements a hierarchy strictly stronger than positional
+pyramids at a fixed window size. A `w x h` variable is a probability law on
+the input slice together with its deterministic `(w-2) x (h-2)` Life output.
+The complete laws of opposite spacetime faces agree: a horizontal face
+contains a `(w-1) x h` input and its shared `(w-3) x (h-2)` outputs, with the
+analogous condition vertically. The input and output laws on the common
+interior also agree. These are joint-distribution equalities, not merely
+equalities of positional expectations.
+
+The exact levels searched so far are
+
+```
+input cluster     optimum
+3 x 3             8/13
+4 x 3 = 3 x 4     3/5
+4 x 4             134/241
+```
+
+Thus no searched level reaches `1/2`; the smallest unresolved square is
+`5 x 5`. `cluster_4x4_certificate.json` proves the last value exactly. Its
+rational D4-symmetrized dual is checked on all `65536` input patterns. Its
+matching pseudomarginal has 102 patterns and weights in units of `1/723`, with
+numerator histogram
+
+```
+2:2, 3:61, 5:4, 9:8, 10:6, 12:7, 18:12, 24:1, 60:1.
+```
+
+The full current and next `2 x 2` laws agree. In particular, their common
+population distribution is
+
+```
+population       0       1        2        3        4
+probability    20/241  16/241  120/241  60/241  25/241.
+```
+
+This explicitly characterizes why the finite LP can remain above `1/2`: it is
+a nonnegative, spatial-face-balanced, temporally stationary local law, not a
+global Life measure.
+
+Here is the global telescoping argument for the dual. If `G` is the eight
+element square-symmetry group, then for every `4 x 4` input `a` the stored
+tables satisfy
+
+```
+sum(b(1,1) : b in G a) <= |G a| 134/241
+  + sum(X[L(g a)] - X[R(g a)]
+      + Y[T(g a)] - Y[B(g a)]
+      + Z[I(g a)] - Z[F(g a)] : g a in G a).
+```
+
+Here `G a` is the orbit, so repeated symmetric images are counted once.
+First average a finite Life spacetime torus with its eight rotated/reflected
+copies; this preserves density and makes every member of an orbit equiprobable.
+Multiply each orbit inequality by that common probability and sum the orbits.
+Translation is a bijection, so the expected right and bottom input-face
+potentials equal the expected left and top potentials. `F(a)` is the next-time
+interior `I(a)`, so temporal terms cancel as well. Normalization leaves density
+at most `134/241`. The same cancellation works after integration against any
+translation-invariant bi-infinite law.
+
+Opposite-face balance alone does not assert that horizontal and vertical
+extensions commute. The next necessary projective constraint is a
+nonnegative `5 x 5` law `gamma` whose four translated `4 x 4` spacetime-cluster
+marginals all equal the same level-`4 x 4` law `mu`:
+
+```
+sum(gamma[A] : A restricted to (i+[0,3]) x (j+[0,3]) = a) = mu[a]
+                                                    (i,j in {0,1}).
+```
+
+Outputs in each restriction are fixed by Life. This four-corner coupling is
+the first genuinely two-dimensional extension-positivity constraint; separate
+one-direction Markov extensions do not imply it.
+
+For completeness, let `H_n` be the square-cluster optimum at size `n x n`.
+Restriction proves `H_{n+1} <= H_n`. A projectively consistent sequence has,
+by finite-alphabet compactness, a subsequential limit whose face equations give
+spatial translation invariance and whose temporal equation gives invariance
+under Life. Conversely every invariant Life measure supplies every finite
+cluster law. Hence this hierarchy decreases to the sharp invariant-measure
+density, while retaining exact local consistency at every level.
+This convergence concerns invariant-measure density only; it neither identifies the
+periodic-orbit supremum nor proves the periodic `1/2` conjecture.
 
 ## Convergent pyramid hierarchy
 
@@ -810,6 +896,7 @@ standard library:
 cd life_agar_certificate
 python verify.py
 python strip2_verify.py
+python cluster_verify.py
 python pyramid_obstruction.py
 python spectral_identities.py
 python temporal_charging_obstruction.py
@@ -833,6 +920,7 @@ result exactly:
 python -m pip install -r requirements.txt
 python solve.py
 python strip2_solve.py
+python cluster_hierarchy.py
 python pyramid_search.py
 python pyramid_6x8_search.py
 python pyramid_6x10_search.py

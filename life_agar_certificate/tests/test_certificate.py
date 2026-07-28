@@ -11,6 +11,7 @@ from pathlib import Path
 DIRECTORY = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(DIRECTORY))
 
+from cluster_verify import verify as verify_cluster
 from entropy_obstruction import analyze as analyze_entropy_obstruction
 from model import life_output
 from pyramid_obstruction import analyze as analyze_pyramid_obstruction
@@ -129,6 +130,28 @@ class Strip2CertificateTests(unittest.TestCase):
         certificate["density_bound"] = "3/5"
         with self.assertRaises(AssertionError):
             verify_strip2(certificate)
+
+
+class ClusterCertificateTests(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        with (DIRECTORY / "cluster_4x4_certificate.json").open(
+            encoding="utf-8"
+        ) as stream:
+            cls.certificate = json.load(stream)
+
+    def test_exact_cluster_dual_and_pseudomarginal(self):
+        result = verify_cluster(self.certificate)
+        self.assertEqual(Fraction(result["bound"]), Fraction(134, 241))
+        self.assertEqual(result["patterns"], 65536)
+        self.assertEqual(result["primal_support"], 102)
+        self.assertEqual(result["minimum_slack"], "0")
+
+    def test_tampered_cluster_bound_is_rejected(self):
+        certificate = copy.deepcopy(self.certificate)
+        certificate["bound"] = "1/2"
+        with self.assertRaises(AssertionError):
+            verify_cluster(certificate)
 
 
 class PyramidObstructionTests(unittest.TestCase):
