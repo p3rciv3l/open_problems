@@ -1,0 +1,218 @@
+{
+  "claim": "Every 30x27 phase of the 6x3-periodic koynnos target forces the matching central 6x3 predecessor tile.",
+  "scope": {
+    "target": [
+      30,
+      27
+    ],
+    "predecessor": [
+      32,
+      29
+    ],
+    "phases": 18,
+    "queried_cells_per_phase": 18,
+    "time_steps": 1
+  },
+  "solver": "cadical195",
+  "passed": true,
+  "results": [
+    {
+      "phase": [
+        0,
+        0
+      ],
+      "variables": 928,
+      "clauses": 196920,
+      "baseline_sat": true,
+      "forced_cells": 18,
+      "opposite_queries_unsat": 18
+    },
+    {
+      "phase": [
+        1,
+        0
+      ],
+      "variables": 928,
+      "clauses": 196920,
+      "baseline_sat": true,
+      "forced_cells": 18,
+      "opposite_queries_unsat": 18
+    },
+    {
+      "phase": [
+        2,
+        0
+      ],
+      "variables": 928,
+      "clauses": 196920,
+      "baseline_sat": true,
+      "forced_cells": 18,
+      "opposite_queries_unsat": 18
+    },
+    {
+      "phase": [
+        3,
+        0
+      ],
+      "variables": 928,
+      "clauses": 196920,
+      "baseline_sat": true,
+      "forced_cells": 18,
+      "opposite_queries_unsat": 18
+    },
+    {
+      "phase": [
+        4,
+        0
+      ],
+      "variables": 928,
+      "clauses": 196920,
+      "baseline_sat": true,
+      "forced_cells": 18,
+      "opposite_queries_unsat": 18
+    },
+    {
+      "phase": [
+        5,
+        0
+      ],
+      "variables": 928,
+      "clauses": 196920,
+      "baseline_sat": true,
+      "forced_cells": 18,
+      "opposite_queries_unsat": 18
+    },
+    {
+      "phase": [
+        0,
+        1
+      ],
+      "variables": 928,
+      "clauses": 196920,
+      "baseline_sat": true,
+      "forced_cells": 18,
+      "opposite_queries_unsat": 18
+    },
+    {
+      "phase": [
+        1,
+        1
+      ],
+      "variables": 928,
+      "clauses": 196920,
+      "baseline_sat": true,
+      "forced_cells": 18,
+      "opposite_queries_unsat": 18
+    },
+    {
+      "phase": [
+        2,
+        1
+      ],
+      "variables": 928,
+      "clauses": 196920,
+      "baseline_sat": true,
+      "forced_cells": 18,
+      "opposite_queries_unsat": 18
+    },
+    {
+      "phase": [
+        3,
+        1
+      ],
+      "variables": 928,
+      "clauses": 196920,
+      "baseline_sat": true,
+      "forced_cells": 18,
+      "opposite_queries_unsat": 18
+    },
+    {
+      "phase": [
+        4,
+        1
+      ],
+      "variables": 928,
+      "clauses": 196920,
+      "baseline_sat": true,
+      "forced_cells": 18,
+      "opposite_queries_unsat": 18
+    },
+    {
+      "phase": [
+        5,
+        1
+      ],
+      "variables": 928,
+      "clauses": 196920,
+      "baseline_sat": true,
+      "forced_cells": 18,
+      "opposite_queries_unsat": 18
+    },
+    {
+      "phase": [
+        0,
+        2
+      ],
+      "variables": 928,
+      "clauses": 196920,
+      "baseline_sat": true,
+      "forced_cells": 18,
+      "opposite_queries_unsat": 18
+    },
+    {
+      "phase": [
+        1,
+        2
+      ],
+      "variables": 928,
+      "clauses": 196920,
+      "baseline_sat": true,
+      "forced_cells": 18,
+      "opposite_queries_unsat": 18
+    },
+    {
+      "phase": [
+        2,
+        2
+      ],
+      "variables": 928,
+      "clauses": 196920,
+      "baseline_sat": true,
+      "forced_cells": 18,
+      "opposite_queries_unsat": 18
+    },
+    {
+      "phase": [
+        3,
+        2
+      ],
+      "variables": 928,
+      "clauses": 196920,
+      "baseline_sat": true,
+      "forced_cells": 18,
+      "opposite_queries_unsat": 18
+    },
+    {
+      "phase": [
+        4,
+        2
+      ],
+      "variables": 928,
+      "clauses": 196920,
+      "baseline_sat": true,
+      "forced_cells": 18,
+      "opposite_queries_unsat": 18
+    },
+    {
+      "phase": [
+        5,
+        2
+      ],
+      "variables": 928,
+      "clauses": 196920,
+      "baseline_sat": true,
+      "forced_cells": 18,
+      "opposite_queries_unsat": 18
+    }
+  ]
+}
