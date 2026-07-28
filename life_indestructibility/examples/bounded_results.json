@@ -1,0 +1,78 @@
+{
+  "one_tick_safe": {
+    "safe": true,
+    "horizon": 1,
+    "protected": [
+      0,
+      0
+    ],
+    "exterior_live": [],
+    "flip_generation": null,
+    "trace": [],
+    "sat_variables": 10,
+    "sat_clauses": 522
+  },
+  "block_counterexample": {
+    "safe": false,
+    "horizon": 1,
+    "protected": [
+      0,
+      0
+    ],
+    "exterior_live": [
+      [
+        1,
+        -1
+      ]
+    ],
+    "flip_generation": 1,
+    "trace": [
+      [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          -1
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          1,
+          1
+        ]
+      ],
+      [
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          -1
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          2,
+          0
+        ]
+      ]
+    ],
+    "sat_variables": 10,
+    "sat_clauses": 517
+  }
+}

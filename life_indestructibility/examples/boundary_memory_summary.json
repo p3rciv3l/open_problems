@@ -1,0 +1,28 @@
+{
+  "abstraction": "exact 5x5 state with adversarial 7x7 outer-ring actions",
+  "outer_actions": [
+    "all_dead",
+    "all_live",
+    "vertical_sides_live",
+    "horizontal_caps_live",
+    "mask_0x0006ae"
+  ],
+  "generator_output": [
+    "protected=1 states=16777216 max_rank=5 outer_actions=4",
+    "protected=0 states=16777216 max_rank=7 outer_actions=5"
+  ],
+  "center_alive": {
+    "states": 16777216,
+    "raw_bytes": 16777216,
+    "gzip_bytes": 1697142,
+    "raw_sha256": "38365d1a505269526ceb29b70bfe419859dd48fc67f9b3fd3eaef050ee28bf76",
+    "gzip_sha256": "11574eb372cada5e70a65bc0be818ca03c6ae1320a264b780557f44b3bf1b20c"
+  },
+  "center_dead": {
+    "states": 16777216,
+    "raw_bytes": 16777216,
+    "gzip_bytes": 5615494,
+    "raw_sha256": "16ec1aa2bd7354fe2f6ce2e152b62eb14f401798f634705bfc1a84579ce54867",
+    "gzip_sha256": "ef5adec47922d553c0edab2f5b75439d362db84895e606547c8d72334f52dd4d"
+  }
+}
