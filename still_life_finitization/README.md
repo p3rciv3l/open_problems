@@ -32,6 +32,8 @@ python -m still_life_finitization.automata.generate_stripe_certificate
 python -m still_life_finitization.automata.verify_stripe_certificate
 python -m still_life_finitization.automata.generate_period3_certificate --jobs 3
 python -m still_life_finitization.automata.verify_period3_certificate
+python -m still_life_finitization.automata.generate_period4_certificate --jobs 4
+python -m still_life_finitization.automata.verify_period4_certificate
 ```
 
 `automata/block_4x4_certificate.json` is a deterministic finite-state transfer
@@ -62,6 +64,16 @@ directly checked finite seeds for all representatives, phases, and pump
 residue classes. Six-column and six-row transfers cover every larger
 rectangle, with a uniform margin bound of 4. Its verifier uses only the Life
 rule and certificate bitmaps; it does not invoke SAT.
+
+`automata/period4_certificate.json` extends this to every still life having
+some horizontal period and some vertical period at most 4. Exhaustive
+classification of all 74,954 rectangular tiles gives 251 distinct hosts on a
+common 12x12 lift and 13 translation/dihedral orbits. Earlier theorems cover
+eight orbits (including the empty host); 19,176 checked seeds cover the five
+new orbits. Radius-1 boundary states permit insertion of two full host periods
+in either direction, proving the same uniform margin bound of 4 for all window
+sizes. Verification enumerates the host class and directly checks every seed,
+seam, pump, and commuting two-dimensional transfer without invoking SAT.
 
 Result files retain every tested SAT/UNSAT status, variable and clause counts,
 solver statistics, and a SHA-256 digest of the deterministic clause stream.

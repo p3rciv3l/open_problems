@@ -1,5 +1,72 @@
 # Scoped findings: still-life finitization
 
+## Complete periods-at-most-4 all-window theorem
+
+Let `P` be a Conway Life still life invariant under translations by `(p,0)`
+and `(0,q)` for some `1 <= p,q <= 4`. Every nonempty finite axis-aligned
+rectangular window cut from `P`, at every origin and of every positive width
+and height, has a finite still-life extension with dead-exterior margin at
+most 4.
+
+### Exhaustive host classification
+
+The classifier checks all `sum(2^(pq), 1 <= p,q <= 4) = 74,954` rectangular
+tiles by the toroidal Life rule. The exact stable-tile counts are:
+
+```
+       p=1  p=2  p=3  p=4
+q=1      1    3    1    3
+q=2      3    5    3    9
+q=3      1    3  127   39
+q=4      3    9   39   53
+```
+
+Lifting every stable tile to a common 12x12 period removes duplicate
+presentations and leaves 251 infinite hosts. Translation and the eight square
+symmetries partition them into exactly 13 disjoint orbits. The empty orbit,
+five period-3 orbits, separated 4x4 block orbit, and alternating-row orbit are
+covered by the earlier constructive theorems. Five genuinely new orbits
+remain, represented by tiles of sizes 4x3, 4x3, 4x4, 4x4, and 4x4:
+
+```
+....  ...1  ....  ...1  ..11
+..11  ..1.  ...1  ..1.  11..
+..11  ..11  1.1.  .1..  ..11
+            ...1  1...  11..
+```
+
+The independent verifier repeats the full tile enumeration, common-period
+deduplication, orbit generation, disjointness check, and coverage check. Thus
+the classification is not an assumption encoded in the witness list.
+
+### Finite boundary-state and pumping principle
+
+For each new representative, every window-origin phase and every finite
+transfer base is certified. A horizontal base has either width below
+`2p+2`, or one of the `2p` widths from `2p+2` through `4p+1`; vertical bases
+are analogous with `q`. This gives 19,176 seeds, rather than an unstructured
+search over large windows.
+
+At a pump seam the certificate equates the two complete columns immediately
+before a block with the corresponding columns two host periods later. These
+two columns are the full boundary state needed by a radius-1 cellular
+automaton. Duplicating the intervening `2p` columns creates only
+three-column neighborhoods already present in the verified finite still life.
+Because the inserted width is a multiple of the host period, the fixed window
+continues to agree with `P`. The same argument uses `2q` rows vertically.
+The seam equalities survive insertion, so the operation can be iterated;
+horizontal and vertical insertions commute and preserve each other's boundary
+states.
+
+For arbitrary width `w >= 2p+2`, choose the unique certified base congruent
+to `w` modulo `2p` and pump; smaller widths are direct bases. Choose and pump
+height independently modulo `2q`. This finite boundary-state argument covers
+every positive window size and is the reason the certificate scales beyond
+its finite seed table. Every seed, one-step pump, combined pump, seam state,
+and commutation equality is checked directly from bitmaps without calling
+SAT. The checked certificate SHA-256 is
+`abbf843f89ed2390bb79e367ad7eba1aa04434a136119d3e138e9942c957ef31`.
+
 ## Complete period-3 all-window theorem
 
 Let `P` be any Conway Life still life invariant under translations by `(3,0)`
@@ -74,10 +141,11 @@ they motivated the boundary-state search but are not used in the theorem or
 to claim non-finitizability. Each sequence terminates in a directly checked
 finite witness.
 
-The theorem does not settle periodic hosts whose horizontal or vertical period
-does not divide 3, general sofic hosts, or arbitrary infinite still lifes. No
+The period-3 theorem alone does not settle other periods; the theorem above
+now settles every host with both periods at most 4. Neither theorem settles
+larger periods, general sofic hosts, or arbitrary infinite still lifes. No
 finite-margin UNSAT result is presented as a counterexample, and no general
-compactness principle follows from this class-specific transfer automaton.
+compactness principle follows from these class-specific transfer automata.
 
 ## Alternating-row all-window theorem
 

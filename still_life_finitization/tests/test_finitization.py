@@ -18,6 +18,16 @@ from still_life_finitization.still_life.period3_transfer import (
     pump_vertical as pump_period3_vertical,
     verify_period3_certificate,
 )
+from still_life_finitization.still_life.period4_transfer import (
+    MARGIN as PERIOD4_MARGIN,
+    REPRESENTATIVES as PERIOD4_REPRESENTATIVES,
+    Period4Seed,
+    classify_periods_at_most_4,
+    construct_from_seeds as construct_period4_from_seeds,
+    pump_horizontal as pump_period4_horizontal,
+    pump_vertical as pump_period4_vertical,
+    verify_period4_certificate,
+)
 from still_life_finitization.still_life.sat import build_encoding, enumerate_margins
 from still_life_finitization.still_life.stripe_transfer import (
     COLUMN_STRIPE_PATTERN,
@@ -397,6 +407,90 @@ class Period3TheoremTests(unittest.TestCase):
                 [],
                 (representative, x, y, width, height),
             )
+
+
+class PeriodsAtMost4TheoremTests(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        certificate_path = (
+            Path(__file__).resolve().parents[1]
+            / "automata"
+            / "period4_certificate.json"
+        )
+        cls.certificate = json.loads(certificate_path.read_text())
+        cls.seeds = {}
+        for data in cls.certificate["seeds"]:
+            seed = Period4Seed.from_dict(data)
+            cls.seeds[
+                (
+                    seed.representative,
+                    seed.window.x,
+                    seed.window.y,
+                    seed.window.width,
+                    seed.window.height,
+                )
+            ] = seed
+
+    def test_exhaustive_bounded_period_classification(self):
+        classification = classify_periods_at_most_4()
+        self.assertEqual(classification, self.certificate["classification"])
+        self.assertEqual(classification["candidate_tile_count"], 74954)
+        self.assertEqual(classification["distinct_lifted_hosts"], 251)
+        self.assertEqual(classification["symmetry_orbit_count"], 13)
+        self.assertEqual(classification["uncovered_host_count"], 0)
+        self.assertEqual(classification["orbit_overlap_count"], 0)
+
+    def test_exact_certificate_verifies(self):
+        self.assertEqual(verify_period4_certificate(self.certificate), [])
+        self.assertEqual(self.certificate["summary"]["seed_count"], 19176)
+        self.assertEqual(self.certificate["summary"]["margin_bound"], 4)
+
+    def test_repeated_period_specific_pumps_commute(self):
+        for representative in range(len(PERIOD4_REPRESENTATIVES)):
+            seed = self.seeds[(representative, 0, 0, 10, 10)]
+            first = pump_period4_vertical(pump_period4_horizontal(seed, 2), 3)
+            second = pump_period4_horizontal(pump_period4_vertical(seed, 3), 2)
+            self.assertEqual(first, second)
+            self.assertEqual(
+                verify_cells(
+                    PeriodicPattern(PERIOD4_REPRESENTATIVES[representative]),
+                    first.window,
+                    PERIOD4_MARGIN,
+                    set(first.live_cells),
+                ),
+                [],
+            )
+
+    def test_constructs_large_windows_for_every_new_orbit(self):
+        for representative, x, y, width, height in itertools.product(
+            range(len(PERIOD4_REPRESENTATIVES)),
+            (-5, 0, 6),
+            (-6, 0, 5),
+            (1, 9, 10, 17, 42),
+            (2, 8, 13, 26, 41),
+        ):
+            window = Window(x, y, width, height)
+            live_cells = construct_period4_from_seeds(
+                representative, window, self.seeds
+            )
+            self.assertEqual(
+                verify_cells(
+                    PeriodicPattern(PERIOD4_REPRESENTATIVES[representative]),
+                    window,
+                    PERIOD4_MARGIN,
+                    live_cells,
+                ),
+                [],
+                (representative, x, y, width, height),
+            )
+
+    def test_tampered_certificate_is_rejected(self):
+        damaged = copy.deepcopy(self.certificate)
+        damaged["seeds"][0]["rows"][0] = "1" + damaged["seeds"][0]["rows"][0][1:]
+        self.assertEqual(
+            verify_period4_certificate(damaged),
+            ["seed digest does not match"],
+        )
 
 
 if __name__ == "__main__":
