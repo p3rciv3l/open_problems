@@ -75,6 +75,22 @@ in either direction, proving the same uniform margin bound of 4 for all window
 sizes. Verification enumerates the host class and directly checks every seed,
 seam, pump, and commuting two-dimensional transfer without invoking SAT.
 
+`still_life/periodic_transfer.py` states the same transfer argument without a
+period cutoff.  For an arbitrary `p`-by-`q` periodic still life, a finite table
+of directly checkable seeds is sufficient when its horizontal and vertical
+pump lengths are multiples of `p` and `q`.  The table covers all origin phases,
+all dimensions below the two pump thresholds, and one complete pump-residue
+interval above each threshold.  Equality of the two full columns (respectively
+rows) before each seam is the complete radius-1 boundary state.  The generic
+verifier checks the host, arithmetic side conditions, table coverage, finite
+still-life condition, and every seam; `construct_from_seeds` then handles every
+positive window size.
+
+This is a certificate theorem, not a proof that such a table exists for every
+periodic host.  That existence claim is the still-life finitization problem and
+remains open.  In particular, failure of a bounded-margin SAT search or of this
+rectangular pump ansatz is not an all-margin obstruction.
+
 Result files retain every tested SAT/UNSAT status, variable and clause counts,
 solver statistics, and a SHA-256 digest of the deterministic clause stream.
 SAT witnesses are checked by a separate direct Life implementation before being

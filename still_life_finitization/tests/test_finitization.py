@@ -28,6 +28,14 @@ from still_life_finitization.still_life.period4_transfer import (
     pump_vertical as pump_period4_vertical,
     verify_period4_certificate,
 )
+from still_life_finitization.still_life.periodic_transfer import (
+    PeriodicPumpSeed,
+    PumpParameters,
+    construct_from_seeds as construct_periodic_from_seeds,
+    required_seed_windows,
+    seed_key,
+    verify_seed_table,
+)
 from still_life_finitization.still_life.sat import build_encoding, enumerate_margins
 from still_life_finitization.still_life.stripe_transfer import (
     COLUMN_STRIPE_PATTERN,
@@ -55,6 +63,55 @@ class PatternTests(unittest.TestCase):
         block = PeriodicPattern(("11..", "11..", "....", "...."), "block")
         self.assertEqual(block.validate_still_life(), [])
         self.assertTrue(PeriodicPattern(("1",), "full").validate_still_life())
+
+
+class ArbitraryPeriodTransferTests(unittest.TestCase):
+    def setUp(self):
+        self.pattern = PeriodicPattern((".",), "empty")
+        self.parameters = PumpParameters(
+            margin=0,
+            horizontal_length=2,
+            vertical_length=3,
+            horizontal_offset=2,
+            vertical_offset=2,
+            horizontal_threshold=4,
+            vertical_threshold=5,
+        )
+        self.seeds = {
+            seed_key(self.pattern, window): PeriodicPumpSeed(window, frozenset())
+            for window in required_seed_windows(self.pattern, self.parameters)
+        }
+
+    def test_finite_table_proves_arbitrary_dimensions(self):
+        self.assertEqual(
+            len(self.seeds),
+            (4 + 2 - 1) * (5 + 3 - 1),
+        )
+        self.assertEqual(
+            verify_seed_table(self.pattern, self.parameters, self.seeds),
+            [],
+        )
+        window = Window(17, -23, 103, 82)
+        cells = construct_periodic_from_seeds(
+            self.pattern, self.parameters, self.seeds, window
+        )
+        self.assertEqual(cells, set())
+        self.assertEqual(verify_cells(self.pattern, window, 0, cells), [])
+
+    def test_rejects_nonperiodic_pump_length(self):
+        stripes = PeriodicPattern(("1", "."), "stripes")
+        errors = self.parameters.validate(stripes)
+        self.assertIn(
+            "vertical pump length must be a host-period multiple",
+            errors,
+        )
+
+    def test_rejects_incomplete_table(self):
+        self.seeds.pop(next(iter(self.seeds)))
+        self.assertIn(
+            "seed table is missing 1 keys",
+            verify_seed_table(self.pattern, self.parameters, self.seeds),
+        )
 
 
 class EnumeratorTests(unittest.TestCase):
@@ -284,6 +341,27 @@ class AlternatingRowTheoremTests(unittest.TestCase):
         self.assertEqual(verify_stripe_certificate(self.certificate), [])
         self.assertEqual(self.certificate["summary"]["seed_count"], 264)
         self.assertEqual(self.certificate["summary"]["margin_bound"], 3)
+
+    def test_certificate_satisfies_arbitrary_period_theorem(self):
+        parameters = PumpParameters(3, 3, 4, 3, 4, 9, 9)
+        seeds = {
+            seed_key(STRIPE_PATTERN, seed.window): PeriodicPumpSeed(
+                seed.window, seed.live_cells
+            )
+            for seed in self.seeds.values()
+        }
+        self.assertEqual(
+            verify_seed_table(STRIPE_PATTERN, parameters, seeds),
+            [],
+        )
+        window = Window(-17, 23, 101, 98)
+        cells = construct_periodic_from_seeds(
+            STRIPE_PATTERN, parameters, seeds, window
+        )
+        self.assertEqual(
+            verify_cells(STRIPE_PATTERN, window, STRIPE_MARGIN, cells),
+            [],
+        )
 
     def test_pumps_commute_and_preserve_still_life_repeatedly(self):
         seed = self.seeds[(0, 9, 9)]

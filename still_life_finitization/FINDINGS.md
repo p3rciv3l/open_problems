@@ -1,5 +1,53 @@
 # Scoped findings: still-life finitization
 
+## Arbitrary-period finite boundary-state theorem
+
+Let `P` be a Conway Life still life with horizontal period `p` and vertical
+period `q`; neither period is bounded.  Fix a margin `M`, pump lengths `a,b`,
+offsets `s,t >= 2`, and thresholds `A >= s+a`, `B >= t+b`, with `p | a` and
+`q | b`.  Suppose there is a finite still-life extension, supported in margin
+`M`, for every origin phase in `Z/p x Z/q` and every base size
+
+```
+1 <= w < A+a,    1 <= h < B+b.
+```
+
+For bases with `w >= A`, require the two complete bitmap columns at
+`x+s-2,x+s-1` to equal those at `x+s+a-2,x+s+a-1`.  Require the analogous two
+complete rows for bases with `h >= B`.
+
+Then every nonempty rectangular window cut from `P` has a finite still-life
+extension in margin `M`.  Indeed, for arbitrary `w >= A`, select the unique
+base `A <= w0 < A+a` congruent to `w` modulo `a`, and duplicate the intervening
+`a` columns `(w-w0)/a` times.  Every radius-1 neighborhood at a new seam is a
+neighborhood already present at the old seam.  All other neighborhoods are
+translated unchanged.  Since `p | a`, the shifted fixed core still agrees with
+`P`.  The seam equalities remain true after insertion.  The same proof applies
+to rows.  Horizontal and vertical duplications commute: each maps the Cartesian
+pump block to the same grid of copies, independent of order.  Sizes below a
+threshold are direct bases.
+
+This is a finite theorem for each supplied `(P,M,a,b,s,t,A,B)`, and its number
+of required seeds is exactly
+
+```
+p q (A+a-1)(B+b-1).
+```
+
+`still_life/periodic_transfer.py` is an independent implementation of the
+statement.  It rejects pump lengths not divisible by the host periods, checks
+the exact seed-key set and every full seam state, and constructs extensions at
+arbitrary target sizes.
+
+The theorem does **not** prove that every periodic host has such a table.  That
+would settle the still-life finitization problem, which remains open even
+though the host is restricted to be doubly periodic.  Nor does failure for a
+fixed margin, pump length, or seam location prove non-finitizability: an
+all-margin obstruction must exclude every finite-support completion, not only
+this certificate form.  The periods-at-most-4 certificates below establish the
+hypothesis for those hosts; no unconditional arbitrary-period existence or
+all-margin periodic counterexample is currently known.
+
 ## Complete periods-at-most-4 all-window theorem
 
 Let `P` be a Conway Life still life invariant under translations by `(p,0)`
