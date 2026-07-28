@@ -138,6 +138,82 @@ discharge that flux into the Elkies survivor deficit `1/2-s`; the present
 three-layer positional certificates do not, because their dual pays for it
 with the quantified seams above.
 
+### Exact obstruction to population-only temporal charging
+
+Here is a precise limit of the survivor/birth/death approach. Let `A_t` be a
+Life generation on an `N`-cell king-grid torus and put
+
+```
+S_t = A_t intersect A_(t+1),
+B_t = A_(t+1) - A_t,
+D_t = A_t - A_(t+1).
+```
+
+Then `|A_(t+1)|=|S_t|+|B_t|`, `|A_t|=|S_t|+|D_t|`, every birth has exactly
+three neighbors in `S_t union D_t`, and every survivor has two or three such
+neighbors. On a temporal cycle, `sum |B_t|=sum |D_t|`. These statements are
+not enough for either of the two most direct charging lemmas.
+
+First consider the affine one-step lemma
+
+```
+|S_t| + |B_t| - N/2 <= alpha (|B_t| - |D_t|).                 (A)
+```
+
+Any fixed `alpha` would prove the conjecture after summing around time. On the
+`3 x 3` torus, however, one full live row evolves to the full torus and then
+to the empty torus:
+
+```
+###    ###    ...
+... -> ### -> ...
+...    ###    ...
+```
+
+The first transition has `(S,B,D)=(3,6,0)`, so (A) requires
+`9-9/2 <= 6 alpha`, or `alpha >= 3/4`. The second has
+`(S,B,D)=(0,0,9)`, so it requires `-9/2 <= -9 alpha`, or
+`alpha <= 1/2`. Thus no population-only linear temporal potential can close
+the survivor deficit. The associated bipartite count is sharp: the six births
+have all three predecessors among the three survivors, giving exactly 18
+birth--survivor incidences; the survivor graph is a 3-cycle and has degree
+two. The next transition consists of nine mutually overpopulated deaths.
+
+Nor can an uncorrected fixed temporal window work. The proposed statement
+
+```
+sum_(i=0)^(k-1) |A_(t+i)| <= kN/2                              (W_k)
+```
+
+already fails for `k=2` in the `3 x 3` example, with `3+9>9`. This torus is
+minimal among ordinary rectangular king tori, whose two dimensions must be at
+least three to give eight distinct neighbor positions. Exact enumeration of
+all 512 states shows that every `3 x 3` prefix of every length `k>=3` does
+satisfy `(W_k)`. The next possible torus, `4 x 3`, has the sharper transient
+
+```
+###.    #.#.    #.#.
+#.#. -> #.#. -> #.#. -> ...
+#.#.    #.#.    #.#.
+```
+
+with populations `7,6,6,...`. Hence it violates `(W_k)` by one cell for every
+`k>=3`, while its period-one tail has density exactly `1/2`. This is the
+minimal-area obstruction for those window lengths.
+
+These are counterexamples to the proposed finite lemmas, not to the cycle
+conjecture: neither transient lies on a high-density temporal cycle. They
+redirect a proof toward a genuinely configuration-dependent telescoping
+potential (with spatial face terms or an equivalent projectively coherent
+discharging rule). The displayed scalar combination of birth/death balance,
+king-grid degrees, and edge counts cannot suffice, and neither can any finite
+uncorrected time average.
+
+`temporal_charging_obstruction.py` independently reapplies B3/S23, checks all
+incidence counts above, exhausts the `3 x 3` state space, and certifies all
+prefix lengths by decomposing each finite trajectory into its preperiod and
+cycle.
+
 ## Exact `6 x 12` strip-pyramid bound
 
 `pyramid_6x12.cert` assigns nonnegative integer weights to a `6 x 12`
@@ -308,6 +384,7 @@ cd life_agar_certificate
 python verify.py
 python strip2_verify.py
 python pyramid_obstruction.py
+python temporal_charging_obstruction.py
 g++ -O3 -std=c++17 pyramid_verify.cpp -o pyramid_verify
 ./pyramid_verify pyramid_6x6.cert
 g++ -O3 -std=c++17 pyramid_6x8_verify.cpp -o pyramid_6x8_verify

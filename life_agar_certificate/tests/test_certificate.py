@@ -15,6 +15,7 @@ from model import life_output
 from pyramid_obstruction import analyze as analyze_pyramid_obstruction
 from strip2_verify import load_certificate as load_strip2_certificate
 from strip2_verify import verify as verify_strip2
+from temporal_charging_obstruction import step, verify_all_long_prefixes_3x3
 from verify import load_certificate, verify
 
 
@@ -36,6 +37,13 @@ class LifeRuleTests(unittest.TestCase):
                     expected,
                     (center, neighbors),
                 )
+
+    def test_minimal_temporal_charging_obstructions(self):
+        self.assertEqual(step(0b000_000_111, 3, 3), 0b111_111_111)
+        self.assertEqual(step(0b111_111_111, 3, 3), 0)
+        verify_all_long_prefixes_3x3()
+        self.assertEqual(step(0x557, 4, 3), 0x555)
+        self.assertEqual(step(0x555, 4, 3), 0x555)
 
 
 class CertificateTests(unittest.TestCase):
