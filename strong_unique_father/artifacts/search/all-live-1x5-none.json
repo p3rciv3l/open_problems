@@ -1,0 +1,19 @@
+{
+  "box": [
+    1,
+    5
+  ],
+  "candidates_rejected_by_global_finite_predecessor": 0,
+  "exhausted": true,
+  "finite_predecessor_margin": 2,
+  "goal": "all-live",
+  "proof": {
+    "clauses": 24,
+    "cnf": "artifacts/search/all-live-1x5-none.cnf",
+    "drat": "artifacts/search/all-live-1x5-none.drat",
+    "variables": 5
+  },
+  "rejections": [],
+  "symmetry": "none",
+  "winner": null
+}

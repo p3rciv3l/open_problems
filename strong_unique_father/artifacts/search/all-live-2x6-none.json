@@ -1,0 +1,143 @@
+{
+  "box": [
+    2,
+    6
+  ],
+  "candidates_rejected_by_global_finite_predecessor": 1,
+  "exhausted": true,
+  "finite_predecessor_margin": 2,
+  "goal": "all-live",
+  "proof": {
+    "clauses": 210,
+    "cnf": "artifacts/search/all-live-2x6-none.cnf",
+    "drat": "artifacts/search/all-live-2x6-none.drat",
+    "variables": 12
+  },
+  "rejections": [
+    {
+      "changed_cell": [
+        0,
+        0,
+        1
+      ],
+      "predecessor": [
+        [
+          -2,
+          -1
+        ],
+        [
+          -2,
+          1
+        ],
+        [
+          -2,
+          3
+        ],
+        [
+          -2,
+          4
+        ],
+        [
+          -2,
+          6
+        ],
+        [
+          -1,
+          2
+        ],
+        [
+          -1,
+          3
+        ],
+        [
+          -1,
+          4
+        ],
+        [
+          -1,
+          5
+        ],
+        [
+          0,
+          -1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          1,
+          -2
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          4
+        ],
+        [
+          2,
+          6
+        ],
+        [
+          2,
+          7
+        ],
+        [
+          3,
+          -1
+        ]
+      ],
+      "target": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          4
+        ],
+        [
+          0,
+          5
+        ],
+        [
+          1,
+          0
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          4
+        ],
+        [
+          1,
+          5
+        ]
+      ]
+    }
+  ],
+  "symmetry": "none",
+  "winner": null
+}
