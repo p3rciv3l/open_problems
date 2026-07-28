@@ -52,6 +52,150 @@ coincide. Consequently its weight is counted exactly once at every torus
 cell. B3/S23 on the lifted finite patch agrees with the wrapped update, and
 temporal cancellation uses only an actual temporal cycle.
 
+### LP duality and local coboundary certificates
+
+The limiting statement has an exact functional-analytic dual. Let `X` be the
+compact set of bi-infinite Life spacetime diagrams, let `sigma_1,sigma_2,
+sigma_3` be the two spatial shifts and the time shift, and let
+`phi(x)=x(0,0,0)`. Write `M_sigma(X)` for the translation-invariant probability
+measures. For locally constant real functions `g_i` on `X`, put
+
+```
+div(g) = sum_(i=1)^3 (g_i - g_i composed with sigma_i).
+```
+
+Then
+
+```
+rho = max_(mu in M_sigma(X)) integral phi dmu
+    = inf_(g_1,g_2,g_3 local) max_(x in X) (phi(x) + div(g)(x)).       (D)
+```
+
+In particular there is no infinite-dimensional LP duality gap, and the
+infimum may be taken over rational-valued local functions. Every `g` gives
+the upper bound in (D), since invariant measures integrate `div(g)` to zero.
+For the reverse bound, let
+
+```
+A_n phi(x) = |Q_n|^(-1) sum_(v in Q_n) phi(sigma^v x),
+Q_n = {0,...,n-1}^3.
+```
+
+The difference `A_n phi-phi` is a finite sum of generator coboundaries:
+write each translate `phi composed with sigma^v-phi` as a telescoping path in
+the three coordinate directions and average the paths. Thus
+`A_n phi=phi+div(g^(n))` for rational local `g^(n)`. Moreover
+
+```
+lim_(n -> infinity) max_(x in X) A_n phi(x) = rho.                  (F)
+```
+
+Indeed, the left side is always at least `rho` after integration. If `x_n`
+maximizes `A_n phi`, the orbit empirical measures on `Q_n` have invariant
+weak limits because the cubes are Følner, and every such limit has
+`phi`-integral equal to the corresponding subsequential limit. This proves
+(F) and (D). Equivalently, Hahn--Banach separation gives the same result:
+the annihilator of the closure of the coboundaries consists exactly of
+translation-invariant signed measures, and positive normalized separating
+functionals are invariant probability measures.
+
+This proves the following precise approximate-certificate theorem:
+
+```
+rho <= c
+if and only if
+for every epsilon > 0 there are rational local g_1,g_2,g_3 with
+phi + div(g) <= c + epsilon everywhere on X.                       (C_epsilon)
+```
+
+These are genuinely finite certificates. The left side of an inequality in
+`(C_epsilon)` depends on one finite spacetime window. If a pattern on that
+window does not occur in `X`, compactness and the finite-type Life rules
+exclude it after some finite collar is added. Since there are only finitely
+many window patterns, one common collar suffices, after which the inequality
+can be checked by finite enumeration using only B3/S23 constraints.
+
+There is already a period-one Life diagram of density `1/2`: alternate full
+live rows and empty rows. Every live cell has its two horizontal neighbors,
+while every dead cell has six live neighbors. Consequently `rho >= 1/2`, and
+the still-open assertion has the sharp equivalent forms
+
+```
+rho = 1/2
+<=> max_X A_n phi <= 1/2 + o(1)
+<=> (C_epsilon) holds with c=1/2 for every epsilon > 0.             (H)
+```
+
+Thus approximate local certificates would be a complete proof, not merely
+evidence for an exact certificate.
+
+An exact finite certificate is strictly a question of attainment. For a
+radius `R`, let `V_R` be the finite-dimensional space of functions depending
+only on the radius-`R` window and set
+
+```
+lambda_R = min_(g_1,g_2,g_3 in V_R)
+           max_X (phi + div(g)).
+```
+
+The minimum exists: after listing the finitely many occurring patterns this
+is an ordinary finite linear program. The spaces may be nested, and (D)
+gives
+
+```
+lambda_R decreases to rho.
+```
+
+Since `rho >= 1/2`, an exact local `1/2` certificate exists if and only if
+`lambda_R=1/2` for some finite `R`. Equivalently, approximation can be
+upgraded whenever certificates with errors tending to zero can all be chosen
+in one fixed local function space. Without such finite-radius stabilization,
+Hahn--Banach only puts `phi-1/2` in the closure of
+`{div(g)+h : h<=0}`; it does not put it in the union of the finite-radius
+cones. This is the exact logical gap between convergence of the hierarchy
+and attainment of a finite `1/2` certificate.
+
+### What can force periodic approximation
+
+Let `M_per(X)` denote orbit measures on spacetime diagrams with a finite
+`Z^3` orbit, exactly the spatially and temporally periodic diagrams. The
+property needed to reduce the invariant-measure problem to finite tori is
+
+```
+closure(M_per(X)) = M_sigma(X).                                   (P)
+```
+
+Under (P), continuity of `mu -> integral phi dmu` gives
+
+```
+rho = sup_(nu in M_per(X)) integral phi dnu.
+```
+
+The commonly suggested hypotheses have different consequences:
+
+* Upper semicontinuity is not enough. Here the density functional is already
+  continuous and compactness ensures that a maximizing invariant measure
+  exists, but says nothing about whether it is a periodic limit.
+* Finite-type structure is not enough in dimension at least two. Strongly
+  aperiodic Wang-tile SFTs have no periodic configurations at all. Thus the
+  fact that Life spacetime is a three-dimensional SFT cannot by itself prove
+  (P). In contrast, periodic orbit measures are dense for an irreducible
+  one-dimensional SFT. Even without irreducibility, a locally constant
+  potential on a one-dimensional SFT has a periodic maximizer: its maximum is
+  a maximum cycle mean, and the finite graph LP supplies an exact coboundary
+  certificate.
+* The standard specification property does suffice. Sigmund's periodic
+  approximation argument, and its residually finite amenable group version,
+  says that periodic orbit measures are dense in invariant measures. Since
+  `Z^3` is residually finite and amenable, specification for the full
+  spacetime shift would imply (P).
+
+No specification property is presently proved for the Life spacetime SFT,
+and it does not follow from being an SFT. Therefore periodic-orbit bounds
+alone do not currently identify `rho`; the exact alternatives are to prove
+(P) (specification is one sufficient route), rule out aperiodic measures
+above `1/2` directly, or produce the approximate certificates in (H).
+
 ### What the `6 x 8`--`6 x 12` optima say
 
 The exact maximizing slices expose a boundary transient, not a repeatable
