@@ -3,6 +3,56 @@
 from collections.abc import Sequence
 
 
+def light_cone_capacity(
+    width: int,
+    height: int,
+    elapsed: int,
+    radius: int = 1,
+) -> int:
+    """Return the number of sites in the rectangular causal bound."""
+    if min(width, height) <= 0 or min(elapsed, radius) < 0:
+        raise ValueError("sizes must be positive and times nonnegative")
+    reach = radius * elapsed
+    return (width + 2 * reach) * (height + 2 * reach)
+
+
+def minimum_elapsed_time_for_copies(
+    width: int,
+    height: int,
+    copies: int,
+    radius: int = 1,
+) -> int:
+    """Return the least integer time whose causal bound can hold the copies."""
+    if min(width, height, copies, radius) <= 0:
+        raise ValueError("all arguments must be positive")
+    low = 0
+    high = 1
+    while light_cone_capacity(width, height, high, radius) < copies:
+        high *= 2
+    while low < high:
+        middle = (low + high) // 2
+        if light_cone_capacity(width, height, middle, radius) >= copies:
+            high = middle
+        else:
+            low = middle + 1
+    return low
+
+
+def forced_lineage_cancellations(
+    nominal_lineages: int,
+    maximum_lineages_per_tile: int,
+    width: int,
+    height: int,
+    elapsed: int,
+    radius: int = 1,
+) -> int:
+    """Lower-bound nominal lineages absent from any endpoint macrotile."""
+    if min(nominal_lineages, maximum_lineages_per_tile) <= 0:
+        raise ValueError("lineage counts must be positive")
+    capacity = light_cone_capacity(width, height, elapsed, radius)
+    return max(0, nominal_lineages - maximum_lineages_per_tile * capacity)
+
+
 def capacity_at_generation(
     width: int,
     height: int,
@@ -14,10 +64,7 @@ def capacity_at_generation(
     if min(width, height, population, period, generation) <= 0:
         raise ValueError("all arguments must be positive")
     required = population * (1 << generation)
-    available = (
-        (width + 2 * period * generation)
-        * (height + 2 * period * generation)
-    )
+    available = light_cone_capacity(width, height, period * generation)
     return required, available
 
 
@@ -82,8 +129,9 @@ def phased_capacity_at_generation(
         raise ValueError("sizes must be positive and radius nonnegative")
     counts = phase_counts(substitution, initial_phase, generation)
     required = minimum_phase_population * sum(counts)
-    reach = radius * period * generation
-    available = (width + 2 * reach) * (height + 2 * reach)
+    available = light_cone_capacity(
+        width, height, period * generation, radius
+    )
     return counts, required, available
 
 

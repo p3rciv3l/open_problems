@@ -96,6 +96,66 @@ is endpoint cancellation/coalescence or another context-dependent macro-rule,
 such as parity, or non-fixed generation times. Thus merely adding a reflected
 second phase to clean doubling cannot work.
 
+## Escape-hatch theorem
+
+The obstruction can be sharpened into a necessary-mechanism theorem without
+assuming fixed generation intervals or context-free evolution.
+
+**Theorem (endpoint packing and lineage deficit).** Let a
+two-dimensional radius-`rho` cellular automaton with a quiescent state start
+from a finite pattern in a `w` by `h` box. At an arbitrary increasing sequence
+of sampling times `t_n`, suppose the complete configuration is a
+pairwise-disjoint union of `c_n` nonempty finite macrotiles; the tile shapes,
+phases, and sizes may depend on `n`. Then
+
+`c_n <= A_n := (w + 2*rho*t_n)(h + 2*rho*t_n)`.                 (1)
+
+Suppose additionally that an abstract replication account has `b_n` nominal
+lineages at sample `n`. If `x_n` lineages are cancelled and every endpoint
+tile coalesces at most `K_n` uncancelled lineages, then
+
+`x_n >= b_n - K_n*A_n`.                                        (2)
+
+Here cancellation and coalescence are bookkeeping notions, not assumptions
+about intermediate Life states: every uncancelled lineage must be assigned to
+an endpoint tile, and no tile receives more than `K_n` assignments.
+
+**Proof.** Finite propagation confines every nonquiescent cell at time `t_n`
+to the initial box enlarged by `rho*t_n` in each direction. Choosing one live
+cell from every disjoint nonempty endpoint tile injects the tiles into that
+box, proving (1). At most `c_n*K_n <= A_n*K_n` nominal lineages can be
+represented at the endpoint. The remaining `b_n - x_n` lineages must fit
+among those assignments, so `b_n - x_n <= K_n*A_n`, proving (2). `QED`
+
+This yields exact necessary mechanisms:
+
+- If `c_n >= a*n^d` eventually, then
+  `t_n = Omega(n^(d/2))`. Fixed or bounded generation intervals give
+  `t_n = O(n)`, so polynomial copy growth above degree two is impossible.
+- If `c_n >= a*lambda^n` for `lambda > 1`, then
+  `t_n = Omega(lambda^(n/2))`. Exponential realized replication therefore
+  requires exponentially increasing total generation times; in particular,
+  among the first `n` generation intervals at least one has length
+  `Omega(lambda^(n/2)/n)`.
+- If nominal branching has `b_n >= a*lambda^n` while `t_n` and `K_n` are
+  subexponential, (2) gives `x_n/b_n -> 1`. Thus a fixed-period implementation
+  must cancel asymptotically all nominal branches or coalesce an unbounded
+  number into some endpoint tiles. A uniform finite coalescence bound does
+  not escape the obstruction.
+- Parity macro-rules take exactly the context-dependent cancellation route.
+  Polynomial
+  replicators of degree at most two and constructors with increasing
+  generation intervals remain viable. The theorem does not assert that any
+  elementary Life example in those classes exists.
+
+`minimum_elapsed_time_for_copies` computes the exact integer lower bound
+
+`min {t >= 0 : (w + 2*rho*t)(h + 2*rho*t) >= c}`,
+
+and `forced_lineage_cancellations` computes the right-hand deficit in (2).
+These routines avoid floating-point asymptotics and are covered by independent
+boundary tests.
+
 `branching_certificate.py` performs only exact integer recurrence and
 light-cone arithmetic. The committed certificate uses the two-phase
 substitution `A -> B`, `B -> A+B`; reproduce and independently verify it:
