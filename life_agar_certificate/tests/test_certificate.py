@@ -11,6 +11,7 @@ from pathlib import Path
 DIRECTORY = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(DIRECTORY))
 
+from entropy_obstruction import analyze as analyze_entropy_obstruction
 from model import life_output
 from pyramid_obstruction import analyze as analyze_pyramid_obstruction
 from strip2_verify import load_certificate as load_strip2_certificate
@@ -72,6 +73,24 @@ class CertificateTests(unittest.TestCase):
         certificate["bound"] = "1/2"
         with self.assertRaises(AssertionError):
             verify(certificate)
+
+
+class EntropyObstructionTests(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        cls.report = analyze_entropy_obstruction(DIRECTORY)
+
+    def test_locally_stationary_witness_exceeds_one_half(self):
+        self.assertEqual(
+            Fraction(self.report["local_witness_density"]), Fraction(8, 13)
+        )
+        self.assertEqual(self.report["local_witness_support"], 57)
+
+    def test_noninteracting_blinker_product(self):
+        self.assertEqual(self.report["blinker_spacing"], 5)
+        self.assertEqual(self.report["blinker_labelings_checked"], 81)
+        self.assertEqual(self.report["blinker_density"], "3*q/25")
+        self.assertEqual(self.report["blinker_activity"], "4*q/25")
 
 
 class Strip2CertificateTests(unittest.TestCase):

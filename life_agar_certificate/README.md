@@ -276,6 +276,82 @@ incidence counts above, exhausts the `3 x 3` state space, and certifies all
 prefix lengths by decomposing each finite trajectory into its preperiod and
 cycle.
 
+### Entropy, predecessor multiplicity, and their exact obstruction
+
+Entropy preservation under a stationary deterministic rule is much weaker
+than local invertibility. Let `F` be Life, let `X` have a spatially
+translation-invariant law `mu` with `F mu = mu`, put `Y=F(X)`, and let `Q_n`
+be an `n x n` square. Since `Y[Q_n]` is a function of
+`X[Q_n+[-1,1]^2]` and `Y[Q_n]` has the same law as `X[Q_n]`,
+
+```
+H(X[Q_n+[-1,1]^2] | Y[Q_n])
+  = H(X[Q_n+[-1,1]^2]) - H(X[Q_n])
+  <= 4n+4 bits.                                                (E)
+```
+
+Thus every stationary Life law has zero *relative spatial entropy rate*:
+the uncertainty in a predecessor of an `n x n` image is boundary-order, not
+area-order. This is the rigorous conclusion available from determinism and
+stationarity. It holds at every density, so treating entropy balance as a
+strict bulk loss would assume the missing step rather than prove it.
+In particular, (E) controls conditional entropy (the mean logarithmic
+posterior uncertainty), not the maximum cardinality of every predecessor
+fiber; exceptional images can still have many predecessors.
+
+Shearer's inequality does not add a density term. Applied to translates of a
+finite window it gives the usual upper bounds on spatial entropy rate, while
+`h(F(X))=h(X)` is already forced by equality in law. There is also an exact
+one-step local obstruction. The 57-pattern probability distribution stored as
+`optimality_witness` in `certificate.json` has
+
+```
+P(center=1) = P(Life output=1) = 8/13,
+law(left 3x2 face) = law(right 3x2 face),
+law(top 2x3 face) = law(bottom 2x3 face).
+```
+
+Because this is an actual probability distribution, the entropies of all
+subsets of its nine input bits and deterministic output satisfy every Shannon
+and Shearer inequality automatically. Therefore no argument whose complete
+hypotheses are one `3 x 3 -> 1` Life marginal, these opposite-face and
+one-cell temporal consistency equations, and Shannon-type information
+inequalities can imply density at most `1/2`. The witness need not extend to a
+global Life law; imposing consistent marginals at every scale is precisely
+the projective problem characterized above.
+
+Positive entropy cannot be dismissed as an inactive equality case. For an
+explicit family, fix `L >= 5`, choose an offset uniformly in
+`(Z/LZ)^2`, and at every point of that offset coset independently place
+either no object, a horizontal blinker, or a vertical blinker with
+probabilities `1-q,q/2,q/2`. The radius-two influence boxes of distinct
+centers are disjoint. Life therefore swaps the two blinker labels and fixes
+the empty label. The resulting law is spatially translation invariant and
+Life invariant, and for `0 < q <= 1` it is active and has
+
+```
+density = 3q/L^2,
+changing-cell intensity = 4q/L^2,
+spatial entropy = (H_2(q)+q)/L^2 bits per cell > 0.
+```
+
+The entropy formula follows because, conditional on the finite offset, the
+three labels are recoverable and i.i.d.; mixing over `L^2` offsets changes
+block entropy by at most `log_2(L^2)`. This standard independent-oscillator
+law explicitly rules out any claim that equality in deterministic entropy
+balance forces zero entropy or zero activity.
+
+These facts do not prove the `1/2` bound, and no entropy-density theorem is
+claimed here. A successful information proof must introduce a new strict
+inequality that uses globally coherent Life-specific marginals (and vanishes
+on the active laws above), then prove that density above `1/2` makes it
+strict. Without that step, predecessor counting or local entropy loss is only
+a heuristic reformulation of the open invariant-measure problem.
+
+`entropy_obstruction.py` exactly rechecks the `8/13` local witness and
+exhausts all 81 labelings of four blinkers at the minimal certified spacing
+on a `10 x 10` torus.
+
 ## Exact `6 x 12` strip-pyramid bound
 
 `pyramid_6x12.cert` assigns nonnegative integer weights to a `6 x 12`
@@ -447,6 +523,7 @@ python verify.py
 python strip2_verify.py
 python pyramid_obstruction.py
 python temporal_charging_obstruction.py
+python entropy_obstruction.py
 g++ -O3 -std=c++17 pyramid_verify.cpp -o pyramid_verify
 ./pyramid_verify pyramid_6x6.cert
 g++ -O3 -std=c++17 pyramid_6x8_verify.cpp -o pyramid_6x8_verify
