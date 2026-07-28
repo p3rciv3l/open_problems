@@ -1,0 +1,25 @@
+{
+  "available_cells": 961,
+  "generation": 15,
+  "height": 1,
+  "initial_phase": 0,
+  "minimum_phase_population": 1,
+  "period": 1,
+  "phase_counts": [
+    377,
+    610
+  ],
+  "radius": 1,
+  "required_cells": 987,
+  "substitution": [
+    [
+      0,
+      1
+    ],
+    [
+      1,
+      1
+    ]
+  ],
+  "width": 1
+}

@@ -1,0 +1,3 @@
+scope,rules,max_width,max_height,gap,times,instances,witnesses
+one_phase_horizontal,"60;90;102;150",4,4,1,pitch,64,0
+one_phase_horizontal,"60;90;102;150",3,3,2,"pitch;pitch+1",72,0
