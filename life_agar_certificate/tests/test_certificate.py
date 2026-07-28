@@ -14,6 +14,7 @@ sys.path.insert(0, str(DIRECTORY))
 from entropy_obstruction import analyze as analyze_entropy_obstruction
 from model import life_output
 from pyramid_obstruction import analyze as analyze_pyramid_obstruction
+from spectral_identities import verify_all as verify_spectral_identities
 from strip2_verify import load_certificate as load_strip2_certificate
 from strip2_verify import verify as verify_strip2
 from temporal_charging_obstruction import (
@@ -54,6 +55,15 @@ class LifeRuleTests(unittest.TestCase):
         verify_all_long_prefixes_3x3()
         self.assertEqual(step(0x557, 4, 3), 0x555)
         self.assertEqual(step(0x555, 4, 3), 0x555)
+
+    def test_exact_polynomial_and_spectral_identities(self):
+        report = verify_spectral_identities()
+        self.assertEqual(report["degree_constrained_4x3_states"], 1132)
+        self.assertEqual(
+            Fraction(report["maximum_degree_constrained_4x3_density"]),
+            Fraction(1, 2),
+        )
+        self.assertEqual(report["3x3_cycles"], 127)
 
 
 class CertificateTests(unittest.TestCase):

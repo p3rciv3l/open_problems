@@ -344,6 +344,104 @@ and exhausts all 512 states of the `3 x 3` torus. The exact maximum of
 Enumeration is used only to certify this finite local statement; the
 translation-summed contradiction itself is the displayed exact argument.
 
+### Exact Boolean and Fourier identities
+
+There is an exact spectral formulation, but its quadratic positivity does not
+by itself prove `1/2`. Write `x_t(v)` for a Boolean generation, `K` for
+convolution with the eight king moves, and `n_t=Kx_t`. For `0 <= j <= 8` put
+
+```
+Delta_j(n) = product_(0 <= r <= 8, r != j) (n-r)/(j-r).
+```
+
+Since every neighbor sum is an integer in `[0,8]`, these are exact indicator
+polynomials, not approximations. Births, two- and three-neighbor survivors,
+all survivors, and deaths are respectively
+
+```
+b  = (1-x) Delta_3(n),
+s2 = x Delta_2(n),
+s3 = x Delta_3(n),
+s  = s2+s3,
+d  = x-s.
+```
+
+Thus `x_(t+1)=b+s`, with the exact annihilators
+
+```
+xb=0,  (1-x)s=0,  (n-3)b=0,  (n-2)(n-3)s=0.
+```
+
+In particular the nonlinear threshold rule has not been replaced by a moment
+condition. Averaging a temporal cycle gives `<b>=<d>` and
+`rho=<s>+<b>`.
+
+Normalize Fourier transform so that Parseval reads
+`sum_k |xhat(k)|^2=<x^2>=rho`. At frequency `(p,q)` the king kernel has the
+real symbol
+
+```
+lambda(p,q) = (1+2 cos p)(1+2 cos q)-1
+            = 2 cos p+2 cos q+4 cos p cos q.
+```
+
+Consequently, with `A=<x Kx>` and `n=Kx`,
+
+```
+A       = sum_k lambda(k) |xhat(k)|^2,
+<n^2>   = sum_k lambda(k)^2 |xhat(k)|^2.                       (F)
+```
+
+The sharp lower spectral edge is `lambda >= -4`. Indeed, for
+`u=(1+cos p)/2` and `v=(1+cos q)/2`,
+
+```
+lambda+4 = 12uv + 4(1-u)(1-v) >= 0.
+```
+
+Separating the constant mode in (F) therefore gives the exact quadratic
+positivity inequality
+
+```
+A >= 8rho^2-4(rho-rho^2) = 12rho^2-4rho.                      (P)
+```
+
+Equality in (P) means that every nonconstant Fourier coefficient is supported
+where `lambda=-4`, namely `(p,q)=(0,pi)` or `(pi,0)` when those frequencies
+exist on the torus. Alternating live columns or rows at density `1/2` realize
+equality. This characterizes equality for the spectral inequality, not for
+all maximum-density degree-three sets.
+
+If a Boolean field has at most three live neighbors at each live cell, then
+`A<=3rho`; combining this with (P) yields only `rho<=7/12`. The independent
+live--dead incidence identity is
+
+```
+<x K(1-x)> = 8rho-A.
+```
+
+Its trivial upper bound `8(1-rho)` gives `A>=16rho-8`, and hence the stronger
+but still insufficient `rho<=8/13`. Elkies's nonlinear geometric theorem
+improves this to `rho<=1/2`; equality forces every live cell to have at least
+two live neighbors and every dead cell to have at least four live neighbors.
+Applying it to the survivor field is legitimate because a survivor has at
+most three survivor neighbors, so `<s> <= 1/2`. It does not finish the
+oscillator problem because
+
+```
+rho = <s>+<b>;
+```
+
+the missing exact positivity statement must pay every positive birth flux
+from the survivor deficit `1/2-<s>`. Parseval, the degree constraint, and
+birth/death balance alone leave that term uncontrolled.
+
+`spectral_identities.py` constructs the rational `Delta_j` coefficients,
+checks their complete Boolean truth table and all annihilators, verifies both
+identities (F) as integer cyclic-correlation identities, exhausts every
+degree-three state on the `4 x 3` torus, checks the equality stripe, and
+independently verifies birth/death balance on every `3 x 3` temporal cycle.
+
 ### Exact obstruction to population-only temporal charging
 
 Here is a precise limit of the survivor/birth/death approach. Let `A_t` be a
@@ -666,6 +764,7 @@ cd life_agar_certificate
 python verify.py
 python strip2_verify.py
 python pyramid_obstruction.py
+python spectral_identities.py
 python temporal_charging_obstruction.py
 python entropy_obstruction.py
 g++ -O3 -std=c++17 pyramid_verify.cpp -o pyramid_verify
