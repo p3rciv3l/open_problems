@@ -138,6 +138,68 @@ discharge that flux into the Elkies survivor deficit `1/2-s`; the present
 three-layer positional certificates do not, because their dual pays for it
 with the quantified seams above.
 
+### Exact counterexample to coefficient-one survivor stability
+
+The quantitative stability statement needed to finish that proposed
+discharging argument is false for a legal Life transition. In its
+translation-summed form it would have to say
+
+```
+|B_t| <= N/2 - |S_t|,                                         (S)
+```
+
+because `|A_(t+1)|=|S_t|+|B_t|`; coefficient one is indispensable for a
+`1/2` conclusion. Consider the spatially periodic configuration on
+`Z^2` whose live rows are exactly those with `y = 0 (mod 3)`. A fundamental
+`3 x 3` domain is
+
+```
+###      ###
+...  ->  ###
+...      ###
+```
+
+Every initially live cell has its two horizontal neighbors and survives.
+Every initially dead cell has exactly the three cells in the adjacent live
+row as neighbors and is born. Thus the transition is legal and
+
+```
+N=9,  |S_t|=3,  |B_t|=6,  |D_t|=0,
+N/2-|S_t|=3/2.
+```
+
+Consequently `|B_t|/(N/2-|S_t|)=4`, and (S) fails by a factor of four. This is
+already a translation-summed counterexample on the infinite lattice: sum any
+putative translation-covariant local charging inequality over the nine
+translations of the fundamental domain. If its nonnegative local defects pay
+at least one unit per birth while their total is bounded by the Elkies
+survivor deficit, the sum would give `6 <= 3/2`, a contradiction. This rules
+out the proposed local stability lemma regardless of its finite radius or how
+the local defect types are classified.
+
+The time-stationary version does not provide a weaker intermediate lemma.
+For a temporal cycle of length `T`, summing (S) over time gives
+
+```
+sum_t |B_t| <= sum_t (N/2-|S_t|)
+iff
+sum_t |A_(t+1)| <= TN/2.
+```
+
+The right-hand statement is exactly the cycle-average density conjecture, not
+a consequence of birth/death balance. Elkies's equality theorem gives only
+the qualitative endpoint: if a periodic survivor set has density `1/2`, every
+cell outside it has at least four survivor neighbors, so no birth can occur.
+It supplies no coefficient-one estimate near equality. Positive stationary
+flux therefore implies a positive survivor deficit by compactness, but showing
+that the deficit is at least the flux is precisely the unresolved conjecture.
+
+`temporal_charging_obstruction.py` checks the displayed transition directly
+and exhausts all 512 states of the `3 x 3` torus. The exact maximum of
+`|B|/(N/2-|S|)` is `4`, attained by the row/column configurations above.
+Enumeration is used only to certify this finite local statement; the
+translation-summed contradiction itself is the displayed exact argument.
+
 ### Exact obstruction to population-only temporal charging
 
 Here is a precise limit of the survivor/birth/death approach. Let `A_t` be a

@@ -1,5 +1,7 @@
 """Exact finite checks for population-only temporal charging obstructions."""
 
+from fractions import Fraction
+
 
 def step(state, width, height):
     result = 0
@@ -74,6 +76,36 @@ def verify_all_long_prefixes_3x3():
         assert max(centered_prefixes[2:], default=0) <= 0
 
 
+def verify_survivor_stability_obstruction():
+    """Disprove the coefficient-one survivor-deficit stability inequality."""
+    width = height = 3
+    size = width * height
+    maximum_ratio = Fraction()
+    maximizers = []
+    for state in range(1 << size):
+        survivors, births, deaths = transition_counts(state, width, height)
+        deficit = Fraction(size, 2) - survivors
+        assert deficit >= 0
+        if not deficit:
+            assert births == 0
+            continue
+        ratio = Fraction(births, 1) / deficit
+        if ratio > maximum_ratio:
+            maximum_ratio = ratio
+            maximizers = [(state, survivors, births, deaths)]
+        elif ratio == maximum_ratio:
+            maximizers.append((state, survivors, births, deaths))
+
+    row = 0b000_000_111
+    assert (row, 3, 6, 0) in maximizers
+    assert maximum_ratio == 4
+    return {
+        "states": 1 << size,
+        "maximum_birth_to_survivor_deficit_ratio": str(maximum_ratio),
+        "maximizers": len(maximizers),
+    }
+
+
 def main():
     row = 0b000_000_111
     full = (1 << 9) - 1
@@ -89,6 +121,7 @@ def main():
     assert directed_edges(survivors, survivors, 3, 3) == 6
     assert 3 + 9 > 9
 
+    stability = verify_survivor_stability_obstruction()
     verify_all_long_prefixes_3x3()
 
     transient = 0x557
@@ -101,6 +134,10 @@ def main():
         assert 7 + 6 * (length - 1) > 6 * length
 
     print("3x3 row -> full -> empty counts: 3, 9, 0")
+    print(
+        "3x3 exhaustive maximum birth/survivor-deficit ratio: "
+        f"{stability['maximum_birth_to_survivor_deficit_ratio']}"
+    )
     print("3x3 exhaustive check: every prefix of length >= 3 has average <= 1/2")
     print("4x3 transient -> stripes -> stripes counts: 7, 6, 6, ...")
     print("all temporal-charging obstruction checks passed")
