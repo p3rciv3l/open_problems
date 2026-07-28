@@ -91,3 +91,41 @@ class LifePreimageCNF:
     def model_assignment(self, model: list[int]) -> dict[Cell, bool]:
         positive = {literal for literal in model if literal > 0}
         return {cell: variable in positive for cell, variable in self.variables.items()}
+
+
+def finite_counter_predecessor(
+    image_live: frozenset[Cell],
+    width: int,
+    height: int,
+    cell: Cell,
+    expected: bool,
+    margin: int = 2,
+    encoding: str = "cardinality",
+) -> dict[Cell, bool] | None:
+    """Find a finite-support, globally valid predecessor changing one cell."""
+    if margin < 0:
+        raise ValueError("margin must be nonnegative")
+    support = {
+        (x, y)
+        for y in range(-margin, height + margin)
+        for x in range(-margin, width + margin)
+    }
+    image = {
+        (x, y): (x, y) in image_live
+        for y in range(-margin - 1, height + margin + 1)
+        for x in range(-margin - 1, width + margin + 1)
+    }
+    cnf = LifePreimageCNF(image, encoding)
+    assumptions = [cnf.literal(cell, not expected)]
+    assumptions.extend(
+        cnf.literal(candidate, False)
+        for candidate in sorted(cnf.domain - support)
+    )
+
+    from pysat.solvers import Cadical195
+
+    with Cadical195(bootstrap_with=cnf.clauses) as solver:
+        if not solver.solve(assumptions=assumptions):
+            return None
+        assignment = cnf.model_assignment(solver.get_model())
+    return {candidate: value for candidate, value in assignment.items() if candidate in support}

@@ -82,3 +82,36 @@ of the strong Unique Father problem.  In particular, 64 live cells remain
 unforced by the width-2 finite check.  At least one of them now has the exact
 global counter-predecessor above, proving that repeated expansion of this
 stabilization cannot produce a strong witness.
+
+## Exact finite still-life synthesis
+
+`strong_unique_father.synthesis` searches still lifes rather than measuring a
+fixed construction.  Its master CNF encodes exact finite evolution (including
+the dead exterior), an exact bounding box, optional population bounds, and
+horizontal, vertical, half-turn, D2, or D4 symmetry.  A candidate is rejected
+only by a finite predecessor whose direct, unbounded Life evolution is exactly
+the candidate and which changes a requested cell.  A candidate is accepted
+only after the opposite predecessor literal is UNSAT in the finite image-patch
+encoding, which quantifies over restrictions of arbitrary global predecessors.
+
+The checked search in `artifacts/search` gives a bounded impossibility theorem
+beyond the kynnös family: **none of the 1,769 nonempty finite still lifes whose
+minimal bounding box has both dimensions at most 6 has every live cell
+preserved by every predecessor**.  Consequently none preserves its entire
+convex hull.  Rectangles related by rotation are represented once.  The 21
+JSON manifests contain a globally valid finite counter-predecessor for each
+still life; the matching CNF/DRAT pairs prove that the manifests exhaust every
+exact bounding-box class.  The DRAT files were checked independently with
+`drat-trim`.
+
+Reproduce one class and validate its manifest with:
+
+```sh
+python -m strong_unique_father.synthesis 6 6 --symmetry none \
+  --proof-prefix artifacts/search/all-live-6x6-none \
+  --output artifacts/search/all-live-6x6-none.json
+python -m strong_unique_father.synthesis \
+  --verify artifacts/search/all-live-6x6-none.json
+drat-trim artifacts/search/all-live-6x6-none.cnf \
+  artifacts/search/all-live-6x6-none.drat
+```
