@@ -36,6 +36,12 @@ simulation code.
   translation and dihedral symmetry. `exclude_still_life_classes` stops each
   class at its first certified changed-periodic collision. All 38 classes have
   such a witness, so no still life fitting in 5-by-5 is single-glider-proof.
+  The same row-constraint search exhausts all 3,928 fixed-board still lifes in
+  a 6-by-6 box, giving 332 nonempty classes up to translation and dihedral
+  symmetry. Every class has an exact changed-periodic collision certificate.
+  Thus no finite still life whose bounding box fits in 6-by-6 is
+  single-glider-proof. This is a strict class impossibility theorem, not a
+  finite-horizon universality claim.
 
 These quantifiers are intentionally not conflated. **Survival through a
 bounded horizon does not solve the Immovable Object Problem**, whose exterior
@@ -94,3 +100,7 @@ search, and `examples/still_life_4x4_attacks.csv` contains every attack
 classification used by that record.
 `examples/still_life_5x5_exclusion.csv` contains the complete 38-class
 exclusion and exact early collision witness for each class.
+`examples/still_life_6x6_exclusion.csv` analogously contains all 332 classes.
+Each recorded repeat is independently replayed on an unbounded coordinate
+plane in the test suite; equality of the entire finite configuration at two
+generations proves subsequent periodicity by determinism.

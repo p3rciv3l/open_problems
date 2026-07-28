@@ -57,6 +57,35 @@ def _touches(a: Pattern, b: Pattern) -> bool:
     )
 
 
+def interacting_lane_bounds(
+    target: Pattern, direction: str, phase: int
+) -> tuple[int, int]:
+    """Return a proven finite interval containing every interacting lane.
+
+    The cross-coordinate ``dx*y-dy*x`` is invariant under a glider's
+    translation. Moore adjacency can change it by at most two. The union over
+    the four temporal phases therefore contains every lane that can interact;
+    exact trajectory replay removes the lanes in this interval that miss.
+    """
+    if not target:
+        raise ValueError("target must be nonempty")
+    if direction not in DIRECTIONS:
+        raise ValueError(f"unknown direction: {direction}")
+    if phase not in range(4):
+        raise ValueError("phase must be 0, 1, 2, or 3")
+    dx, dy = DIRECTIONS[direction]
+    target_cross = [dx * y - dy * x for x, y in target]
+    orbit_cross = [
+        dx * y - dy * x
+        for offset in range(4)
+        for x, y in glider(direction, (phase + offset) % 4)
+    ]
+    return (
+        min(target_cross) - max(orbit_cross) - 2,
+        max(target_cross) - min(orbit_cross) + 2,
+    )
+
+
 @dataclass(frozen=True)
 class Attack:
     direction: str
@@ -122,10 +151,9 @@ def enumerate_interacting_attacks(
     for direction, (dx, dy) in DIRECTIONS.items():
         for phase in range(4):
             shape = glider(direction, phase)
-            cross_values = [dx * y - dy * x for x, y in target]
-            shape_cross = [dx * y - dy * x for x, y in shape]
-            lane_min = min(cross_values) - max(shape_cross) - 2
-            lane_max = max(cross_values) - min(shape_cross) + 2
+            lane_min, lane_max = interacting_lane_bounds(
+                target, direction, phase
+            )
             for lane in range(lane_min, lane_max + 1):
                 tx, ty = _translation_for_lane(direction, lane)
                 candidate = translate(shape, tx, ty)

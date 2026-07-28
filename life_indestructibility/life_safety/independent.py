@@ -20,3 +20,23 @@ def dense_step(pattern: Iterable[Cell]) -> Pattern:
             if neighbors == 3 or (neighbors == 2 and (x, y) in alive):
                 output.add((x, y))
     return frozenset(output)
+
+
+def verify_exact_period(
+    initial: Iterable[Cell],
+    repeat_generation: int,
+    period: int,
+    expected_repeat: Iterable[Cell] | None = None,
+) -> bool:
+    """Replay an exact global period certificate on the unbounded sparse plane."""
+    if repeat_generation < 1 or period < 1 or period > repeat_generation:
+        return False
+    current = frozenset(initial)
+    earlier = current if repeat_generation == period else None
+    for generation in range(1, repeat_generation + 1):
+        current = dense_step(current)
+        if generation == repeat_generation - period:
+            earlier = current
+    return current == earlier and (
+        expected_repeat is None or current == frozenset(expected_repeat)
+    )

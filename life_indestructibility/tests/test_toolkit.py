@@ -13,6 +13,7 @@ from life_safety import (
     check_bounded_flip,
     enumerate_still_life_classes,
     enumerate_interacting_attacks,
+    interacting_lane_bounds,
     search_three_by_three_invariant,
     step,
 )
@@ -22,7 +23,7 @@ from life_safety.candidates import (
     exclude_still_life_classes,
 )
 from life_safety.gliders import DIRECTIONS, glider, simulate_collision
-from life_safety.independent import dense_step
+from life_safety.independent import dense_step, verify_exact_period
 from life_safety.invariant import (
     PROTECTED_INDEX,
     REGION,
@@ -243,6 +244,23 @@ class GliderEnumerationTests(unittest.TestCase):
                 }
                 self.assertEqual(actual, expected)
 
+    def test_lane_bounds_cover_all_phases_and_exclude_distant_lanes(self):
+        for direction in DIRECTIONS:
+            for phase in range(4):
+                lower, upper = interacting_lane_bounds(BLOCK, direction, phase)
+                actual = {
+                    attack.lane
+                    for attack in self.attacks
+                    if attack.direction == direction and attack.phase == phase
+                }
+                self.assertTrue(actual)
+                self.assertGreaterEqual(min(actual), lower)
+                self.assertLessEqual(max(actual), upper)
+                for lane in range(lower - 20, lower):
+                    self.assertFalse(independent_lane_hits(direction, phase, lane))
+                for lane in range(upper + 1, upper + 21):
+                    self.assertFalse(independent_lane_hits(direction, phase, lane))
+
     def test_large_target_lane_after_generation_64_is_not_missed(self):
         far_block = translate(BLOCK, 20, 0)
         target = BLOCK | far_block
@@ -417,6 +435,50 @@ class StillLifeCandidateTests(unittest.TestCase):
             )
         exclusions = exclude_still_life_classes()
         self.assertTrue(all(exclusion.witness for exclusion in exclusions))
+
+    def test_six_by_six_constraint_exclusion_replays_independently(self):
+        with (HERE / "examples" / "still_life_6x6_exclusion.csv").open() as source:
+            rows = list(csv.DictReader(source))
+        candidates = {
+            candidate.identifier: candidate
+            for candidate in enumerate_still_life_classes(6, 6)
+        }
+        self.assertEqual(len(candidates), 332)
+        self.assertEqual(len(rows), len(candidates))
+        for row in rows:
+            self.assertEqual(row["excluded"], "True")
+            candidate = candidates[row["candidate"]]
+            self.assertEqual(
+                json.loads(row["pattern"]),
+                [list(cell) for cell in sorted(candidate.pattern)],
+            )
+            attacks = enumerate_interacting_attacks(candidate.pattern)
+            self.assertEqual(len(attacks), int(row["attack_count"]))
+            key = (
+                row["witness_direction"],
+                int(row["witness_phase"]),
+                int(row["witness_lane"]),
+            )
+            attack = next(
+                attack
+                for attack in attacks
+                if (attack.direction, attack.phase, attack.lane) == key
+            )
+            generation = int(row["witness_settled_generation"])
+            period = int(row["witness_period"])
+            collision = simulate_collision(
+                candidate.pattern, attack, horizon=generation
+            )
+            self.assertEqual(collision.outcome, "changed_periodic")
+            self.assertNotEqual(collision.final, candidate.pattern)
+            self.assertTrue(
+                verify_exact_period(
+                    candidate.pattern | attack.initial_glider,
+                    generation,
+                    period,
+                    collision.final,
+                )
+            )
 
 
 if __name__ == "__main__":

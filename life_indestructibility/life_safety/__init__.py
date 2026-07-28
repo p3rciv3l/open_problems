@@ -11,6 +11,7 @@ from .gliders import (
     CollisionResult,
     check_all_single_gliders,
     enumerate_interacting_attacks,
+    interacting_lane_bounds,
 )
 from .life import Pattern, evolve, step
 from .invariant import InvariantSearchResult, search_three_by_three_invariant
@@ -28,6 +29,7 @@ __all__ = [
     "enumerate_still_life_classes",
     "exclude_still_life_classes",
     "enumerate_interacting_attacks",
+    "interacting_lane_bounds",
     "evolve",
     "search_still_life_classes",
     "search_three_by_three_invariant",
