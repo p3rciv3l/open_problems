@@ -191,6 +191,68 @@ a SHA-256 digest for an independent solver. For the expanded-row query
 `7929759778f94de721dd9334184a9b9aa072897c18a38eecd7f55731810ccca4`;
 both CaDiCaL 1.9.5 and Glucose 4.2 return UNSAT.
 
+## Exact transverse obstruction
+
+The target-shape branch of the search did not find a noncontracting,
+type-closed transition. It did produce an exact bounded obstruction that
+rules out all target-shape weakening inside the successful rectangle, rather
+than just one proposed shape.
+
+Fix phase `(0,0)`, constrain the full `38 x 34` output rectangle as above, and
+consider the complete available predecessor row
+
+```text
+[-2,39] x {17}.
+```
+
+The matching marching-band value is forced exactly at
+
+```text
+[1,28] x {17}  union  {(31,17)}.
+```
+
+It is not forced at any of the other thirteen positions. Thus the longest
+contiguous canonical interval on this central row has width 28. In particular
+no width-38 interval in the complete radius-two predecessor domain is forced.
+This improves the previously recorded guaranteed interior width from 10 to
+28, but it is still a strict `38 -> 28` contraction and cannot be the requested
+type-closed transition.
+
+Here “exact” has a finite, checkable meaning. `slice_forcing.cnf.gz` is the
+direct two-step Life CNF plus one clause saying that at least one cell differs
+among the 29 forced slice positions or the 360 positions in the cap-transition
+claim above. The uncompressed formula has 3,036 variables and 1,034,393
+clauses. It was exported, parsed back from DIMACS, and checked UNSAT by Glucose
+4.2; the search itself used CaDiCaL 1.9.5. Thus both marching-band universal
+forcing claims are covered by the exported aggregate query. For each of the
+thirteen remaining positions, `slice_result.json` contains a complete
+assignment to the `42 x 38` predecessor and `40 x 36` intermediate
+rectangles. `cap_search.py` evaluates Life directly on every represented
+neighborhood and checks both steps, including the requested flipped bit.
+The uncompressed DIMACS SHA-256 is
+`666f77cfd2b3f5d2f6a09291048046b4daf09fa6ed45ed692b8b681da042f763`;
+the checked-in gzip SHA-256 is
+`96122ff9130769aed31ff9d6499ad8361dfa9d1f43a5d6e96c99992669253ae8`.
+
+There is also a useful maximality consequence. Let `A` be this marching-band
+phase and let `D=[0,37] x [0,33]`. Among all output patterns obtained by
+fixing an arbitrary subset of cells in `D` to their values in `A`, the full
+pattern `A|D` has the strongest predecessor constraints: every predecessor of
+`A|D` is a predecessor of any such partial pattern. Therefore each replayed
+countermodel above is also a countermodel for every target obtained by
+deleting cells or changing the target shape within `D`. No alternative
+phase-`(0,0)` target shape contained in this bounding box and retaining the
+canonical marching-band predecessor can force a noncontracting canonical
+row. This monotonicity statement is exact and unbounded over the collection
+of subsets of `D`; its SAT input is only the stated finite box.
+
+The obstruction does **not** cover a larger bounding box, values inconsistent
+with the canonical agar but admitting another composable predecessor type,
+other phases, off-agar side or corner gadgets, longer inverse time, or a
+finite alphabet of types. In particular it is not a no-go theorem for an
+expanding cone and does not improve the PSPACE-hardness result to
+`Pi^0_1`-hardness.
+
 ## Sources for this obstruction
 
 - V. Salo and I. Törmä, *What Can Oracles Teach Us About the Ultimate Fate of

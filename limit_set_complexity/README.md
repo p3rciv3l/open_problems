@@ -64,6 +64,20 @@ python cap_search.py --min-padding 14 --max-padding 20 --output cap_result.json
 python cap_search.py --emit-query query.cnf --padding 15 --cell 10,-1
 ```
 
+The exact transverse-slice analysis is:
+
+```bash
+python cap_search.py --padding 15 --analyze-slice 17 \
+  --emit-forcing-claim slice_forcing.cnf --output slice_result.json
+```
+
+This exports one CNF asserting that at least one cell in either the full
+360-cell cap claim or the reported transverse-slice claim differs, reparses
+that DIMACS file, and checks it UNSAT with Glucose 4.2 independently of the
+CaDiCaL search. Every reported nonforced cell includes a complete two-layer
+SAT model in `slice_result.json`; the command directly replays both Life steps
+before writing it. The checked-in CNF is gzip-compressed.
+
 ## Files
 
 - `forcing.py`: direct CNF encoder, PySAT verifier, and DIMACS exporter.
@@ -73,6 +87,10 @@ python cap_search.py --emit-query query.cnf --padding 15 --cell 10,-1
 - `result.json`: generated results for all 18 phases.
 - `cap_result.json`: generated bounded cap search, including the verified
   `38 x 34` transition and the excluded `36 x 32` candidate.
+- `slice_result.json`: exact phase-`(0,0)` canonical forcing status on the
+  transverse row `y=17`, with replayed countermodels.
+- `slice_forcing.cnf.gz`: independently parsed and UNSAT-checked aggregate
+  universal claim for the cap transition and all forced cells on that row.
 - `research_note.md`: exact logical scope, a complete conditional reduction
   skeleton, and the fixed-ring finite-state obstruction.
 

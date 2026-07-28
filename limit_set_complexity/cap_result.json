@@ -26,6 +26,7 @@
         36
       ],
       "variables": 2732,
+      "clauses": 923008,
       "baseline_sat": true,
       "queried_cells": 272,
       "forced_cells": 0,
@@ -35,8 +36,7 @@
         10,
         -1
       ],
-      "success": false,
-      "clauses": 923008
+      "success": false
     },
     {
       "padding": 15,
@@ -53,14 +53,14 @@
         38
       ],
       "variables": 3036,
+      "clauses": 1034392,
       "baseline_sat": true,
       "queried_cells": 360,
       "forced_cells": 360,
       "expanded_rows_forced": true,
       "canonical_interior_forced": true,
       "first_failure": null,
-      "success": true,
-      "clauses": 1034392
+      "success": true
     }
   ],
   "found": {
@@ -78,13 +78,13 @@
       38
     ],
     "variables": 3036,
+    "clauses": 1034392,
     "baseline_sat": true,
     "queried_cells": 360,
     "forced_cells": 360,
     "expanded_rows_forced": true,
     "canonical_interior_forced": true,
     "first_failure": null,
-    "success": true,
-    "clauses": 1034392
+    "success": true
   }
 }

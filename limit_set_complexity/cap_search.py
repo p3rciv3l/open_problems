@@ -9,8 +9,9 @@ import itertools
 import json
 from dataclasses import asdict, dataclass
 from pathlib import Path
-from typing import Iterable, Iterator
+from typing import Iterable, Iterator, Sequence
 
+from pysat.formula import CNF
 from pysat.solvers import Solver
 
 from forcing import OFFSETS, life
@@ -263,6 +264,145 @@ def query_clauses(
     ]
 
 
+def mismatch_literal(
+    domain: Domain, phase_x: int, phase_y: int, cell: tuple[int, int]
+) -> int:
+    x, y = cell
+    expected = band_value(x, y, phase_x, phase_y)
+    variable = domain.predecessor_var(x, y)
+    return variable if expected == 0 else -variable
+
+
+def forcing_claim_clauses(
+    padding: int,
+    phase_x: int,
+    phase_y: int,
+    cells: Sequence[tuple[int, int]],
+) -> Iterator[list[int]]:
+    yield from instance_clauses(dimensions(padding), phase_x, phase_y)
+    yield [
+        mismatch_literal(dimensions(padding), phase_x, phase_y, cell)
+        for cell in cells
+    ]
+
+
+def model_bits(model: Sequence[int], variables: Iterable[int]) -> str:
+    assignment = {abs(literal): literal > 0 for literal in model}
+    return "".join("1" if assignment[variable] else "0" for variable in variables)
+
+
+def witness_from_model(domain: Domain, model: Sequence[int]) -> dict:
+    predecessor_rows = [
+        model_bits(
+            model,
+            (domain.predecessor_var(x, y) for x in domain.predecessor_x),
+        )
+        for y in domain.predecessor_y
+    ]
+    middle_rows = [
+        model_bits(model, (domain.middle_var(x, y) for x in domain.middle_x))
+        for y in domain.middle_y
+    ]
+    return {"predecessor": predecessor_rows, "middle": middle_rows}
+
+
+def replay_witness(
+    domain: Domain,
+    witness: dict,
+    phase_x: int = 0,
+    phase_y: int = 0,
+) -> bool:
+    predecessor = {
+        (x, y): int(witness["predecessor"][row][column])
+        for row, y in enumerate(domain.predecessor_y)
+        for column, x in enumerate(domain.predecessor_x)
+    }
+    middle = {
+        (x, y): int(witness["middle"][row][column])
+        for row, y in enumerate(domain.middle_y)
+        for column, x in enumerate(domain.middle_x)
+    }
+    for x, y in itertools.product(domain.middle_x, domain.middle_y):
+        neighbors = [
+            predecessor[x + dx, y + dy]
+            for dx, dy in OFFSETS
+            if (dx, dy) != (0, 0)
+        ]
+        if life(predecessor[x, y], neighbors) != middle[x, y]:
+            return False
+    for x, y in itertools.product(range(domain.width), range(domain.height)):
+        neighbors = [
+            middle[x + dx, y + dy]
+            for dx, dy in OFFSETS
+            if (dx, dy) != (0, 0)
+        ]
+        if life(middle[x, y], neighbors) != band_value(
+            x, y, phase_x, phase_y
+        ):
+            return False
+    return True
+
+
+def predecessor_witness_bit(domain: Domain, witness: dict, x: int, y: int) -> int:
+    return int(
+        witness["predecessor"][y - domain.predecessor_y.start][
+            x - domain.predecessor_x.start
+        ]
+    )
+
+
+def analyze_slice(
+    padding: int,
+    row: int,
+    phase_x: int,
+    phase_y: int,
+    solver_name: str,
+) -> dict:
+    domain = dimensions(padding)
+    results = []
+    forced_cells = []
+    with Solver(
+        name=solver_name,
+        bootstrap_with=instance_clauses(domain, phase_x, phase_y),
+    ) as solver:
+        if not solver.solve():
+            raise RuntimeError("the base cap instance is UNSAT")
+        baseline = witness_from_model(domain, solver.get_model())
+        if not replay_witness(domain, baseline, phase_x, phase_y):
+            raise RuntimeError("the baseline SAT model does not replay")
+        for x in domain.predecessor_x:
+            cell = (x, row)
+            mismatch = mismatch_literal(domain, phase_x, phase_y, cell)
+            if solver.solve(assumptions=[mismatch]):
+                witness = witness_from_model(domain, solver.get_model())
+                if not replay_witness(domain, witness, phase_x, phase_y):
+                    raise RuntimeError(f"SAT model for {cell} does not replay")
+                expected = band_value(x, row, phase_x, phase_y)
+                if predecessor_witness_bit(domain, witness, x, row) == expected:
+                    raise RuntimeError(f"SAT model for {cell} does not differ")
+                results.append(
+                    {
+                        "cell": cell,
+                        "forced": False,
+                        "expected": expected,
+                        "witnessed": 1 - expected,
+                        "witness": witness,
+                    }
+                )
+            else:
+                forced_cells.append(cell)
+                results.append({"cell": cell, "forced": True})
+    return {
+        "padding": padding,
+        "phase": [phase_x, phase_y],
+        "row": row,
+        "output_size": [domain.width, domain.height],
+        "baseline_witness": baseline,
+        "forced_cells": forced_cells,
+        "results": results,
+    }
+
+
 def write_dimacs(
     path: Path,
     padding: int,
@@ -290,6 +430,45 @@ def write_dimacs(
     }
 
 
+def write_forcing_claim_dimacs(
+    path: Path,
+    padding: int,
+    phase_x: int,
+    phase_y: int,
+    cells: Sequence[tuple[int, int]],
+) -> dict:
+    domain = dimensions(padding)
+    clauses = forcing_claim_clauses(
+        padding, phase_x, phase_y, tuple(cells)
+    )
+    count = clause_count(domain, phase_x, phase_y) + 1
+    digest = hashlib.sha256()
+    with path.open("wb") as output:
+        header = f"p cnf {domain.variables} {count}\n".encode()
+        output.write(header)
+        digest.update(header)
+        for clause in clauses:
+            line = (" ".join(map(str, clause)) + " 0\n").encode()
+            output.write(line)
+            digest.update(line)
+    return {
+        "path": str(path),
+        "variables": domain.variables,
+        "clauses": count,
+        "sha256": digest.hexdigest(),
+        "claimed_cells": [list(cell) for cell in cells],
+        "interpretation": (
+            "UNSAT iff every listed predecessor cell has its marching-band value"
+        ),
+    }
+
+
+def independently_check_unsat(path: Path, solver_name: str) -> bool:
+    formula = CNF(from_file=str(path))
+    with Solver(name=solver_name, bootstrap_with=formula.clauses) as solver:
+        return not solver.solve()
+
+
 def parse_pair(value: str) -> tuple[int, int]:
     parts = value.split(",")
     if len(parts) != 2:
@@ -305,11 +484,44 @@ def main() -> int:
     parser.add_argument("--solver", default="cadical195")
     parser.add_argument("--output", type=Path)
     parser.add_argument("--emit-query", type=Path)
+    parser.add_argument("--emit-forcing-claim", type=Path)
+    parser.add_argument("--analyze-slice", type=int)
+    parser.add_argument("--check-solver", default="glucose42")
     parser.add_argument("--padding", type=int, default=20)
     parser.add_argument("--cell", type=parse_pair, default=(10, -1))
     args = parser.parse_args()
 
-    if args.emit_query:
+    if args.analyze_slice is not None:
+        report = analyze_slice(
+            args.padding,
+            args.analyze_slice,
+            *args.phase,
+            args.solver,
+        )
+        if args.emit_forcing_claim:
+            slice_cells = [tuple(cell) for cell in report["forced_cells"]]
+            candidate_cells = list(cap_cells(dimensions(args.padding)))
+            claim_cells = list(dict.fromkeys(candidate_cells + slice_cells))
+            certificate = write_forcing_claim_dimacs(
+                args.emit_forcing_claim,
+                args.padding,
+                *args.phase,
+                claim_cells,
+            )
+            certificate["claims"] = {
+                "cap_transition": [list(cell) for cell in candidate_cells],
+                "transverse_slice": [list(cell) for cell in slice_cells],
+            }
+            certificate["check_solver"] = args.check_solver
+            certificate["checked_unsat"] = independently_check_unsat(
+                args.emit_forcing_claim, args.check_solver
+            )
+            if not certificate["checked_unsat"]:
+                raise RuntimeError("exported forcing claim is not UNSAT")
+            report["certificate"] = certificate
+    elif args.emit_forcing_claim:
+        raise SystemExit("--emit-forcing-claim requires --analyze-slice")
+    elif args.emit_query:
         report = write_dimacs(
             args.emit_query, args.padding, *args.phase, args.cell
         )

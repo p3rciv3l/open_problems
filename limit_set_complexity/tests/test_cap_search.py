@@ -1,5 +1,10 @@
 import itertools
+import json
+import tempfile
 import unittest
+from pathlib import Path
+
+from pysat.solvers import Solver
 
 from cap_search import (
     Domain,
@@ -7,8 +12,15 @@ from cap_search import (
     cap_cells,
     clause_count,
     dimensions,
+    forcing_claim_clauses,
     instance_clauses,
+    independently_check_unsat,
+    mismatch_literal,
+    predecessor_witness_bit,
+    replay_witness,
     relation_clauses,
+    witness_from_model,
+    write_forcing_claim_dimacs,
 )
 from forcing import OFFSETS, life
 
@@ -84,6 +96,68 @@ class CapEncoderTests(unittest.TestCase):
         self.assertEqual(
             clause_count(tiny), sum(1 for _ in instance_clauses(tiny))
         )
+
+    def test_sat_witness_replays_under_life(self):
+        domain = Domain(1, 1)
+        with Solver(
+            name="cadical195", bootstrap_with=instance_clauses(domain)
+        ) as solver:
+            self.assertTrue(solver.solve())
+            witness = witness_from_model(domain, solver.get_model())
+        self.assertTrue(replay_witness(domain, witness))
+        witness["middle"][0] = (
+            ("1" if witness["middle"][0][0] == "0" else "0")
+            + witness["middle"][0][1:]
+        )
+        self.assertFalse(replay_witness(domain, witness))
+
+    def test_combined_claim_asserts_some_mismatch(self):
+        padding = 1
+        domain = dimensions(padding)
+        cells = [(0, 0), (1, 0)]
+        clauses = list(forcing_claim_clauses(padding, 0, 0, cells))
+        self.assertEqual(
+            clauses[-1],
+            [mismatch_literal(domain, 0, 0, cell) for cell in cells],
+        )
+        self.assertEqual(
+            len(clauses), clause_count(domain) + 1
+        )
+
+    def test_dimacs_is_reparsed_for_independent_check(self):
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "claim.cnf"
+            report = write_forcing_claim_dimacs(
+                path, 1, 0, 0, [(0, 0), (1, 0)]
+            )
+            self.assertEqual(report["clauses"], clause_count(dimensions(1)) + 1)
+            with path.open("a") as output:
+                variable = dimensions(1).predecessor_var(0, 0)
+                output.write(f"{variable} 0\n{-variable} 0\n")
+            lines = path.read_text().splitlines()
+            parts = lines[0].split()
+            parts[-1] = str(int(parts[-1]) + 2)
+            lines[0] = " ".join(parts)
+            path.write_text("\n".join(lines) + "\n")
+            self.assertTrue(independently_check_unsat(path, "glucose42"))
+
+    def test_checked_slice_countermodels_replay(self):
+        result_path = Path(__file__).parents[1] / "slice_result.json"
+        report = json.loads(result_path.read_text())
+        domain = dimensions(report["padding"])
+        self.assertTrue(report["certificate"]["checked_unsat"])
+        nonforced = [result for result in report["results"] if not result["forced"]]
+        self.assertEqual(len(nonforced), 13)
+        for result in nonforced:
+            x, y = result["cell"]
+            self.assertTrue(
+                replay_witness(domain, result["witness"], *report["phase"])
+            )
+            self.assertEqual(
+                predecessor_witness_bit(domain, result["witness"], x, y),
+                result["witnessed"],
+            )
+            self.assertNotEqual(result["expected"], result["witnessed"])
 
 
 if __name__ == "__main__":
