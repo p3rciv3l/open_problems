@@ -5,6 +5,53 @@ The strongest certificate here proves the new bound
 improving the published `1176/2087 ≈ 0.563488` bound. It does **not**
 prove the conjectured `1/2` bound.
 
+## Exact counterexample search on small space-time tori
+
+`torus_search.py` encodes every cell in an `H x W x P` space-time torus as
+a Boolean variable. Each wrapped B3/S23 equation is encoded by its complete
+truth table, and a totalizer requires a specified live population. A lex-leader
+under every space-time translation and every rectangular (or square)
+reflection/rotation, together with a live origin, breaks symmetry without
+removing any positive-density orbit.
+
+The checked search covers all 24 triples
+
+```
+3 <= H <= W <= 5,  1 <= P <= 4.
+```
+
+No orbit above density `1/2` exists in that range. More strongly, the exact
+maxima for periods `P = 1,2,3,4` are:
+
+```
+torus   P=1    P=2     P=3     P=4
+3x3     4/9    8/18    12/27   16/36
+3x4     6/12   12/24   18/36   24/48
+4x4     8/16   16/32   24/48   32/64
+3x5     7/15   14/30   21/45   28/60
+4x5    10/20   20/40   30/60   40/80
+5x5    12/25   25/50   36/75   50/100
+```
+
+These are finite-range exclusions, not a proof of the `1/2` conjecture.
+`torus_results.json` contains an exact maximizing orbit for every triple:
+all phases as bitmaps and torus RLE, phase populations, every transition's
+birth/death/survivor counts, and SHA-256/byte-size metadata for the CNF and
+DRAT proof of each optimum. Proof blobs are deliberately not stored.
+`torus_verify.py` independently reapplies Life with wrapping, recounts every
+candidate, regenerates each CNF and DRAT proof into a temporary or requested
+output directory, checks its metadata, and invokes `drat-trim`.
+
+The near-maximizers separate into two useful mechanisms. Most odd-period
+optima are repetitions of maximum still lifes. On `5x5`, this gives `12/25`
+for periods 1 and 3. The even-period `5x5` optimum is instead a genuine
+period-2 orbit with populations `13,12`, nine survivors per transition, and
+alternating `(births,deaths) = (3,4),(4,3)`, attaining exactly `1/2`.
+Several even-area tori also admit complementary period-2 maximizers with no
+survivors: every live cell dies and the other half is born. Thus equality can
+be supported both by zero flux and by maximal flux; any general proof must
+handle both rather than assuming near-maximizers are almost still lifes.
+
 ## Convergent pyramid hierarchy
 
 The finite certificates below are levels of a complete, rather than merely
@@ -767,6 +814,7 @@ python pyramid_obstruction.py
 python spectral_identities.py
 python temporal_charging_obstruction.py
 python entropy_obstruction.py
+python torus_verify.py torus_results.json --drat-trim /path/to/drat-trim
 g++ -O3 -std=c++17 pyramid_verify.cpp -o pyramid_verify
 ./pyramid_verify pyramid_6x6.cert
 g++ -O3 -std=c++17 pyramid_6x8_verify.cpp -o pyramid_6x8_verify
@@ -789,6 +837,7 @@ python pyramid_search.py
 python pyramid_6x8_search.py
 python pyramid_6x10_search.py
 python pyramid_6x12_search.py
+python torus_search.py --range 3 5 4 --output torus_results.json
 python verify.py
 python strip2_verify.py
 ```

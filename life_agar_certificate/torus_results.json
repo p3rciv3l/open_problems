@@ -1,0 +1,1365 @@
+{
+  "format": 1,
+  "instances": [
+    {
+      "width": 3,
+      "height": 3,
+      "period": 1,
+      "volume": 9,
+      "threshold": 5,
+      "above_half": "UNSAT",
+      "maximum_population": 4,
+      "maximum_density": "4/9",
+      "maximizer_phases": [
+        [
+          "oo.",
+          "oo.",
+          "..."
+        ]
+      ],
+      "maximizer_rle": [
+        "2o$2o$3!"
+      ],
+      "phase_populations": [
+        4
+      ],
+      "transitions": [
+        {
+          "births": 0,
+          "deaths": 0,
+          "survivors": 4
+        }
+      ],
+      "excluded_population": 5,
+      "cnf_sha256": "959b73dddf3ed7a60d4c9608cbaa738a19e3d58b836cf913ed77279f30848c8c",
+      "variables": 748,
+      "clauses": 8580,
+      "cnf_bytes": 176492,
+      "drat_sha256": "1990c391e11dd88b2cf266fb64a3d2a55def38d01413648c687fd48b63546da0",
+      "drat_bytes": 24446
+    },
+    {
+      "width": 3,
+      "height": 3,
+      "period": 2,
+      "volume": 18,
+      "threshold": 10,
+      "above_half": "UNSAT",
+      "maximum_population": 8,
+      "maximum_density": "8/18",
+      "maximizer_phases": [
+        [
+          "oo.",
+          "oo.",
+          "..."
+        ],
+        [
+          "oo.",
+          "oo.",
+          "..."
+        ]
+      ],
+      "maximizer_rle": [
+        "2o$2o$3!",
+        "2o$2o$3!"
+      ],
+      "phase_populations": [
+        4,
+        4
+      ],
+      "transitions": [
+        {
+          "births": 0,
+          "deaths": 0,
+          "survivors": 4
+        },
+        {
+          "births": 0,
+          "deaths": 0,
+          "survivors": 4
+        }
+      ],
+      "excluded_population": 9,
+      "cnf_sha256": "10394671c8173c4727e3420ba79e2b9a943badb5100177270d91d42021629a41",
+      "variables": 2811,
+      "clauses": 25034,
+      "cnf_bytes": 532063,
+      "drat_sha256": "dd4439427dda37cd9b137855aea37f5d7a09902c0ac6aeb02553b6edcf96118f",
+      "drat_bytes": 74033
+    },
+    {
+      "width": 3,
+      "height": 3,
+      "period": 3,
+      "volume": 27,
+      "threshold": 14,
+      "above_half": "UNSAT",
+      "maximum_population": 12,
+      "maximum_density": "12/27",
+      "maximizer_phases": [
+        [
+          "ooo",
+          "o..",
+          "..."
+        ],
+        [
+          "ooo",
+          "o..",
+          "..."
+        ],
+        [
+          "ooo",
+          "o..",
+          "..."
+        ]
+      ],
+      "maximizer_rle": [
+        "3o$o2$3!",
+        "3o$o2$3!",
+        "3o$o2$3!"
+      ],
+      "phase_populations": [
+        4,
+        4,
+        4
+      ],
+      "transitions": [
+        {
+          "births": 0,
+          "deaths": 0,
+          "survivors": 4
+        },
+        {
+          "births": 0,
+          "deaths": 0,
+          "survivors": 4
+        },
+        {
+          "births": 0,
+          "deaths": 0,
+          "survivors": 4
+        }
+      ],
+      "excluded_population": 13,
+      "cnf_sha256": "b5982044f9366d9c56fbe865812058b6b6bd9fd97c932bb674b39cf161759bf9",
+      "variables": 6177,
+      "clauses": 49352,
+      "cnf_bytes": 1018676,
+      "drat_sha256": "509eadfbdadbedb3f4f96ccec856fc24ad1b51d3db532bb426449f67854c6800",
+      "drat_bytes": 74059
+    },
+    {
+      "width": 3,
+      "height": 3,
+      "period": 4,
+      "volume": 36,
+      "threshold": 19,
+      "above_half": "UNSAT",
+      "maximum_population": 16,
+      "maximum_density": "16/36",
+      "maximizer_phases": [
+        [
+          "oo.",
+          "oo.",
+          "..."
+        ],
+        [
+          "oo.",
+          "oo.",
+          "..."
+        ],
+        [
+          "oo.",
+          "oo.",
+          "..."
+        ],
+        [
+          "oo.",
+          "oo.",
+          "..."
+        ]
+      ],
+      "maximizer_rle": [
+        "2o$2o$3!",
+        "2o$2o$3!",
+        "2o$2o$3!",
+        "2o$2o$3!"
+      ],
+      "phase_populations": [
+        4,
+        4,
+        4,
+        4
+      ],
+      "transitions": [
+        {
+          "births": 0,
+          "deaths": 0,
+          "survivors": 4
+        },
+        {
+          "births": 0,
+          "deaths": 0,
+          "survivors": 4
+        },
+        {
+          "births": 0,
+          "deaths": 0,
+          "survivors": 4
+        },
+        {
+          "births": 0,
+          "deaths": 0,
+          "survivors": 4
+        }
+      ],
+      "excluded_population": 17,
+      "cnf_sha256": "042f55785109a423791a6c7ca51861ef4706422339e0d54c8a34a61353e2e541",
+      "variables": 10843,
+      "clauses": 81531,
+      "cnf_bytes": 1641936,
+      "drat_sha256": "54a5359ad88312e8fd598240f298e37a7af27cc93087a0f073b1120b11102664",
+      "drat_bytes": 459286
+    },
+    {
+      "width": 4,
+      "height": 3,
+      "period": 1,
+      "volume": 12,
+      "threshold": 7,
+      "above_half": "UNSAT",
+      "maximum_population": 6,
+      "maximum_density": "6/12",
+      "maximizer_phases": [
+        [
+          "o.o.",
+          "o.o.",
+          "o.o."
+        ]
+      ],
+      "maximizer_rle": [
+        "obo$obo$obo!"
+      ],
+      "phase_populations": [
+        6
+      ],
+      "transitions": [
+        {
+          "births": 0,
+          "deaths": 0,
+          "survivors": 6
+        }
+      ],
+      "excluded_population": 7,
+      "cnf_sha256": "7049db54dead9719b0cc9ff77303081eb1ddd6f5256fb909b8ee6840f64a2fb6",
+      "variables": 667,
+      "clauses": 9687,
+      "cnf_bytes": 229645,
+      "drat_sha256": "efa903986c309504b84298e1cccb7933d26a6201f2a2b9d613fe7bd04d9be5b6",
+      "drat_bytes": 26773
+    },
+    {
+      "width": 4,
+      "height": 3,
+      "period": 2,
+      "volume": 24,
+      "threshold": 13,
+      "above_half": "UNSAT",
+      "maximum_population": 12,
+      "maximum_density": "12/24",
+      "maximizer_phases": [
+        [
+          "oo..",
+          "oo..",
+          "oo.."
+        ],
+        [
+          "..oo",
+          "..oo",
+          "..oo"
+        ]
+      ],
+      "maximizer_rle": [
+        "2o2$2o2$2o2!",
+        "2b2o$2b2o$2b2o!"
+      ],
+      "phase_populations": [
+        6,
+        6
+      ],
+      "transitions": [
+        {
+          "births": 6,
+          "deaths": 6,
+          "survivors": 0
+        },
+        {
+          "births": 6,
+          "deaths": 6,
+          "survivors": 0
+        }
+      ],
+      "excluded_population": 13,
+      "cnf_sha256": "cf64c5908e4a88b96d56d9a274cd9043e9ee4ae5ae369bdd7cd3dc9a073bea31",
+      "variables": 2511,
+      "clauses": 26453,
+      "cnf_bytes": 624340,
+      "drat_sha256": "0779641eb3cc35e350236fdfe04e07198272296a3ddb8f483f2c87a5dda5dc57",
+      "drat_bytes": 81887
+    },
+    {
+      "width": 4,
+      "height": 3,
+      "period": 3,
+      "volume": 36,
+      "threshold": 19,
+      "above_half": "UNSAT",
+      "maximum_population": 18,
+      "maximum_density": "18/36",
+      "maximizer_phases": [
+        [
+          "o.o.",
+          "o.o.",
+          "o.o."
+        ],
+        [
+          "o.o.",
+          "o.o.",
+          "o.o."
+        ],
+        [
+          "o.o.",
+          "o.o.",
+          "o.o."
+        ]
+      ],
+      "maximizer_rle": [
+        "obo$obo$obo!",
+        "obo$obo$obo!",
+        "obo$obo$obo!"
+      ],
+      "phase_populations": [
+        6,
+        6,
+        6
+      ],
+      "transitions": [
+        {
+          "births": 0,
+          "deaths": 0,
+          "survivors": 6
+        },
+        {
+          "births": 0,
+          "deaths": 0,
+          "survivors": 6
+        },
+        {
+          "births": 0,
+          "deaths": 0,
+          "survivors": 6
+        }
+      ],
+      "excluded_population": 19,
+      "cnf_sha256": "c35280c510f27ef963e2cc1cae3d0c835c8642b511d7a2b3101c29e434938e35",
+      "variables": 5515,
+      "clauses": 50283,
+      "cnf_bytes": 1137900,
+      "drat_sha256": "68e380d6188931c9920a72d89aef6b4a773fdcfa32ac2a9ee7352dd959091372",
+      "drat_bytes": 82112
+    },
+    {
+      "width": 4,
+      "height": 3,
+      "period": 4,
+      "volume": 48,
+      "threshold": 25,
+      "above_half": "UNSAT",
+      "maximum_population": 24,
+      "maximum_density": "24/48",
+      "maximizer_phases": [
+        [
+          "oo..",
+          "oo..",
+          "oo.."
+        ],
+        [
+          "..oo",
+          "..oo",
+          "..oo"
+        ],
+        [
+          "oo..",
+          "oo..",
+          "oo.."
+        ],
+        [
+          "..oo",
+          "..oo",
+          "..oo"
+        ]
+      ],
+      "maximizer_rle": [
+        "2o2$2o2$2o2!",
+        "2b2o$2b2o$2b2o!",
+        "2o2$2o2$2o2!",
+        "2b2o$2b2o$2b2o!"
+      ],
+      "phase_populations": [
+        6,
+        6,
+        6,
+        6
+      ],
+      "transitions": [
+        {
+          "births": 6,
+          "deaths": 6,
+          "survivors": 0
+        },
+        {
+          "births": 6,
+          "deaths": 6,
+          "survivors": 0
+        },
+        {
+          "births": 6,
+          "deaths": 6,
+          "survivors": 0
+        },
+        {
+          "births": 6,
+          "deaths": 6,
+          "survivors": 0
+        }
+      ],
+      "excluded_population": 25,
+      "cnf_sha256": "b4ac15d41a99e742bf93ccd8f712cf1d84bb5b157e35a096d6bbdc9e173814c2",
+      "variables": 9679,
+      "clauses": 81177,
+      "cnf_bytes": 1767200,
+      "drat_sha256": "d47251fbb97c0b76afa076ade573db206d31a36559bce49143615b4586efe76b",
+      "drat_bytes": 124912
+    },
+    {
+      "width": 4,
+      "height": 4,
+      "period": 1,
+      "volume": 16,
+      "threshold": 9,
+      "above_half": "UNSAT",
+      "maximum_population": 8,
+      "maximum_density": "8/16",
+      "maximizer_phases": [
+        [
+          "oooo",
+          "....",
+          "oooo",
+          "...."
+        ]
+      ],
+      "maximizer_rle": [
+        "4o$4$4o$4!"
+      ],
+      "phase_populations": [
+        8
+      ],
+      "transitions": [
+        {
+          "births": 0,
+          "deaths": 0,
+          "survivors": 8
+        }
+      ],
+      "excluded_population": 9,
+      "cnf_sha256": "e8e8466e4debadf65b5d97c25bca5ad407e20b84d98b302105ccfa81261d1783",
+      "variables": 2239,
+      "clauses": 20697,
+      "cnf_bytes": 441403,
+      "drat_sha256": "4e03bad52b35bc24e6e045e792a1f9b6f95d989495974431f6d42c25e13e9ffc",
+      "drat_bytes": 28602
+    },
+    {
+      "width": 4,
+      "height": 4,
+      "period": 2,
+      "volume": 32,
+      "threshold": 17,
+      "above_half": "UNSAT",
+      "maximum_population": 16,
+      "maximum_density": "16/32",
+      "maximizer_phases": [
+        [
+          "oooo",
+          "oooo",
+          "....",
+          "...."
+        ],
+        [
+          "....",
+          "....",
+          "oooo",
+          "oooo"
+        ]
+      ],
+      "maximizer_rle": [
+        "4o$4o$4$4!",
+        "4$4$4o$4o!"
+      ],
+      "phase_populations": [
+        8,
+        8
+      ],
+      "transitions": [
+        {
+          "births": 8,
+          "deaths": 8,
+          "survivors": 0
+        },
+        {
+          "births": 8,
+          "deaths": 8,
+          "survivors": 0
+        }
+      ],
+      "excluded_population": 17,
+      "cnf_sha256": "a4168ffbd461e410d3ae7cdbd96a61e8f7cee2f795fafe19ec10cc57b338ff32",
+      "variables": 8607,
+      "clauses": 66257,
+      "cnf_bytes": 1344627,
+      "drat_sha256": "a943d1c1237ac4ebddade3f8776220a54e5d54f06273d4cfbe459b82b69e887c",
+      "drat_bytes": 99402
+    },
+    {
+      "width": 4,
+      "height": 4,
+      "period": 3,
+      "volume": 48,
+      "threshold": 25,
+      "above_half": "UNSAT",
+      "maximum_population": 24,
+      "maximum_density": "24/48",
+      "maximizer_phases": [
+        [
+          "oooo",
+          "....",
+          "oooo",
+          "...."
+        ],
+        [
+          "oooo",
+          "....",
+          "oooo",
+          "...."
+        ],
+        [
+          "oooo",
+          "....",
+          "oooo",
+          "...."
+        ]
+      ],
+      "maximizer_rle": [
+        "4o$4$4o$4!",
+        "4o$4$4o$4!",
+        "4o$4$4o$4!"
+      ],
+      "phase_populations": [
+        8,
+        8,
+        8
+      ],
+      "transitions": [
+        {
+          "births": 0,
+          "deaths": 0,
+          "survivors": 8
+        },
+        {
+          "births": 0,
+          "deaths": 0,
+          "survivors": 8
+        },
+        {
+          "births": 0,
+          "deaths": 0,
+          "survivors": 8
+        }
+      ],
+      "excluded_population": 25,
+      "cnf_sha256": "791d99681f137fc0dcb562e563900aa50afbf1f792acfc12e41405887dd59526",
+      "variables": 19087,
+      "clauses": 136665,
+      "cnf_bytes": 2736159,
+      "drat_sha256": "28abd256f7de69737a4cbdebbe1f850263996d86e17777c7faa07d366dd5f954",
+      "drat_bytes": 849720
+    },
+    {
+      "width": 4,
+      "height": 4,
+      "period": 4,
+      "volume": 64,
+      "threshold": 33,
+      "above_half": "UNSAT",
+      "maximum_population": 32,
+      "maximum_density": "32/64",
+      "maximizer_phases": [
+        [
+          "oo..",
+          "..oo",
+          "oo..",
+          "..oo"
+        ],
+        [
+          "oo..",
+          "..oo",
+          "oo..",
+          "..oo"
+        ],
+        [
+          "oo..",
+          "..oo",
+          "oo..",
+          "..oo"
+        ],
+        [
+          "oo..",
+          "..oo",
+          "oo..",
+          "..oo"
+        ]
+      ],
+      "maximizer_rle": [
+        "2o2$2b2o$2o2$2b2o!",
+        "2o2$2b2o$2o2$2b2o!",
+        "2o2$2b2o$2o2$2b2o!",
+        "2o2$2b2o$2o2$2b2o!"
+      ],
+      "phase_populations": [
+        8,
+        8,
+        8,
+        8
+      ],
+      "transitions": [
+        {
+          "births": 0,
+          "deaths": 0,
+          "survivors": 8
+        },
+        {
+          "births": 0,
+          "deaths": 0,
+          "survivors": 8
+        },
+        {
+          "births": 0,
+          "deaths": 0,
+          "survivors": 8
+        },
+        {
+          "births": 0,
+          "deaths": 0,
+          "survivors": 8
+        }
+      ],
+      "excluded_population": 33,
+      "cnf_sha256": "2fc41f6bba39ec940d0e5c36de000b21bd175037f8210f4acbd35fecfd65303d",
+      "variables": 33663,
+      "clauses": 231905,
+      "cnf_bytes": 4583994,
+      "drat_sha256": "d50d4b1c59a8793d4099570c4d8454d55b98d0a87661e0d8960739144668451f",
+      "drat_bytes": 6070033
+    },
+    {
+      "width": 5,
+      "height": 3,
+      "period": 1,
+      "volume": 15,
+      "threshold": 8,
+      "above_half": "UNSAT",
+      "maximum_population": 7,
+      "maximum_density": "7/15",
+      "maximizer_phases": [
+        [
+          "oo.o.",
+          "o..o.",
+          ".o.o."
+        ]
+      ],
+      "maximizer_rle": [
+        "2obo$o2bo$bobo!"
+      ],
+      "phase_populations": [
+        7
+      ],
+      "transitions": [
+        {
+          "births": 0,
+          "deaths": 0,
+          "survivors": 7
+        }
+      ],
+      "excluded_population": 8,
+      "cnf_sha256": "4b5b4536ff509fead2bcb31fd80ba9afa0d6fca474b28a3371abf4142d45b040",
+      "variables": 1018,
+      "clauses": 13215,
+      "cnf_bytes": 315298,
+      "drat_sha256": "78d2958a0c63c4be837e839ef16fcf2de0cefdc1b197ba38599e83b48be472eb",
+      "drat_bytes": 28631
+    },
+    {
+      "width": 5,
+      "height": 3,
+      "period": 2,
+      "volume": 30,
+      "threshold": 16,
+      "above_half": "UNSAT",
+      "maximum_population": 14,
+      "maximum_density": "14/30",
+      "maximizer_phases": [
+        [
+          "oo.o.",
+          "o..o.",
+          "o..o."
+        ],
+        [
+          "oo.o.",
+          "o..o.",
+          "o..o."
+        ]
+      ],
+      "maximizer_rle": [
+        "2obo$o2bo$o2bo!",
+        "2obo$o2bo$o2bo!"
+      ],
+      "phase_populations": [
+        7,
+        7
+      ],
+      "transitions": [
+        {
+          "births": 0,
+          "deaths": 0,
+          "survivors": 7
+        },
+        {
+          "births": 0,
+          "deaths": 0,
+          "survivors": 7
+        }
+      ],
+      "excluded_population": 15,
+      "cnf_sha256": "7790c72cfdb085d73b5ef28035c555ffea2ec2e8b57d7bd292fd16f86b6b835c",
+      "variables": 3867,
+      "clauses": 37484,
+      "cnf_bytes": 866646,
+      "drat_sha256": "1a052867f900295dfe449f72d30bdf90850a147fcd7b50734adaca6b286a5521",
+      "drat_bytes": 194607
+    },
+    {
+      "width": 5,
+      "height": 3,
+      "period": 3,
+      "volume": 45,
+      "threshold": 23,
+      "above_half": "UNSAT",
+      "maximum_population": 21,
+      "maximum_density": "21/45",
+      "maximizer_phases": [
+        [
+          "oo.o.",
+          "oo.o.",
+          "...o."
+        ],
+        [
+          "oo.o.",
+          "oo.o.",
+          "...o."
+        ],
+        [
+          "oo.o.",
+          "oo.o.",
+          "...o."
+        ]
+      ],
+      "maximizer_rle": [
+        "2obo$2obo$3bo!",
+        "2obo$2obo$3bo!",
+        "2obo$2obo$3bo!"
+      ],
+      "phase_populations": [
+        7,
+        7,
+        7
+      ],
+      "transitions": [
+        {
+          "births": 0,
+          "deaths": 0,
+          "survivors": 7
+        },
+        {
+          "births": 0,
+          "deaths": 0,
+          "survivors": 7
+        },
+        {
+          "births": 0,
+          "deaths": 0,
+          "survivors": 7
+        }
+      ],
+      "excluded_population": 22,
+      "cnf_sha256": "acdde6825b8f383411c9b4f69b5e62e7f3f9268b076c617246c7bed5aefbe4f5",
+      "variables": 8530,
+      "clauses": 72792,
+      "cnf_bytes": 1599028,
+      "drat_sha256": "a71f8f6ea0009277fde13bb8466cb8a7c6ba17aa7ad1055269687e8577a2536d",
+      "drat_bytes": 226727
+    },
+    {
+      "width": 5,
+      "height": 3,
+      "period": 4,
+      "volume": 60,
+      "threshold": 31,
+      "above_half": "UNSAT",
+      "maximum_population": 28,
+      "maximum_density": "28/60",
+      "maximizer_phases": [
+        [
+          "oo.o.",
+          "oo.o.",
+          "...o."
+        ],
+        [
+          "oo.o.",
+          "oo.o.",
+          "...o."
+        ],
+        [
+          "oo.o.",
+          "oo.o.",
+          "...o."
+        ],
+        [
+          "oo.o.",
+          "oo.o.",
+          "...o."
+        ]
+      ],
+      "maximizer_rle": [
+        "2obo$2obo$3bo!",
+        "2obo$2obo$3bo!",
+        "2obo$2obo$3bo!",
+        "2obo$2obo$3bo!"
+      ],
+      "phase_populations": [
+        7,
+        7,
+        7,
+        7
+      ],
+      "transitions": [
+        {
+          "births": 0,
+          "deaths": 0,
+          "survivors": 7
+        },
+        {
+          "births": 0,
+          "deaths": 0,
+          "survivors": 7
+        },
+        {
+          "births": 0,
+          "deaths": 0,
+          "survivors": 7
+        },
+        {
+          "births": 0,
+          "deaths": 0,
+          "survivors": 7
+        }
+      ],
+      "excluded_population": 29,
+      "cnf_sha256": "9efcb5733bad62ef0b68c3bc840f475d7479995610d3f5741012021e8df95da2",
+      "variables": 14995,
+      "clauses": 119127,
+      "cnf_bytes": 2559274,
+      "drat_sha256": "1ccaedbd17854e0ffb7b64e9b50a35fb80d507acfbac0f3ac862ea9dd85f8866",
+      "drat_bytes": 532487
+    },
+    {
+      "width": 5,
+      "height": 4,
+      "period": 1,
+      "volume": 20,
+      "threshold": 11,
+      "above_half": "UNSAT",
+      "maximum_population": 10,
+      "maximum_density": "10/20",
+      "maximizer_phases": [
+        [
+          "ooooo",
+          ".....",
+          "ooooo",
+          "....."
+        ]
+      ],
+      "maximizer_rle": [
+        "5o$5$5o$5!"
+      ],
+      "phase_populations": [
+        10
+      ],
+      "transitions": [
+        {
+          "births": 0,
+          "deaths": 0,
+          "survivors": 10
+        }
+      ],
+      "excluded_population": 11,
+      "cnf_sha256": "038ba1b8cba5755541ed6003e941d390a0771cf1fe2e88b2b33717f34367cca8",
+      "variables": 1767,
+      "clauses": 20079,
+      "cnf_bytes": 478911,
+      "drat_sha256": "314492f5fda24e93c36089334db07b2c5338bf91ec0feaa3fa41a2544a67b370",
+      "drat_bytes": 30984
+    },
+    {
+      "width": 5,
+      "height": 4,
+      "period": 2,
+      "volume": 40,
+      "threshold": 21,
+      "above_half": "UNSAT",
+      "maximum_population": 20,
+      "maximum_density": "20/40",
+      "maximizer_phases": [
+        [
+          "ooooo",
+          "ooooo",
+          ".....",
+          "....."
+        ],
+        [
+          ".....",
+          ".....",
+          "ooooo",
+          "ooooo"
+        ]
+      ],
+      "maximizer_rle": [
+        "5o$5o$5$5!",
+        "5$5$5o$5o!"
+      ],
+      "phase_populations": [
+        10,
+        10
+      ],
+      "transitions": [
+        {
+          "births": 10,
+          "deaths": 10,
+          "survivors": 0
+        },
+        {
+          "births": 10,
+          "deaths": 10,
+          "survivors": 0
+        }
+      ],
+      "excluded_population": 21,
+      "cnf_sha256": "0324774f1dab97b4647d26c766a4985ddb3e13220a72009f3744c0dcac3a4271",
+      "variables": 6775,
+      "clauses": 59797,
+      "cnf_bytes": 1334813,
+      "drat_sha256": "c1a825dd8982bd6abe9257b54603bfbb9dab8eb525bbd22a47d70211ff7f31e5",
+      "drat_bytes": 788770
+    },
+    {
+      "width": 5,
+      "height": 4,
+      "period": 3,
+      "volume": 60,
+      "threshold": 31,
+      "above_half": "UNSAT",
+      "maximum_population": 30,
+      "maximum_density": "30/60",
+      "maximizer_phases": [
+        [
+          "ooo..",
+          "...oo",
+          "ooo..",
+          "...oo"
+        ],
+        [
+          "ooo..",
+          "...oo",
+          "ooo..",
+          "...oo"
+        ],
+        [
+          "ooo..",
+          "...oo",
+          "ooo..",
+          "...oo"
+        ]
+      ],
+      "maximizer_rle": [
+        "3o2$3b2o$3o2$3b2o!",
+        "3o2$3b2o$3o2$3b2o!",
+        "3o2$3b2o$3o2$3b2o!"
+      ],
+      "phase_populations": [
+        10,
+        10,
+        10
+      ],
+      "transitions": [
+        {
+          "births": 0,
+          "deaths": 0,
+          "survivors": 10
+        },
+        {
+          "births": 0,
+          "deaths": 0,
+          "survivors": 10
+        },
+        {
+          "births": 0,
+          "deaths": 0,
+          "survivors": 10
+        }
+      ],
+      "excluded_population": 31,
+      "cnf_sha256": "541af1bc714f3d82836f7d62bc81ce9e664bbe726cd6512308f0b27fca1a887e",
+      "variables": 14995,
+      "clauses": 119127,
+      "cnf_bytes": 2559274,
+      "drat_sha256": "b0d5dd6bad4b00553de818da7180b98028e306e416d0ef9e5e6a6e286e56d1e5",
+      "drat_bytes": 2129682
+    },
+    {
+      "width": 5,
+      "height": 4,
+      "period": 4,
+      "volume": 80,
+      "threshold": 41,
+      "above_half": "UNSAT",
+      "maximum_population": 40,
+      "maximum_density": "40/80",
+      "maximizer_phases": [
+        [
+          "ooooo",
+          "ooooo",
+          ".....",
+          "....."
+        ],
+        [
+          ".....",
+          ".....",
+          "ooooo",
+          "ooooo"
+        ],
+        [
+          "ooooo",
+          "ooooo",
+          ".....",
+          "....."
+        ],
+        [
+          ".....",
+          ".....",
+          "ooooo",
+          "ooooo"
+        ]
+      ],
+      "maximizer_rle": [
+        "5o$5o$5$5!",
+        "5$5$5o$5o!",
+        "5o$5o$5$5!",
+        "5$5$5o$5o!"
+      ],
+      "phase_populations": [
+        10,
+        10,
+        10,
+        10
+      ],
+      "transitions": [
+        {
+          "births": 10,
+          "deaths": 10,
+          "survivors": 0
+        },
+        {
+          "births": 10,
+          "deaths": 10,
+          "survivors": 0
+        },
+        {
+          "births": 10,
+          "deaths": 10,
+          "survivors": 0
+        },
+        {
+          "births": 10,
+          "deaths": 10,
+          "survivors": 0
+        }
+      ],
+      "excluded_population": 41,
+      "cnf_sha256": "86fd834d1ffc46610413df3b2e1c5bce3dc43e7c8b52c6cf8a34508117e9cf37",
+      "variables": 26431,
+      "clauses": 198073,
+      "cnf_bytes": 4163072,
+      "drat_sha256": "8e3fa3ab04cfb91fdece40a5e35d2c0974b4b772bca4e5849d011bd0cc1b371b",
+      "drat_bytes": 4842029
+    },
+    {
+      "width": 5,
+      "height": 5,
+      "period": 1,
+      "volume": 25,
+      "threshold": 13,
+      "above_half": "UNSAT",
+      "maximum_population": 12,
+      "maximum_density": "12/25",
+      "maximizer_phases": [
+        [
+          "ooooo",
+          "o....",
+          "..oo.",
+          "ooo.o",
+          "....."
+        ]
+      ],
+      "maximizer_rle": [
+        "5o$o4$2b2o$3obo$5!"
+      ],
+      "phase_populations": [
+        12
+      ],
+      "transitions": [
+        {
+          "births": 0,
+          "deaths": 0,
+          "survivors": 12
+        }
+      ],
+      "excluded_population": 13,
+      "cnf_sha256": "8c1da63c250659c2e5e2a7765cc2612fd8af0e6fd2e2dbe98e75a5de6d174f15",
+      "variables": 5317,
+      "clauses": 43269,
+      "cnf_bytes": 899413,
+      "drat_sha256": "9dacca1fb226aaa599ecfc0f4a14b8120ad14f0df0b6a71ae5da88b9fb7fbb46",
+      "drat_bytes": 78273
+    },
+    {
+      "width": 5,
+      "height": 5,
+      "period": 2,
+      "volume": 50,
+      "threshold": 26,
+      "above_half": "UNSAT",
+      "maximum_population": 25,
+      "maximum_density": "25/50",
+      "maximizer_phases": [
+        [
+          "oooo.",
+          "o.o..",
+          "o....",
+          "o.ooo",
+          ".oo.."
+        ],
+        [
+          "o..oo",
+          "o.oo.",
+          "o.o..",
+          "o.ooo",
+          "....."
+        ]
+      ],
+      "maximizer_rle": [
+        "4o$obo2$o4$ob3o$b2o2!",
+        "o2b2o$ob2o$obo2$ob3o$5!"
+      ],
+      "phase_populations": [
+        13,
+        12
+      ],
+      "transitions": [
+        {
+          "births": 3,
+          "deaths": 4,
+          "survivors": 9
+        },
+        {
+          "births": 4,
+          "deaths": 3,
+          "survivors": 9
+        }
+      ],
+      "excluded_population": 26,
+      "cnf_sha256": "f69e192fbd9e87ad3ac1ffdd51b7c9c8e2f549480facf7b89499b32ee6dab4ba",
+      "variables": 20685,
+      "clauses": 147212,
+      "cnf_bytes": 2942841,
+      "drat_sha256": "a473996623e0107808bfdd9ac8fbfcd69360efdc584517b4b9162b4946a129ef",
+      "drat_bytes": 2307205
+    },
+    {
+      "width": 5,
+      "height": 5,
+      "period": 3,
+      "volume": 75,
+      "threshold": 38,
+      "above_half": "UNSAT",
+      "maximum_population": 36,
+      "maximum_density": "36/75",
+      "maximizer_phases": [
+        [
+          "oooo.",
+          "....o",
+          ".oo.o",
+          ".oo.o",
+          "....o"
+        ],
+        [
+          "oooo.",
+          "....o",
+          ".oo.o",
+          ".oo.o",
+          "....o"
+        ],
+        [
+          "oooo.",
+          "....o",
+          ".oo.o",
+          ".oo.o",
+          "....o"
+        ]
+      ],
+      "maximizer_rle": [
+        "4o$4bo$b2obo$b2obo$4bo!",
+        "4o$4bo$b2obo$b2obo$4bo!",
+        "4o$4bo$b2obo$b2obo$4bo!"
+      ],
+      "phase_populations": [
+        12,
+        12,
+        12
+      ],
+      "transitions": [
+        {
+          "births": 0,
+          "deaths": 0,
+          "survivors": 12
+        },
+        {
+          "births": 0,
+          "deaths": 0,
+          "survivors": 12
+        },
+        {
+          "births": 0,
+          "deaths": 0,
+          "survivors": 12
+        }
+      ],
+      "excluded_population": 37,
+      "cnf_sha256": "1616465900effd98dd3cc2588574146344ef72a5a24c04d562be3981b1511ac9",
+      "variables": 46071,
+      "clauses": 311798,
+      "cnf_bytes": 6112074,
+      "drat_sha256": "b972f71bab13a46c78d78adc6912e5ea848035755aa776b1717789bec23e7237",
+      "drat_bytes": 16824453
+    },
+    {
+      "width": 5,
+      "height": 5,
+      "period": 4,
+      "volume": 100,
+      "threshold": 51,
+      "above_half": "UNSAT",
+      "maximum_population": 50,
+      "maximum_density": "50/100",
+      "maximizer_phases": [
+        [
+          "oooo.",
+          "o.o..",
+          "o....",
+          "o.ooo",
+          ".oo.."
+        ],
+        [
+          "o..oo",
+          "o.oo.",
+          "o.o..",
+          "o.ooo",
+          "....."
+        ],
+        [
+          "oooo.",
+          "o.o..",
+          "o....",
+          "o.ooo",
+          ".oo.."
+        ],
+        [
+          "o..oo",
+          "o.oo.",
+          "o.o..",
+          "o.ooo",
+          "....."
+        ]
+      ],
+      "maximizer_rle": [
+        "4o$obo2$o4$ob3o$b2o2!",
+        "o2b2o$ob2o$obo2$ob3o$5!",
+        "4o$obo2$o4$ob3o$b2o2!",
+        "o2b2o$ob2o$obo2$ob3o$5!"
+      ],
+      "phase_populations": [
+        13,
+        12,
+        13,
+        12
+      ],
+      "transitions": [
+        {
+          "births": 3,
+          "deaths": 4,
+          "survivors": 9
+        },
+        {
+          "births": 4,
+          "deaths": 3,
+          "survivors": 9
+        },
+        {
+          "births": 3,
+          "deaths": 4,
+          "survivors": 9
+        },
+        {
+          "births": 4,
+          "deaths": 3,
+          "survivors": 9
+        }
+      ],
+      "excluded_population": 51,
+      "cnf_sha256": "50ee119ecbf365a12a5f3fe1b8ffbadea9a4eb8339af99648b4733b08b41c4e0",
+      "variables": 81471,
+      "clauses": 537023,
+      "cnf_bytes": 10378569,
+      "drat_sha256": "a61d42656de69b53ac0c647b364140e7d052b8a38a28699b38dc5e0daf55fc7c",
+      "drat_bytes": 30758266
+    }
+  ]
+}
