@@ -1,4 +1,4 @@
-// Exact max-weight separator for 6xH -> 4x(H-2) -> 2x(H-4), 5 <= H <= 10.
+// Exact max-weight separator for 6xH -> 4x(H-2) -> 2x(H-4), 5 <= H <= 20.
 #include <algorithm>
 #include <cstdint>
 #include <iostream>
@@ -25,6 +25,17 @@ int LifeRow(int above, int middle, int below, int width) {
   }
   return output;
 }
+
+std::string Decimal(unsigned __int128 value) {
+  if (value == 0) return "0";
+  std::string result;
+  while (value) {
+    result.push_back('0' + value % 10);
+    value /= 10;
+  }
+  std::reverse(result.begin(), result.end());
+  return result;
+}
 }  // namespace
 
 int main(int argc, char** argv) {
@@ -33,7 +44,7 @@ int main(int argc, char** argv) {
   const int first_count = 3 * ((height + 1) / 2);
   const int second_count = 2 * ((height - 1) / 2);
   const int orbit_count = first_count + second_count + (height - 3) / 2;
-  if (height < 5 || height > 10 || argc != orbit_count + 2) return 2;
+  if (height < 5 || height > 20 || argc != orbit_count + 2) return 2;
   std::vector<long long> weights(orbit_count);
   for (int index = 0; index < orbit_count; ++index)
     weights[index] = std::stoll(argv[index + 2]);
@@ -66,7 +77,7 @@ int main(int argc, char** argv) {
         if ((bits >> x) & 1) score2[y][bits] += weights[orbit(2, x, y)];
 
   std::vector<long long> short_scores(1 << 16, kNeg);
-  std::vector<unsigned long long> short_paths(1 << 16);
+  std::vector<unsigned __int128> short_paths(1 << 16);
   for (int row0 = 0; row0 < 64; ++row0)
     for (int row1 = 0; row1 < 64; ++row1)
       for (int row2 = 0; row2 < 64; ++row2) {
@@ -77,13 +88,13 @@ int main(int argc, char** argv) {
         if (score > short_scores[state]) {
           short_scores[state] = score;
           short_paths[state] =
-              row0 | (static_cast<unsigned long long>(row1) << 6) |
-              (static_cast<unsigned long long>(row2) << 12);
+              row0 | (static_cast<unsigned __int128>(row1) << 6) |
+              (static_cast<unsigned __int128>(row2) << 12);
         }
       }
 
   std::vector<long long> scores(1 << 20, kNeg), next_scores(1 << 20, kNeg);
-  std::vector<unsigned long long> paths(1 << 20), next_paths(1 << 20);
+  std::vector<unsigned __int128> paths(1 << 20), next_paths(1 << 20);
   for (int state = 0; state < (1 << 16); ++state) {
     if (short_scores[state] == kNeg) continue;
     const int row1 = state & 63, row2 = (state >> 6) & 63;
@@ -96,7 +107,7 @@ int main(int argc, char** argv) {
       if (score > scores[out]) {
         scores[out] = score;
         paths[out] =
-            short_paths[state] | (static_cast<unsigned long long>(row3) << 18);
+            short_paths[state] | (static_cast<unsigned __int128>(row3) << 18);
       }
     }
   }
@@ -116,7 +127,7 @@ int main(int argc, char** argv) {
         if (score > next_scores[out]) {
           next_scores[out] = score;
           next_paths[out] =
-              paths[state] | (static_cast<unsigned long long>(row) << (6 * y));
+              paths[state] | (static_cast<unsigned __int128>(row) << (6 * y));
         }
       }
     }
@@ -125,5 +136,5 @@ int main(int argc, char** argv) {
   }
   const auto best = std::max_element(scores.begin(), scores.end());
   const int state = best - scores.begin();
-  std::cout << *best << ' ' << paths[state] << '\n';
+  std::cout << *best << ' ' << Decimal(paths[state]) << '\n';
 }

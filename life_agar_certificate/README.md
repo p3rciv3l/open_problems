@@ -1,9 +1,75 @@
 # Local Life agar certificate experiments
 
 The strongest certificate here proves the new bound
-`138947/250001 ≈ 0.555786` for every finite, spatially periodic Life orbit,
+`138867/250001 ≈ 0.555466` for every finite, spatially periodic Life orbit,
 improving the published `1176/2087 ≈ 0.563488` bound. It does **not**
 prove the conjectured `1/2` bound.
+
+## Convergent pyramid hierarchy
+
+The finite certificates below are levels of a complete, rather than merely
+heuristic, local hierarchy. Let `P_n` contain generations `0,...,n`, starting
+from a `6n x 6n` square and deleting one boundary cell on every side at each
+generation. Normalize arbitrary nonnegative positional weights on `P_n` to
+sum to one, and let `h_n` be the least possible maximum weighted live count
+over all initial slices. Then
+
+```
+lim(n -> infinity) h_n = rho,
+```
+
+where `rho` is the largest one-cell expectation among translation-invariant
+probability measures on bi-infinite Life spacetime diagrams. In particular,
+every spatially and temporally periodic orbit has density at most every
+`h_n`. Thus this hierarchy converges to the sharp invariant-measure bound;
+proving that its limit is `1/2` would prove the conjecture (and the statement
+also isolates the possible obstruction: an aperiodic invariant measure above
+`1/2`).
+
+Here is a short proof. Let `u_n` be the maximum for uniform weights on `P_n`.
+For any invariant measure, the expectation of every normalized positional
+weighting is its density, so
+
+```
+rho <= h_n <= u_n.
+```
+
+The pyramids `P_n` are a Følner sequence in space-time: their volume is
+Theta(`n^3`), while every fixed-width spatial or temporal boundary is
+O(`n^2`). Translate a maximizing finite diagram to every root in `P_n` and
+average the resulting point masses. Any weak limit is translation invariant,
+and the proportion of roots at which any fixed Life constraint meets the
+boundary tends to zero, so the limit is supported on bi-infinite Life
+diagrams. Its one-cell expectation is any corresponding limit of `u_n`;
+hence `limsup u_n <= rho`. Averaging restrictions to `P_n` under any
+invariant measure gives the reverse inequality `u_n >= rho`, proving
+`u_n -> rho` and squeezing `h_n -> rho`.
+
+The translation argument does not assume that a torus is wider than the
+certificate. For each fixed certificate position, translation of the origin
+is a bijection of any spatial or temporal torus, even when positions wrap or
+coincide. Consequently its weight is counted exactly once at every torus
+cell. B3/S23 on the lifted finite patch agrees with the wrapped update, and
+temporal cancellation uses only an actual temporal cycle.
+
+## Exact `6 x 12` strip-pyramid bound
+
+`pyramid_6x12.cert` assigns nonnegative integer weights to a `6 x 12`
+slice at time `t`, its determined central `4 x 10` slice at `t+1`, and
+the determined central `2 x 8` slice at `t+2`. The weights sum to
+1,000,004. Exact max-plus row dynamic programming exhausts all `2^72`
+initial slices symbolically and proves maximum live weight 555,468.
+Translation averaging therefore gives
+
+```
+555468/1000004 = 138867/250001.
+```
+
+The certificate is only 36 lines. `pyramid_6x12_verify.cpp` reads the
+integer artifact, checks its geometry and weight sum, independently
+reapplies B3/S23, and computes the exact maximum without an LP solver.
+As with the `6 x 10` level, no optimality claim is made for this rounded
+weighting.
 
 ## Exact `6 x 10` strip-pyramid bound
 
@@ -161,6 +227,8 @@ g++ -O3 -std=c++17 pyramid_6x8_verify.cpp -o pyramid_6x8_verify
 ./pyramid_6x8_verify pyramid_6x8.cert
 g++ -O3 -std=c++17 pyramid_6x10_verify.cpp -o pyramid_6x10_verify
 ./pyramid_6x10_verify pyramid_6x10.cert
+g++ -O3 -std=c++17 pyramid_6x12_verify.cpp -o pyramid_6x12_verify
+./pyramid_6x12_verify pyramid_6x12.cert
 python -m unittest discover -s tests -v
 ```
 
@@ -174,6 +242,7 @@ python strip2_solve.py
 python pyramid_search.py
 python pyramid_6x8_search.py
 python pyramid_6x10_search.py
+python pyramid_6x12_search.py
 python verify.py
 python strip2_verify.py
 ```
