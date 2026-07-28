@@ -1,0 +1,19 @@
+# Three-generation shrinking pyramid: 6x6 at t, 4x4 at t+1, 2x2 at t+2.
+# Translating this shape proves density <= 4704/8348 = 1176/2087.
+total_weight 8348
+maximum_live_weight 4704
+layer 6 6
+24 72 120 120 72 24
+72 114 180 180 114 72
+120 180 294 294 180 120
+120 180 294 294 180 120
+72 114 180 180 114 72
+24 72 120 120 72 24
+layer 4 4
+96 241 241 96
+241 154 154 241
+241 154 154 241
+96 241 241 96
+layer 2 2
+179 179
+179 179
