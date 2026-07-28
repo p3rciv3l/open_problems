@@ -12,6 +12,7 @@ DIRECTORY = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(DIRECTORY))
 
 from model import life_output
+from pyramid_obstruction import analyze as analyze_pyramid_obstruction
 from strip2_verify import load_certificate as load_strip2_certificate
 from strip2_verify import verify as verify_strip2
 from verify import load_certificate, verify
@@ -82,6 +83,33 @@ class Strip2CertificateTests(unittest.TestCase):
         certificate["density_bound"] = "3/5"
         with self.assertRaises(AssertionError):
             verify_strip2(certificate)
+
+
+class PyramidObstructionTests(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        cls.report = analyze_pyramid_obstruction(DIRECTORY)
+
+    def test_stored_maximizers_are_extinction_transients(self):
+        self.assertEqual(self.report["6x8"]["live_counts"], [44, 0, 0])
+        self.assertEqual(self.report["6x10"]["live_counts"], [60, 0, 0])
+        self.assertEqual(self.report["6x12"]["live_counts"], [68, 0, 0])
+        self.assertEqual(self.report["6x8"]["score"], 174312)
+        self.assertEqual(self.report["6x10"]["score"], 555788)
+        self.assertEqual(self.report["6x12"]["score"], 555468)
+
+    def test_dual_has_temporal_flux_but_large_spatial_seam_defect(self):
+        dual = self.report["6x8"]["dual"]
+        self.assertEqual(dual["support"], 19)
+        for _, deaths, births in dual["expected_transitions"]:
+            self.assertEqual(Fraction(deaths), Fraction(births))
+        defects = {
+            (entry["layer"], entry["axis"]): Fraction(entry["total_variation"])
+            for entry in dual["overlap_defects"]
+        }
+        self.assertEqual(defects[(0, "x")], Fraction(73904, 78167))
+        self.assertEqual(defects[(0, "y")], Fraction(63504, 78167))
+        self.assertGreater(defects[(0, "x")], Fraction(9, 10))
 
 
 @unittest.skipUnless(shutil.which("g++"), "g++ is required")

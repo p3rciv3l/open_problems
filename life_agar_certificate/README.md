@@ -52,6 +52,92 @@ coincide. Consequently its weight is counted exactly once at every torus
 cell. B3/S23 on the lifted finite patch agrees with the wrapped update, and
 temporal cancellation uses only an actual temporal cycle.
 
+### What the `6 x 8`--`6 x 12` optima say
+
+The exact maximizing slices expose a boundary transient, not a repeatable
+high-density phase. At heights 8 and 12 a `6 x H` rectangle with its four
+corners deleted is a maximizer; at height 10 the full rectangle is a
+maximizer. Their three layer populations are respectively
+
+```
+(44, 0, 0), (60, 0, 0), (68, 0, 0).
+```
+
+Thus all three die completely in one step. The verifier proves that their
+scores are the stored maxima, so this observation is exact. The small
+`6 x 8`--`6 x 12` numerical drift is therefore not evidence of a repeatable
+high-density configuration.
+
+The exact `6 x 8` dual is subtler. Its expected births and deaths agree at
+both transitions:
+
+```
+t -> t+1:  births = deaths = 501584/78167
+t+1 -> t+2: births = deaths = 179920/78167.
+```
+
+It therefore fakes temporal stationarity at the level of one-cell marginals.
+It is nevertheless very far from spatially repeatable. Symmetrize its 19
+slices under the two rectangle reflections. The total-variation distances
+between the laws of opposite one-cell-overlap faces are
+
+```
+             horizontal       vertical
+layer 0      73904/78167       63504/78167
+layer 1      50108/78167       38258/78167
+layer 2          0             11754/78167.
+```
+
+Opposite overlap laws must be equal for the restriction of any
+translation-invariant spatial measure. In particular, the layer-0 horizontal
+defect is greater than `0.945`; the fixed-window dual obstruction cannot be
+tiled, made Markov across its seam, or converge unchanged to an invariant
+Life spacetime. `pyramid_obstruction.py` derives these fractions directly from
+the stored integer dual and checks the three maximizing extinction slices.
+
+### Exact characterization of a remaining obstruction
+
+The preceding defect gives a useful theorem of alternatives. For finite legal
+Life-pyramid laws `nu_n`, call the overlap defect at radius `r` the largest
+total-variation distance between the laws of two congruent radius-`r`
+subwindows whose roots differ by one spatial or temporal unit. Then a
+translation-invariant bi-infinite Life measure of density at least `c` exists
+if and only if there are pyramids with inradius tending to infinity, expected
+root occupancy at least `c-o(1)`, and every fixed-radius overlap defect tending
+to zero.
+
+The forward implication is restriction of the invariant measure. Conversely,
+compactness of probability laws on finite binary windows gives a diagonal
+weak limit of the rooted laws. Vanishing overlap defects makes that limit
+invariant, and the Life equations hold in the limit because they are closed
+local constraints. This also proves the equivalent projective formulation in
+which all congruent subwindow marginals agree exactly.
+
+Consequently, failure of the `1/2` theorem is not represented by the stored
+dual or by any other isolated finite-window pseudodistribution. It requires a
+projectively coherent family with density uniformly greater than `1/2`. By
+ergodic decomposition it may be chosen ergodic; if no periodic counterexample
+exists, almost every spacetime in that component is aperiodic.
+
+There is a further necessary local charging condition. In such an invariant
+measure let `p` be live intensity, `s` the intensity of live cells that
+survive, and `b,d` the birth and death intensities. Stationarity gives
+`b=d=p-s`. Survivors have at most three survivor neighbors, so Elkies's
+maximum-degree-three theorem gives `s <= 1/2`. Hence every counterexample must
+satisfy
+
+```
+b = d >= p - 1/2 > 0,
+P(cell changes state) = 2b >= 2p - 1.
+```
+
+This isolates the only remaining mechanism: a spatially coherent,
+positive-flux (and, absent a periodic counterexample, aperiodic) family whose
+birth/death transport survives every scale. A proof of `1/2` can equivalently
+discharge that flux into the Elkies survivor deficit `1/2-s`; the present
+three-layer positional certificates do not, because their dual pays for it
+with the quantified seams above.
+
 ## Exact `6 x 12` strip-pyramid bound
 
 `pyramid_6x12.cert` assigns nonnegative integer weights to a `6 x 12`
@@ -221,6 +307,7 @@ standard library:
 cd life_agar_certificate
 python verify.py
 python strip2_verify.py
+python pyramid_obstruction.py
 g++ -O3 -std=c++17 pyramid_verify.cpp -o pyramid_verify
 ./pyramid_verify pyramid_6x6.cert
 g++ -O3 -std=c++17 pyramid_6x8_verify.cpp -o pyramid_6x8_verify
